@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SceneController">
+   <children>
+      <AnchorPane layoutX="111.0" layoutY="-81.0" prefHeight="1080.0" prefWidth="1914.0">
+         <children>
+            <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="742.0" layoutY="402.0">
+               <image>
+                  <Image url="@../../../../Recources/pics/Try3.png" />
+               </image>
+            </ImageView>
+            <TextField fx:id="txtField" layoutX="715.0" layoutY="627.0" prefHeight="25.0" prefWidth="255.0" />
+            <Button fx:id="loginbtn" layoutX="768.0" layoutY="690.0" mnemonicParsing="false" onAction="#switchToSceneWaitstaff" prefHeight="25.0" prefWidth="149.0" text="Login" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
