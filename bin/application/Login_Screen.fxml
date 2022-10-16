@@ -5,6 +5,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SceneController">
    <children>
@@ -16,7 +17,10 @@
                </image>
             </ImageView>
             <TextField fx:id="txtField" layoutX="715.0" layoutY="627.0" prefHeight="25.0" prefWidth="255.0" />
-            <Button fx:id="loginbtn" layoutX="768.0" layoutY="690.0" mnemonicParsing="false" onAction="#switchToSceneWaitstaff" prefHeight="25.0" prefWidth="149.0" text="Login" />
+            <Button fx:id="loginbtn" layoutX="713.0" layoutY="690.0" mnemonicParsing="false" onAction="#loginreroute" prefHeight="132.0" prefWidth="264.0" style="-fx-background-color: Error parsing '*{-fx-background-color: (255, 0, 0);" stylesheets="@application.css" text="Login" textAlignment="CENTER" textFill="RED">
+               <font>
+                  <Font size="34.0" />
+               </font></Button>
          </children>
       </AnchorPane>
    </children>
