@@ -1,56 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SceneController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: #FFFFE0;" stylesheets="@application.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SceneController">
    <children>
-      <Label layoutX="153.0" layoutY="57.0" prefHeight="170.0" prefWidth="310.0" text="Name">
+      <Label layoutX="153.0" layoutY="38.0" prefHeight="170.0" prefWidth="310.0" text="Name">
          <font>
             <Font name="Comic Sans MS" size="65.0" />
          </font>
       </Label>
-      <Label layoutX="153.0" layoutY="240.0" prefHeight="170.0" prefWidth="310.0" text="Job">
+      <Label layoutX="153.0" layoutY="183.0" prefHeight="170.0" prefWidth="310.0" text="Job">
          <font>
             <Font name="Comic Sans MS" size="65.0" />
          </font>
       </Label>
-      <Label layoutX="153.0" layoutY="458.0" prefHeight="170.0" prefWidth="310.0" text="Wage">
+      <Label layoutX="153.0" layoutY="347.0" prefHeight="170.0" prefWidth="310.0" text="Wage">
          <font>
             <Font name="Comic Sans MS" size="65.0" />
          </font>
       </Label>
-      <Label layoutX="123.0" layoutY="736.0" prefHeight="170.0" prefWidth="430.0" text="ID Number">
+      <Label layoutX="153.0" layoutY="555.0" prefHeight="170.0" prefWidth="430.0" text="ID Number">
          <font>
             <Font name="Comic Sans MS" size="65.0" />
          </font>
       </Label>
-      <TextField fx:id="name_texField" layoutX="1304.0" layoutY="142.0" prefHeight="52.0" prefWidth="344.0" />
-      <TextField fx:id="wage_texField" layoutX="1304.0" layoutY="517.0" prefHeight="52.0" prefWidth="344.0" />
-      <TextField fx:id="Id_Number_txtField" layoutX="1304.0" layoutY="769.0" prefHeight="52.0" prefWidth="344.0" />
-      <RadioButton fx:id="Manager_rdb" layoutX="1182.0" layoutY="317.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="135.0" text="Manager">
+      <TextField fx:id="name_texField" layoutX="1298.0" layoutY="97.0" prefHeight="52.0" prefWidth="344.0" />
+      <TextField fx:id="wage_texField" layoutX="1308.0" layoutY="406.0" prefHeight="52.0" prefWidth="344.0" />
+      <TextField fx:id="Id_Number_txtField" layoutX="1308.0" layoutY="640.0" prefHeight="52.0" prefWidth="344.0" />
+      <RadioButton fx:id="Manager_rdb" layoutX="1192.0" layoutY="240.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="135.0" text="Manager">
+         <font>
+            <Font name="Comic Sans MS" size="20.0" />
+         </font>
+         <toggleGroup>
+            <ToggleGroup fx:id="job_type" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="Kitchen_Staff_rdb" layoutX="1354.0" layoutY="240.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="179.0" text="Kitchen staff" toggleGroup="$job_type">
          <font>
             <Font name="Comic Sans MS" size="20.0" />
          </font>
       </RadioButton>
-      <RadioButton fx:id="Kitchen_Staff_rdb" layoutX="1344.0" layoutY="317.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="179.0" text="Kitchen staff">
+      <RadioButton fx:id="Wait_staff_rdb" layoutX="1545.0" layoutY="240.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="160.0" text="Wait staff" toggleGroup="$job_type">
          <font>
             <Font name="Comic Sans MS" size="20.0" />
          </font>
       </RadioButton>
-      <RadioButton fx:id="Wait_staff_rdb" layoutX="1535.0" layoutY="317.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="160.0" text="Wait staff">
+      <RadioButton fx:id="Cashier_rdb" layoutX="1705.0" layoutY="240.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="149.0" text="Cashier" toggleGroup="$job_type">
          <font>
             <Font name="Comic Sans MS" size="20.0" />
          </font>
       </RadioButton>
-      <RadioButton fx:id="Cashier_rdb" layoutX="1695.0" layoutY="317.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="149.0" text="Cashier">
+      <Button fx:id="enter_manager" layoutX="404.0" layoutY="763.0" mnemonicParsing="false" onAction="#enter_manager" prefHeight="200.0" prefWidth="904.0" style="-fx-background-color: #000000;" stylesheets="@application.css" text="Enter" textFill="LIGHTYELLOW">
          <font>
-            <Font name="Comic Sans MS" size="20.0" />
+            <Font name="Comic Sans MS" size="96.0" />
          </font>
-      </RadioButton>
+      </Button>
+      <Label fx:id="verify" layoutX="26.0" layoutY="11.0" prefHeight="54.0" prefWidth="1724.0" stylesheets="@application.css" text="Welcome New User">
+         <font>
+            <Font size="40.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

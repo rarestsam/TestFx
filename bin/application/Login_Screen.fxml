@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -9,18 +10,24 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SceneController">
    <children>
-      <AnchorPane layoutX="111.0" layoutY="-81.0" prefHeight="1080.0" prefWidth="1914.0">
+      <AnchorPane prefHeight="1080.0" prefWidth="1914.0" stylesheets="@application.css">
          <children>
-            <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="742.0" layoutY="402.0">
+            <ImageView fitHeight="423.0" fitWidth="482.0" layoutX="627.0" layoutY="179.0">
                <image>
                   <Image url="@../../../../Recources/pics/Try3.png" />
                </image>
             </ImageView>
-            <TextField fx:id="txtField" layoutX="715.0" layoutY="627.0" prefHeight="25.0" prefWidth="255.0" />
-            <Button fx:id="loginbtn" layoutX="713.0" layoutY="690.0" mnemonicParsing="false" onAction="#loginreroute" prefHeight="132.0" prefWidth="264.0" style="-fx-background-color: Error parsing '*{-fx-background-color: (255, 0, 0);" stylesheets="@application.css" text="Login" textAlignment="CENTER" textFill="RED">
+            <TextField fx:id="txtField" layoutX="537.0" layoutY="627.0" prefHeight="92.0" prefWidth="626.0" />
+            <Button fx:id="loginbtn" layoutX="711.0" layoutY="739.0" mnemonicParsing="false" onAction="#loginreroute" prefHeight="132.0" prefWidth="264.0" style="-fx-background-color: #000000;" stylesheets="@application.css" text="Login" textAlignment="CENTER" textFill="RED">
                <font>
                   <Font size="34.0" />
-               </font></Button>
+               </font>
+            </Button>
+            <Label fx:id="login_Label" layoutX="19.0" layoutY="8.0" prefHeight="76.0" prefWidth="1296.0" text="Hello please login with user ID">
+               <font>
+                  <Font name="Comic Sans MS" size="40.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </children>
