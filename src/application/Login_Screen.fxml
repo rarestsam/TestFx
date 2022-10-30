@@ -14,7 +14,7 @@
          <children>
             <ImageView fitHeight="423.0" fitWidth="482.0" layoutX="627.0" layoutY="179.0">
                <image>
-                  <Image url="@../Try3.png" />
+                  <Image url="@/Try3.png" />
                </image>
             </ImageView>
             <TextField fx:id="txtField" layoutX="537.0" layoutY="627.0" prefHeight="92.0" prefWidth="626.0" />
