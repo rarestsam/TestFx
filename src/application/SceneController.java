@@ -1,7 +1,11 @@
 package application;
 
 import java.io.IOException;
+
+import javax.swing.text.html.ImageView;
+
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -29,6 +33,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.text.TextAlignment;
 
 public class SceneController
 {
@@ -39,9 +44,7 @@ public class SceneController
 	 String [] j = new String[10];
 	 private int fb = 1;
 	 private double ph = 200.0;
-	 //Pane foodbar = new AnchorPane();
-	 //Label foodText = new Label(null);
-	 //Label priceText = new Label(null);
+	 private double tp = 0.0;
 	 
 	// database
 	// setEditable(false) use this function for setting text in a textfield and not being played with
@@ -87,6 +90,10 @@ public class SceneController
 	 @FXML 
 	 private Button waterButton;
 	 
+	 
+
+	 
+	 
 	 public void loginreroute(ActionEvent event) throws IOException
 	 {
 		 /*
@@ -105,6 +112,7 @@ public class SceneController
 		 int value_of_txt; 
 		 String text = txtField.getText();
 		 value_of_txt = Integer.parseInt(text);
+		 login_Label.setStyle("-fx-text-alignment: center; ");
 		 
 		 if( value_of_txt < 10) 
 		     {
@@ -123,10 +131,15 @@ public class SceneController
 			  stage.setScene(scene);
 			  stage.show();
 		 }
+		 if(value_of_txt > 20)
+		 {
+			 login_Label.setText("Incorrect Password");
+		 }
 		}
 		 catch(Exception e)
-		 {
-			 login_Label.setText("Please enter in the correct format. No letters and symbols.");
+		 {	
+			 
+			 login_Label.setText("Please enter in the correct format. No letters and symbols");
 		 }
 	 }
 	 
@@ -189,14 +202,12 @@ public class SceneController
 	 
 	 public void addFoodBar(ActionEvent event)throws IOException
 	 {
-		 System.out.println("nothing");
 		 Font font21 = Font.font("Modern No. 20", 21);
 		 Font font29 = Font.font("Modern No. 20", 29);
 		 
 		 Pane foodbar = new AnchorPane();
 		 Label foodText = new Label(null);
 		 Label priceText = new Label(null);
-		 
 		 
 		 
 		 
@@ -207,8 +218,6 @@ public class SceneController
 		 //foodbar.setPadding(new Insets(0,0,0,0));
 		 foodbar.setId("foodbar"+fb);
 		 
-		 System.out.println("foodbar made");
-		 
 		 Spinner<Integer> spinner = new Spinner<> (1,1000,1);
 		 spinner.setMaxWidth(100);
 		 spinner.setMinHeight(49);
@@ -217,7 +226,7 @@ public class SceneController
 
 		 foodText.setMinWidth(179);
 		 foodText.setMinHeight(56);
-		 foodText.relocate(162.0,8.0);
+		 foodText.relocate(150.0,8.0);
 		 foodText.setFont(font29);
 		 foodText.setId("foodText"+fb);
 		 
@@ -241,6 +250,17 @@ public class SceneController
 		 deleteButton.setStyle("-fx-background-color: #ff0000; ");
 		 deleteButton.setFont(font21);
 		 deleteButton.setId("deleteButton"+fb);
+		 deleteButton.setOnAction(new EventHandler<ActionEvent>() 
+		 	{
+				@Override
+				public void handle(ActionEvent event) 
+				{
+					if(deleteButton.isArmed()==true) 
+					 {
+						 deleteButton.getParent().setVisible(false);
+					 }
+				}
+		 	});
 		 
 		 Button noteButton= new Button("Notes");
 		 noteButton.setMinWidth(90);
@@ -249,8 +269,25 @@ public class SceneController
 		 noteButton.setStyle("-fx-background-color: #8e8e8e; ");
 		 noteButton.setFont(font21);
 		 noteButton.setId("noteButton"+fb);
+		 noteButton.setOnAction(new EventHandler<ActionEvent>() 
+		 	{
+				@Override
+				public void handle(ActionEvent event) {
+					if(noteButton.isArmed()==true) 
+					 {
+						 try 
+						 {
+							notesWindow(event);	
+						 } 
+						 catch (IOException e) 
+						 {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						 }
+					 }
+				}
+		 	});
 		 
-		 System.out.println("other stuff made");
 		 
 		 
 		 if(pizzaButton.isArmed()==true) 
@@ -294,15 +331,16 @@ public class SceneController
 		 ph += 100.0;
 		 fb ++;
 		 
-		 System.out.println(fb);
 		 
-		 /*
-		 root = FXMLLoader.load(getClass().getResource("Waitstaff_Screen.fxml"));
-		 stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-		 Scene barScene = new Scene(foodBarBox);
-		 stage.setScene(barScene);
-		 stage.show();
-		 */
+		 Double totalPriceDub;
+		 String text = priceText.getText();
+		 totalPriceDub = Double.parseDouble(text);
+		 
+		 tp = tp + totalPriceDub;
+		 
+		 String totalPriceStr = Double.toString(tp);
+		 totalPriceText.setText(totalPriceStr);
+		
 		 
 	 }
 	 
@@ -338,9 +376,11 @@ public class SceneController
 		 TextField noteText = new TextField();
 		 noteText.setText(null);
 		 noteText.setMinHeight(180);
+		 noteText.setStyle("-fx-text-alignment: TOP_LEFT; ");
 		 
 		 Button closeButton = new Button("Complete");
 		 closeButton.setOnAction(e -> note.close());
+		 closeButton.relocate(350.0,170.0);
 		 
 		 VBox layout = new VBox(10);
 		 layout.getChildren().addAll(noteText,closeButton);
@@ -355,6 +395,13 @@ public class SceneController
 	 {
 		
 		 
+		 
+	 }
+	 
+	 public void totalPrice(ActionEvent event)throws IOException
+	 {
+		 String totalPriceStr = Double.toString(tp);
+		 totalPriceText.setText(totalPriceStr);
 		 
 	 }
 	 
