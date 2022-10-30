@@ -214,7 +214,7 @@
                               <Font name="Modern No. 20" size="22.0" />
                            </font>
                         </Button>
-                        <Button fx:id="deleteFoodButton" layoutX="470.0" layoutY="14.0" mnemonicParsing="false" onAction="#switchToLogin" prefHeight="42.0" prefWidth="90.0" style="-fx-background-color: red;" text="Delete" textAlignment="CENTER">
+                        <Button fx:id="deleteFoodButton" layoutX="470.0" layoutY="14.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="90.0" style="-fx-background-color: red;" text="Delete" textAlignment="CENTER">
                            <font>
                               <Font name="Modern No. 20" size="22.0" />
                            </font>

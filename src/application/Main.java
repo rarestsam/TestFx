@@ -39,6 +39,14 @@ public class Main extends Application
 	public static void main(String[] args) 
 	{
 		//30 lines
+		try {
+			System.out.print("ss");
+		  }
+		catch(Exception e)
+		{
+			System.out.print("ss");
+			
+		}
 		System.out.print("hee");
 		launch(args);
 	}

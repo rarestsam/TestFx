@@ -113,8 +113,8 @@ public class Database
                  resultSet.close();
                  statement.close();	 
                  updateField.close();
-                updateField.close();
-                connection.close();
+                 updateField.close();
+                 connection.close();
              }
          }
          catch (SQLException sqlex) {
