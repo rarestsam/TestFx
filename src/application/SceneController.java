@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -350,11 +351,15 @@ public class SceneController
 		 
 	 }
 	 
-	 public void deleteFoodBar(ActionEvent event)throws IOException{
+	 public void deleteFoodBar(ActionEvent event)throws IOException
+	 {
 		
 		 
 		 
 	 }
+	 
+	 
+	 
 	 
 	 
 }

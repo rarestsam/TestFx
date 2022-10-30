@@ -8,7 +8,6 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -17,27 +16,27 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<SplitPane dividerPositions="0.6470588235294118" prefHeight="1104.0" prefWidth="1923.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SceneController">
+<SplitPane dividerPositions="0.6470588235294118" prefHeight="1104.0" prefWidth="1923.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SceneController">
   <items>
     <AnchorPane minHeight="0.0" minWidth="0.0" onMouseClicked="#loginreroute" prefHeight="1102.0" prefWidth="1264.0" style="-fx-background-color: #89a4dc;">
          <children>
-            <Button fx:id="clearButton" layoutX="935.0" layoutY="804.0" mnemonicParsing="false" onAction="#switchToLogin" prefHeight="80.0" prefWidth="283.0" style="-fx-background-color: red;" text="Clear" textAlignment="CENTER">
+            <Button fx:id="clearButton" layoutX="935.0" layoutY="804.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="283.0" style="-fx-background-color: red;" text="Clear" textAlignment="CENTER">
                <font>
                   <Font name="Modern No. 20" size="46.0" />
                </font>
             </Button>
-            <Button fx:id="payButton" layoutX="935.0" layoutY="896.0" mnemonicParsing="false" onAction="#switchToLogin" prefHeight="62.0" prefWidth="283.0" style="-fx-background-color: blue;" text="Pay" textAlignment="CENTER">
+            <Button fx:id="payButton" layoutX="935.0" layoutY="896.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="283.0" style="-fx-background-color: blue;" text="Pay" textAlignment="CENTER">
                <font>
                   <Font name="Modern No. 20" size="46.0" />
                </font>
             </Button>
-            <Button fx:id="completeButton" layoutX="935.0" layoutY="990.0" mnemonicParsing="false" onAction="#switchToLogin" prefHeight="66.0" prefWidth="283.0" style="-fx-background-color: green;" text="Complete" textAlignment="CENTER">
+            <Button fx:id="completeButton" layoutX="935.0" layoutY="990.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="283.0" style="-fx-background-color: green;" text="Complete" textAlignment="CENTER">
                <font>
                   <Font name="Modern No. 20" size="46.0" />
                </font>
             </Button>
             <TextField fx:id="searchBar" layoutX="150.0" layoutY="74.0" prefHeight="42.0" prefWidth="855.0" />
-            <Button fx:id="searchButton" layoutX="1004.0" layoutY="74.0" mnemonicParsing="false" onAction="#switchToLogin" prefHeight="25.0" prefWidth="112.0" style="-fx-background-color: green;" text="Search" textAlignment="CENTER">
+            <Button fx:id="searchButton" layoutX="1004.0" layoutY="74.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" style="-fx-background-color: green;" text="Search" textAlignment="CENTER">
                <font>
                   <Font name="Modern No. 20" size="24.0" />
                </font>
@@ -107,7 +106,7 @@
                         <Font name="Modern No. 20" size="22.0" />
                      </font>
                   </Button>
-                  <Button fx:id="fiesButton" layoutX="18.0" layoutY="459.0" mnemonicParsing="false" onAction="#addFoodBar" prefHeight="42.0" prefWidth="216.0" text="Fries $3.02" textAlignment="CENTER">
+                  <Button fx:id="friesButton" layoutX="18.0" layoutY="459.0" mnemonicParsing="false" onAction="#addFoodBar" prefHeight="42.0" prefWidth="216.0" text="Fries $3.02" textAlignment="CENTER">
                      <font>
                         <Font name="Modern No. 20" size="22.0" />
                      </font>
@@ -163,7 +162,11 @@
                         <Font name="Modern No. 20" size="36.0" />
                      </font>
                   </Label>
-                  <TextArea fx:id="tableNum" layoutX="365.0" layoutY="133.0" prefHeight="42.0" prefWidth="64.0" />
+                  <TextField layoutX="363.0" layoutY="133.0" prefHeight="42.0" prefWidth="64.0">
+                     <font>
+                        <Font name="Modern No. 20" size="23.0" />
+                     </font>
+                  </TextField>
                </children>
             </AnchorPane>
             <AnchorPane layoutY="984.0" prefHeight="112.0" prefWidth="488.0">
