@@ -4,8 +4,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="707.0" prefWidth="1069.0" style="-fx-background-color: #89a4dc;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="707.0" prefWidth="1069.0" style="-fx-background-color: #89a4dc;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SceneController">
    <children>
       <Label layoutX="41.0" layoutY="33.0" prefHeight="136.0" prefWidth="472.0" text="Failed to perform task">
          <font>
@@ -17,9 +16,9 @@
             <Font name="Comic Sans MS" size="44.0" />
          </font>
       </Label>
-      <Label fx:id="failed_reasons" alignment="TOP_LEFT" layoutX="1.0" layoutY="247.0" prefHeight="460.0" prefWidth="1069.0">
+      <Label layoutX="47.0" layoutY="313.0" prefHeight="112.0" prefWidth="1014.0" text="Could not connect to the database" textFill="RED">
          <font>
-            <Font name="Comic Sans MS" size="44.0" />
+            <Font name="Comic Sans MS" size="54.0" />
          </font>
       </Label>
    </children>

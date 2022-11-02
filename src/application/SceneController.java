@@ -1,6 +1,8 @@
 package application;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import javax.swing.text.html.ImageView;
 
@@ -35,7 +37,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.text.TextAlignment;
 
-public class SceneController
+public class SceneController extends Thread
 {
 	 private static final Paint WHITE = null;
 	 private Stage stage;
@@ -45,7 +47,10 @@ public class SceneController
 	 private int fb = 1;
 	 private double ph = 200.0;
 	 private double tp = 0.0;
-	 
+	 private String time;
+    
+	 private SimpleDateFormat timeFormat;
+	 Thread mythread = new Thread();
 	// database
 	// setEditable(false) use this function for setting text in a textfield and not being played with
 	 @FXML 
@@ -90,11 +95,28 @@ public class SceneController
 	 @FXML 
 	 private Button waterButton;
 	 
+	@FXML 
+	private Label failure;
 	 
-
+	@FXML
+	private Label timeText;
+	
+	 @FXML 
+	 private Button timeButton;
+	 
+	 @FXML 
+	 private AnchorPane info;
 	 
 	 
-	 public void loginreroute(ActionEvent event) throws IOException
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 public void loginreroute(ActionEvent event) 
 	 {
 		 /*
 		 for(int i =0;i<j.length;i++)
@@ -121,6 +143,8 @@ public class SceneController
 			  scene = new Scene(root);
 			  stage.setScene(scene);
 			  stage.show();
+		      stage.setFullScreen(true);
+
 		     }
 	
 		 if(value_of_txt >= 10 && value_of_txt <= 20)
@@ -130,6 +154,8 @@ public class SceneController
 			  scene = new Scene(root);
 			  stage.setScene(scene);
 			  stage.show();
+			  stage.setFullScreen(true);
+
 		 }
 		 if(value_of_txt > 20)
 		 {
@@ -180,6 +206,8 @@ public class SceneController
 			  scene = new Scene(root);
 			  stage.setScene(scene);
 			  stage.show();
+			  stage.setFullScreen(true);
+			  
 	 }
 	 
 	 public void switchToSceneWaitstaff(ActionEvent event) throws IOException
@@ -189,6 +217,8 @@ public class SceneController
 			  scene = new Scene(root);
 			  stage.setScene(scene);
 			  stage.show();
+			  stage.setFullScreen(true);
+
 	 }
 
 	 public void switchToLogin(ActionEvent event) throws IOException 
@@ -198,10 +228,15 @@ public class SceneController
 		 	scene = new Scene(root);
 		 	stage.setScene(scene);
 		 	stage.show();
+			stage.setFullScreen(true);
+
 	 }
+	 
+	 
 	 
 	 public void addFoodBar(ActionEvent event)throws IOException
 	 {
+		 
 		 Font font21 = Font.font("Modern No. 20", 21);
 		 Font font29 = Font.font("Modern No. 20", 29);
 		 
@@ -405,9 +440,85 @@ public class SceneController
 		 
 	 }
 	 
+	 public void showfailedScreen(String err) 
+	 {
+		 stage = new Stage();
+	 		
+		 		try {
+			    Parent root = FXMLLoader.load(getClass().getResource("Failed.fxml"));
+				Scene scene = new Scene(root,1069,707);
+				Image icon= new Image("food.png");
+				stage.getIcons().add(icon);
+				stage.setTitle("Restauraunt");
+				stage.setScene(scene);
+				stage.show();	
+				stage.setFullScreen(true);
+		 }
+		 catch(Exception e)
+		 {
+		     
+			 System.out.println(err); 
+		 }
+		 //failed_reasons.setMinWidth(179);
+		 //failed_reasons.setMinHeight(56);
+		 //failed_reasons.relocate(200,200);
+		
+	
+	 }
 	 
 	 
+	 public void showTime()
+	 {
+		 
+		 //timeText.setText("12:30");
+		 	//run();
+		 
+		 
+	 }
 	 
 	 
+	 public void run1(ActionEvent event) throws IOException
+	 {
+		 // mythread.run(new Thread<run>);
+		// timeButton.setOnAction(new EventHandler<ActionEvent>() 
+		 SceneController sceneController = new SceneController();
+	
+		 sceneController.start();
+		
+				
+				
+	}
+	 
+	 
+	 @Override
+	 public void run()
+	 {		 
+		 timeFormat = new SimpleDateFormat("hh:mm:ss a");
+		// if(timeButton.isArmed()==true) {				 					   
+		 		Pane info = new AnchorPane();
+				for(int i=0; i<=5;i++) 
+				{				
+				Label timeText = new Label();				
+			    timeText.setMinWidth(103);
+				timeText.setMinHeight(56);
+			    timeText.relocate(180,3.0);
+				timeText.setStyle("-fx-background-color:  #ff0000; ");
+				info.getChildren().addAll(timeText);
+				time = timeFormat.format(Calendar.getInstance().getTime());				
+				timeText.setText(time);
+				System.out.println(timeText.getText());
+				//System.out.println(timeText.getText());
+				  try {
+				   Thread.sleep(1000);
+				  } 
+				  catch (InterruptedException e) 
+				  {
+				   e.printStackTrace();
+				  }
+				  System.out.println(i);
+			}
+	 }
+			
 }
+	 
 

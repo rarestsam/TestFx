@@ -78,22 +78,20 @@ public class Database
 	PreparedStatement updateField = null;
 	
 
-	 public void connect_to_database() throws IOException 
+	 public void connect_to_database(String err) 
 	 {
-		 
-		 try {
-			String msAccDB = "C:\\Users\\rares\\Desktop\\Senior Project\\database ex\\MyBooks.accdb";
+		 try
+		 {
+			String msAccDB = "restaurant.accdb";
 			String dbURL = "jdbc:ucanaccess://" + msAccDB;
 			connection = DriverManager.getConnection(dbURL,"","");
-			statement=connection.createStatement();
-			
+			statement=connection.createStatement(); 
 		 }
-		 catch (SQLException sqlex)
+		 catch(Exception e)
 		 {
-			 sqlex.printStackTrace();
-			// print_Failed_Screen();
-	      }
-		 
+			 SceneController Scenecontroller = new SceneController();
+			 Scenecontroller.showfailedScreen(err);
+		 }
 	 }
 	 
 	 public void setResultset() throws IOException 
@@ -121,24 +119,7 @@ public class Database
              sqlex.printStackTrace();
          }
 	 }
-	 /*
-	 public void print_Failed_Screen() throws IOException
-	 {
-		 try 
-		 {
-			    root = FXMLLoader.load(getClass().getResource("Login_Screen.fxml"));
-				Scene scene = new Scene(root,1920,1030);
-				Image icon= new Image("food.png");
-				stage.getIcons().add(icon);
-				stage.setTitle("Restauraunt");
-				stage.setScene(scene);
-				stage.show();
-			 
-		 }
-		 catch (Exception e)
-		 {			 
-			 System.out.print("no fxml files to load");
-		 }
-	 }
-	 */
+	 
+	 
+	 
 }

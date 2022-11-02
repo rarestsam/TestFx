@@ -10,11 +10,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SceneController">
+<AnchorPane xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SceneController">
    <children>
       <AnchorPane layoutY="-24.0" prefHeight="1080.0" prefWidth="1914.0" style="-fx-background-color: white; -fx-background-color: #d3d3d3;" stylesheets="@application.css">
          <children>
-            <ImageView fx:id="loginPic" fitHeight="423.0" fitWidth="477.0" layoutX="717.0" layoutY="179.0" style="-fx-effect: glow;">
+            <ImageView fx:id="loginPic" fitHeight="423.0" fitWidth="477.0" layoutX="717.0" layoutY="179.0">
                <image>
                   <Image url="@../Try3.png" />
                </image>

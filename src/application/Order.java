@@ -4,6 +4,7 @@ import java.util.ArrayList;
 public class Order 
 {
 	private String order_number;
+	private String notes;
 	private double total;
 	private ArrayList<Double> food_price;
 	private ArrayList<String> food_name;
