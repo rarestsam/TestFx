@@ -36,7 +36,8 @@ public class Main extends Application
 			stage.setFullScreen(true);
 		} 
 		catch(Exception e) 
-		{			
+		{		
+			System.out.println("ss");
 			SceneController sceneController = new SceneController();
 			sceneController.showfailedScreen("Could not open login screen");
 		}
