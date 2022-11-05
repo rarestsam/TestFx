@@ -24,15 +24,16 @@ public class Employee
 	}
 	public double get_totalpay()
 	{
-		totalPay = wage*hours;
 		return totalPay;
 	}
-	
+	public void Set_total_Pay()
+	{		
+		totalPay = wage*hours;
+	}	
 	public void set_Job_Type(String jobType)
 	{
 		this.jobType=jobType;
-	}
-	
+	}	
 	public String getjobType()
 	{
 		return jobType;

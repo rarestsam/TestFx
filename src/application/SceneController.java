@@ -1,10 +1,12 @@
 package application;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 
-import javax.swing.text.html.ImageView;
+
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -47,10 +49,10 @@ public class SceneController extends Thread
 	 private int fb = 1;
 	 private double ph = 200.0;
 	 private double tp = 0.0;
-	 private String time;
-    
+	 private String time;  
 	 private SimpleDateFormat timeFormat;
-	 Thread mythread = new Thread();
+	 ArrayList<Employee> employees = new ArrayList<Employee>();
+	 Database database = new Database();
 	// database
 	// setEditable(false) use this function for setting text in a textfield and not being played with
 	 @FXML 
@@ -118,54 +120,69 @@ public class SceneController extends Thread
 	 
 	 public void loginreroute(ActionEvent event) 
 	 {
-		 /*
-		 for(int i =0;i<j.length;i++)
-			{
-				String s = String.valueOf(i+1); 
-				j[i]= s;
-			//	System.out.print("it Worked");
-			}
-			
-		 for(int i=0; i<j.length; i++) 
-		 {
-		 */
 		 try 
 		{			 
 		 int value_of_txt; 
-		 String text = txtField.getText();
+		 String text =  txtField.getText();
 		 value_of_txt = Integer.parseInt(text);
 		 login_Label.setStyle("-fx-text-alignment: center; ");
+		 database.connect_to_database();
+		 database.setResultset();
+		 while(database.resultSet.next())
+			{
+				  Employee employee = new Employee();
+				  employee.setEmployee_name(database.resultSet.getString("Name"));			
+				  employee.setId_number(database.resultSet.getString("Id Number"));
+				  employee.setHours(database.resultSet.getInt("Hours"));
+				  employee.setWage(database.resultSet.getDouble("Wage"));
+				  employee.set_Job_Type(database.resultSet.getString("Job Type"));
+				  employee.Set_total_Pay();
+				  employees.add(employee);				
+			}
 		 
-		 if( value_of_txt < 10) 
-		     {
-			  Parent root = FXMLLoader.load(getClass().getResource("Waitstaff_Screen.fxml"));
-			  stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-			  scene = new Scene(root);
-			  stage.setScene(scene);
-			  stage.show();
-		      stage.setFullScreen(true);
-
-		     }
-	
-		 if(value_of_txt >= 10 && value_of_txt <= 20)
-		 {
-			  Parent root = FXMLLoader.load(getClass().getResource("Manager_Screen.fxml"));
-			  stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-			  scene = new Scene(root);
-			  stage.setScene(scene);
-			  stage.show();
-			  stage.setFullScreen(true);
-
+		 for(int i=0;i<=employees.size();i++ )
+		 {		 
+			 if(employees.get(i).getId_number().equals(text))
+			 {
+				 if(employees.get(i).getjobType().equals("Manager"))
+				 {					 
+					 Parent root = FXMLLoader.load(getClass().getResource("Manager_Screen.fxml"));
+					  stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+					  scene = new Scene(root);
+					  stage.setScene(scene);
+					  stage.show();
+					  stage.setFullScreen(true);					 
+				 }
+				 if(employees.get(i).getjobType().equals("Wait Staff"))
+				 {
+					 Parent root = FXMLLoader.load(getClass().getResource("Waitstaff_Screen.fxml"));
+					  stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+					  scene = new Scene(root);
+					  stage.setScene(scene);
+					  stage.show();
+				      stage.setFullScreen(true);
+					 
+				 }
+				 
+				 if(employees.get(i).getjobType().equals("Kitchen Staff"))
+				 {
+					  Parent root = FXMLLoader.load(getClass().getResource("Waitstaff_Screen.fxml"));
+					  stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+					  scene = new Scene(root);
+					  stage.setScene(scene);
+					  stage.show();
+				      stage.setFullScreen(true);				 
+				 }			 
+			 }
+		  }	 
+		}		 
+		 catch(SQLException e)
+		 {				 
+			 login_Label.setText("Failed to connect to database");
 		 }
-		 if(value_of_txt > 20)
-		 {
-			 login_Label.setText("Incorrect Password");
-		 }
-		}
 		 catch(Exception e)
-		 {	
-			 
-			 login_Label.setText("Please enter in the correct format. No letters and symbols");
+		 {				 
+			 login_Label.setText("Incorrect Id number or not found in database");
 		 }
 	 }
 	 
@@ -231,9 +248,7 @@ public class SceneController extends Thread
 			stage.setFullScreen(true);
 
 	 }
-	 
-	 
-	 
+		 
 	 public void addFoodBar(ActionEvent event)throws IOException
 	 {
 		 
@@ -481,12 +496,8 @@ public class SceneController extends Thread
 	 {
 		 // mythread.run(new Thread<run>);
 		// timeButton.setOnAction(new EventHandler<ActionEvent>() 
-		 SceneController sceneController = new SceneController();
-	
-		 sceneController.start();
-		
-				
-				
+		 SceneController sceneController = new SceneController();	
+		 sceneController.start();				
 	}
 	 
 	 
@@ -517,8 +528,7 @@ public class SceneController extends Thread
 				  }
 				  System.out.println(i);
 			}
-	 }
-			
+	 }			
 }
 	 
 

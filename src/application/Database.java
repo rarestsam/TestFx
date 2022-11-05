@@ -78,26 +78,19 @@ public class Database
 	PreparedStatement updateField = null;
 	
 
-	 public void connect_to_database(String err) 
+	 public void connect_to_database() throws IOException, SQLException
 	 {
-		 try
-		 {
+		 
 			String msAccDB = "restaurant.accdb";
 			String dbURL = "jdbc:ucanaccess://" + msAccDB;
 			connection = DriverManager.getConnection(dbURL,"","");
-			statement=connection.createStatement(); 
-		 }
-		 catch(Exception e)
-		 {
-			 SceneController Scenecontroller = new SceneController();
-			 Scenecontroller.showfailedScreen(err);
-		 }
+			statement=connection.createStatement(); 	
 	 }
 	 
 	 public void setResultset() throws IOException 
 	 {
 		 try {
-			resultSet=statement.executeQuery("SELECT * FROM Books");
+			resultSet=statement.executeQuery("SELECT * FROM Employee");
 		} catch (SQLException e)
 		 {
 			e.printStackTrace();

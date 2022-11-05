@@ -25,7 +25,7 @@ public class Main extends Application
 	{
 		try {
 			Database database =  new Database();
-			database.connect_to_database("Can't connect to database");			
+			database.connect_to_database();	
 			Parent root = FXMLLoader.load(getClass().getResource("Login_Screen.fxml"));
 			Scene scene = new Scene(root,1920,1030);
 			Image icon= new Image("food.png");
@@ -37,7 +37,7 @@ public class Main extends Application
 		} 
 		catch(Exception e) 
 		{		
-			System.out.println("ss");
+		
 			SceneController sceneController = new SceneController();
 			sceneController.showfailedScreen("Could not open login screen");
 		}
