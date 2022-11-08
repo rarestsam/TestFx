@@ -205,6 +205,13 @@ public class SceneController extends Thread
 	 public void enter_manager(ActionEvent event) 
 	 {
 		 
+		 /*
+		   wage = DecimalFormat.getNumberInstance().parse(wageTxt).doubleValue();
+       	          id = Integer.parseInt(id_Number);
+       			 verify.setText("Success Please go back to login");
+       			 System.out.print("just checking");
+		   
+		  */
 		 try {
 			database.connect_to_database();
 		    database.setResultset();
@@ -232,8 +239,7 @@ public class SceneController extends Thread
           if(name.equals(""))
           {
           	 verify.setText("Please enter a name");      	
-          }
-          
+          }         
          else if(wageTxt.equals(""))
          {
         	 verify.setText("Please enter a wage");     
@@ -242,109 +248,45 @@ public class SceneController extends Thread
          {
         	 verify.setText("Please enter an ID");     
          }
+         else if(!Cashier_rdb.isSelected() && !Kitchen_Staff_rdb.isSelected() && !Manager_rdb.isSelected() && !Wait_staff_rdb.isSelected())
+      	  {
+      		  verify.setText("Please select a job type.");   
+      	  }
+         else if(verify_Nametext(name))
+    	  {	
+    			 verify.setText("Please enter name in the correct format");
+    	  }
+         else if(checkdatabaseid(employees,id_Number))
+    	  {
+    	   	  verify.setText("ID has been taken, please change it."); 
+    	  }
          
           else {
         	  
         	  if(Manager_rdb.isSelected())
         	     {        		  
         		 jobType = "Manager";
+        	     }
         		 
-        		 if(checkdatabaseid(employees,id_Number))
-            	  {
-            	   	  verify.setText("ID has been taken, please change it."); 
-            	  }
-                 
-               else if(verify_Nametext(name))
-       		{	
-       			 verify.setText("Please enter name in the correct format");
-       		}
-       	     
-       		else
-       		{
-       			  wage = DecimalFormat.getNumberInstance().parse(wageTxt).doubleValue();
-       	          id = Integer.parseInt(id_Number);
-       			 verify.setText("Success Please go back to login");
-       			 System.out.print("just checking");
-       		}
-        		 }
        
         	  else if( Wait_staff_rdb.isSelected())
     		  {        		  
     		    jobType = "Wait Staff";
     		    
-    		    if(checkdatabaseid(employees,id_Number))
-    	     	  {
-    	     	   	  verify.setText("ID has been taken, please change it."); 
-    	     	  }
-    	          
-    	        else if(verify_Nametext(name))
-    			{	
-    				 verify.setText("Please enter name in the correct format");
-    			}
-    		     
-    		    
-    		     
-    			else
-    			{
-    				  wage = DecimalFormat.getNumberInstance().parse(wageTxt).doubleValue();
-    		          id = Integer.parseInt(id_Number);
-    				 verify.setText("Success Please go back to login");
-    				 System.out.print("just checking");
-    			}
     		  }
-        	  
         	  else if(Kitchen_Staff_rdb.isSelected())
     		  {        		  
     		    jobType = "Kitchen Staff";
-    		    if(checkdatabaseid(employees,id_Number))
-    	     	  {
-    	     	   	  verify.setText("ID has been taken, please change it."); 
-    	     	  }
-    	          
-    	        else if(verify_Nametext(name))
-    			{	
-    				 verify.setText("Please enter name in the correct format");
-    			}
-   		     
-    			else
-    			{
-    				  wage = DecimalFormat.getNumberInstance().parse(wageTxt).doubleValue();
-    		          id = Integer.parseInt(id_Number);
-    				 verify.setText("Success Please go back to login");
-    				 System.out.println("just checking");
-    			}
     		  }
         	  
         	  else if(Cashier_rdb.isSelected())
     		  {     
-        		  jobType = "Cashier";
-        		  if(checkdatabaseid(employees,id_Number))
-             	  {
-             	   	  verify.setText("ID has been taken, please change it."); 
-             	  }
-                  
-                else if(verify_Nametext(name))
-        		{	
-        			 verify.setText("Please enter name in the correct format");
-        		}
-        	     
-        	    
-        	     
-        		else
-        		{
-        			  wage = DecimalFormat.getNumberInstance().parse(wageTxt).doubleValue();
-        	          id = Integer.parseInt(id_Number);
-        			 verify.setText("Success Please go back to login");
-        			 System.out.print("just checking");
-        		}       		  
-    		   
+        		  jobType = "Cashier";   
     		  }
-        	  
-        	  else if(!Cashier_rdb.isSelected() && !Kitchen_Staff_rdb.isSelected() && !Manager_rdb.isSelected() && !Wait_staff_rdb.isSelected())
-        	  {
-        		  verify.setText("Please select a job type."); 
-        		  
-        	  }
+        	  wage = DecimalFormat.getNumberInstance().parse(wageTxt).doubleValue();
+   	          id = Integer.parseInt(id_Number);
+   			  verify.setText("Success Please go back to login");
+   			  System.out.print("just checking");
           }
 		 }
 		catch (IOException e) 
@@ -363,7 +305,7 @@ public class SceneController extends Thread
 		 {			 
 			 //verify.setText("Please enter the information in the correct formatd");
 			 verify.setText("Please enter the information in the correct format");
-			 System.out.print(e);
+			 System.out.println(e);
 		 }
 	 }
 	 
