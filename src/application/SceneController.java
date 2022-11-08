@@ -2,6 +2,7 @@ package application;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -21,6 +22,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Toggle;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
@@ -53,7 +56,8 @@ public class SceneController extends Thread
 	 private SimpleDateFormat timeFormat;
 	 ArrayList<Employee> employees = new ArrayList<Employee>();
 	 Database database = new Database();
-	// database
+	 ArrayList<Order> orders = new ArrayList<Order>();
+	 
 	// setEditable(false) use this function for setting text in a textfield and not being played with
 	 @FXML 
 	 private TextField txtField;
@@ -66,6 +70,18 @@ public class SceneController extends Thread
 	 
 	 @FXML 
 	 private RadioButton Manager_rdb;
+	 
+	 @FXML 
+	 private RadioButton Wait_staff_rdb;
+	 
+	 @FXML
+	 private RadioButton Kitchen_Staff_rdb;
+	 
+	 @FXML 
+	 private RadioButton Cashier_rdb;
+	 
+	 @FXML
+	 private ToggleGroup job_type;
 	 
 	 @FXML
 	 private Label login_Label;
@@ -97,24 +113,24 @@ public class SceneController extends Thread
 	 @FXML 
 	 private Button waterButton;
 	 
-	@FXML 
-	private Label failure;
+	 @FXML 
+	 private Label failure;
 	 
-	@FXML
-	private Label timeText;
+	 @FXML
+	 private Label timeText;
 	
 	 @FXML 
 	 private Button timeButton;
 	 
 	 @FXML 
 	 private AnchorPane info;
+	 	 
+	 @FXML
+	 private TextField wage_texField;
 	 
-	 
-	 
-	 
-	 
-	 
-	 
+	 @FXML
+	 private TextField Id_Number_txtField;
+	
 	 
 	 
 	 
@@ -186,24 +202,172 @@ public class SceneController extends Thread
 		 }
 	 }
 	 
-	 public void enter_manager(ActionEvent event) throws IOException
+	 public void enter_manager(ActionEvent event) 
 	 {
 		 
-	      int value_of_txt; 
-          String text = name_texField.getText();
+		 try {
+			database.connect_to_database();
+		    database.setResultset();
+		    while(database.resultSet.next())
+			{
+				  Employee employee = new Employee();
+				  employee.setEmployee_name(database.resultSet.getString("Name"));			
+				  employee.setId_number(database.resultSet.getString("Id Number"));
+				  employee.setHours(database.resultSet.getInt("Hours"));
+				  employee.setWage(database.resultSet.getDouble("Wage"));
+				  employee.set_Job_Type(database.resultSet.getString("Job Type"));
+				  employee.Set_total_Pay();
+				  employees.add(employee);	 
+			}
+		    
+          String name = name_texField.getText();
+          String wageTxt = wage_texField.getText();
+          String id_Number = Id_Number_txtField.getText();
+          String jobType;
+          double wage = 0;
+          int id=0;
+          Boolean checkID =true;
+          int arraysize =employees.size();
+        
+          if(name.equals(""))
+          {
+          	 verify.setText("Please enter a name");      	
+          }
           
-		if(verify_text(text))
-		{	
-			 verify.setText("Please enter in the correct format");
-		}
-		
-		else
-		{
-			 verify.setText("Success Please go back to login");
-		}
+         else if(wageTxt.equals(""))
+         {
+        	 verify.setText("Please enter a wage");     
+         }
+         else if(id_Number.equals(""))
+         {
+        	 verify.setText("Please enter an ID");     
+         }
+         
+          else {
+        	  
+        	  if(Manager_rdb.isSelected())
+        	     {        		  
+        		 jobType = "Manager";
+        		 
+        		 if(checkdatabaseid(employees,id_Number))
+            	  {
+            	   	  verify.setText("ID has been taken, please change it."); 
+            	  }
+                 
+               else if(verify_Nametext(name))
+       		{	
+       			 verify.setText("Please enter name in the correct format");
+       		}
+       	     
+       		else
+       		{
+       			  wage = DecimalFormat.getNumberInstance().parse(wageTxt).doubleValue();
+       	          id = Integer.parseInt(id_Number);
+       			 verify.setText("Success Please go back to login");
+       			 System.out.print("just checking");
+       		}
+        		 }
+       
+        	  else if( Wait_staff_rdb.isSelected())
+    		  {        		  
+    		    jobType = "Wait Staff";
+    		    
+    		    if(checkdatabaseid(employees,id_Number))
+    	     	  {
+    	     	   	  verify.setText("ID has been taken, please change it."); 
+    	     	  }
+    	          
+    	        else if(verify_Nametext(name))
+    			{	
+    				 verify.setText("Please enter name in the correct format");
+    			}
+    		     
+    		    
+    		     
+    			else
+    			{
+    				  wage = DecimalFormat.getNumberInstance().parse(wageTxt).doubleValue();
+    		          id = Integer.parseInt(id_Number);
+    				 verify.setText("Success Please go back to login");
+    				 System.out.print("just checking");
+    			}
+    		  }
+        	  
+        	  else if(Kitchen_Staff_rdb.isSelected())
+    		  {        		  
+    		    jobType = "Kitchen Staff";
+    		    if(checkdatabaseid(employees,id_Number))
+    	     	  {
+    	     	   	  verify.setText("ID has been taken, please change it."); 
+    	     	  }
+    	          
+    	        else if(verify_Nametext(name))
+    			{	
+    				 verify.setText("Please enter name in the correct format");
+    			}
+   		     
+    			else
+    			{
+    				  wage = DecimalFormat.getNumberInstance().parse(wageTxt).doubleValue();
+    		          id = Integer.parseInt(id_Number);
+    				 verify.setText("Success Please go back to login");
+    				 System.out.println("just checking");
+    			}
+    		  }
+        	  
+        	  else if(Cashier_rdb.isSelected())
+    		  {     
+        		  jobType = "Cashier";
+        		  if(checkdatabaseid(employees,id_Number))
+             	  {
+             	   	  verify.setText("ID has been taken, please change it."); 
+             	  }
+                  
+                else if(verify_Nametext(name))
+        		{	
+        			 verify.setText("Please enter name in the correct format");
+        		}
+        	     
+        	    
+        	     
+        		else
+        		{
+        			  wage = DecimalFormat.getNumberInstance().parse(wageTxt).doubleValue();
+        	          id = Integer.parseInt(id_Number);
+        			 verify.setText("Success Please go back to login");
+        			 System.out.print("just checking");
+        		}       		  
+    		   
+    		  }
+        	  
+        	  else if(!Cashier_rdb.isSelected() && !Kitchen_Staff_rdb.isSelected() && !Manager_rdb.isSelected() && !Wait_staff_rdb.isSelected())
+        	  {
+        		  verify.setText("Please select a job type."); 
+        		  
+        	  }
+          }
+		 }
+		catch (IOException e) 
+		 {		 
+			verify.setText("Please enter the information in the correct format");
+		 }
+		 catch(SQLException e)
+		 {				 
+			 verify.setText("Failed to connect to database");
+		 }
+		 catch (NumberFormatException e) 
+		 {
+			 verify.setText("Please enter the information in the correct format");			 
+		 }
+		 catch (Exception e) 
+		 {			 
+			 //verify.setText("Please enter the information in the correct formatd");
+			 verify.setText("Please enter the information in the correct format");
+			 System.out.print(e);
+		 }
 	 }
 	 
-	 public Boolean verify_text(String txt)
+	 public Boolean verify_Nametext(String txt) 
 	 {
 		 try
 		 {
@@ -214,6 +378,21 @@ public class SceneController extends Thread
 		 {
 			 return false;
 		 }
+	 }
+	 
+	 
+	 public boolean checkdatabaseid(ArrayList<Employee> employees, String id_Number) 
+	 { 
+		 boolean checkid = false;
+	 for(int i=0;i<employees.size();i++)
+     {
+   	  if(employees.get(i).getId_number().equals(id_Number))
+   	  {
+   		checkid =true; 
+   		break;
+   	  }
+     }
+	return checkid;
 	 }
 	 
 	 public void switchToCreate_New_User(ActionEvent event) throws IOException
@@ -246,7 +425,6 @@ public class SceneController extends Thread
 		 	stage.setScene(scene);
 		 	stage.show();
 			stage.setFullScreen(true);
-
 	 }
 		 
 	 public void addFoodBar(ActionEvent event)throws IOException

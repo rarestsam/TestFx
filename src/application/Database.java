@@ -42,34 +42,16 @@ import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-/* 
- while(resultSet.next())
-			{
-				 System.out.printf("%-8d %-18s %-30s %10.2f\n",
-               			 resultSet.getInt(1),
-                         resultSet.getString(2),
-                         resultSet.getString(3),
-                         resultSet.getDouble(4));			
-			}
-			
-*/
 
-// getColumnCount() 
-//use this function to find how many coloumns there are in a result set
 
-/*   
- 			statement.executeUpdate(sql);
 
-            String updField = "java";
-            String updatesql = "UPDATE Books " +
-                    "SET ListPrice = ? WHERE Code = ?";
-            updateField = connection.prepareStatement(updatesql);
-            updateField.setDouble(1, newPrice);
-            updateField.setString(2, updField);
-            updateField.executeUpdate();
-         
-*/
-
+/*
+ String insertSQL = "INSERT INTO table_name (column1, column2) VALUES (?, ?)";
+PreparedStatement preparedStatement = connection.prepareStatement(insertSQL);
+preparedStatement.setString(1, "value1");
+preparedStatement.setString(2, "value2");
+preparedStatement.executeUpdate();
+ */
 public class Database 
 {
 	Connection connection = null;

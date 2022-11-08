@@ -56,7 +56,7 @@
             <Font name="Comic Sans MS" size="20.0" />
          </font>
       </RadioButton>
-      <Button fx:id="enter_manager" layoutX="404.0" layoutY="763.0" mnemonicParsing="false" onAction="#enter_manager" prefHeight="200.0" prefWidth="904.0" style="-fx-background-color: black;" stylesheets="@application.css" text="Enter" textFill="#89a4dc">
+      <Button fx:id="enter_manager" layoutX="81.0" layoutY="772.0" mnemonicParsing="false" onAction="#enter_manager" prefHeight="200.0" prefWidth="904.0" style="-fx-background-color: black;" stylesheets="@application.css" text="Enter" textFill="#89a4dc">
          <font>
             <Font name="Comic Sans MS" size="96.0" />
          </font>
@@ -66,5 +66,10 @@
             <Font size="40.0" />
          </font>
       </Label>
+      <Button layoutX="1115.0" layoutY="766.0" mnemonicParsing="false" onAction="#switchToLogin" prefHeight="200.0" prefWidth="756.0" style="-fx-background-color: black;" text="Back to login" textFill="#89a4dc">
+         <font>
+            <Font name="Comic Sans MS" size="96.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
