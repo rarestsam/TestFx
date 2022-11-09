@@ -31,29 +31,29 @@
                      <children>
                         <Pane prefHeight="202.0" prefWidth="643.0" style="-fx-background-color: #d3d3d3; -fx-border-color: #89a4dc; -fx-border-width: 10;">
                            <children>
-                              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="19.0" layoutY="50.0" prefHeight="102.0" prefWidth="610.0" text="Order #2" textAlignment="CENTER">
+                              <Button layoutX="7.0" layoutY="8.0" mnemonicParsing="false" prefHeight="184.0" prefWidth="626.0" text="Order #2">
                                  <font>
                                     <Font name="Modern No. 20" size="96.0" />
                                  </font>
-                              </Label>
+                              </Button>
                            </children>
                         </Pane>
                         <Pane layoutX="643.0" prefHeight="202.0" prefWidth="637.0" style="-fx-background-color: #d3d3d3; -fx-border-color: #89a4dc; -fx-border-width: 10;">
                            <children>
-                              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="50.0" prefHeight="102.0" prefWidth="610.0" text="Order #3" textAlignment="CENTER">
+                              <Button layoutX="6.0" layoutY="9.0" mnemonicParsing="false" prefHeight="184.0" prefWidth="626.0" text="Order #3">
                                  <font>
                                     <Font name="Modern No. 20" size="96.0" />
                                  </font>
-                              </Label>
+                              </Button>
                            </children>
                         </Pane>
                         <Pane layoutX="1280.0" prefHeight="202.0" prefWidth="643.0" style="-fx-border-color: #89a4dc; -fx-border-width: 10; -fx-background-color: #d3d3d3;">
                            <children>
-                              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="17.0" layoutY="50.0" prefHeight="102.0" prefWidth="610.0" text="None" textAlignment="CENTER">
+                              <Button layoutX="9.0" layoutY="9.0" mnemonicParsing="false" prefHeight="184.0" prefWidth="626.0" text="None">
                                  <font>
                                     <Font name="Modern No. 20" size="96.0" />
                                  </font>
-                              </Label>
+                              </Button>
                            </children>
                         </Pane>
                      </children>
@@ -126,7 +126,7 @@
                                                       <Insets left="7.0" />
                                                    </padding>
                                                 </Label>
-                                                <Button fx:id="notesButton1" layoutX="495.0" layoutY="14.0" mnemonicParsing="false" onAction="#notesWindow" prefHeight="42.0" prefWidth="94.0" style="-fx-background-color: gray;" text="Done" textAlignment="CENTER">
+                                                <Button fx:id="notesButton1" layoutX="495.0" layoutY="14.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="94.0" style="-fx-background-color: gray;" text="Done" textAlignment="CENTER">
                                                    <font>
                                                       <Font name="Modern No. 20" size="22.0" />
                                                    </font>
@@ -175,7 +175,7 @@
                                                       <Insets left="7.0" />
                                                    </padding>
                                                 </Label>
-                                                <Button fx:id="notesButton1" layoutX="495.0" layoutY="14.0" mnemonicParsing="false" onAction="#notesWindow" prefHeight="42.0" prefWidth="94.0" style="-fx-background-color: gray;" text="Done" textAlignment="CENTER">
+                                                <Button fx:id="notesButton1" layoutX="495.0" layoutY="14.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="94.0" style="-fx-background-color: gray;" text="Done" textAlignment="CENTER">
                                                    <font>
                                                       <Font name="Modern No. 20" size="22.0" />
                                                    </font>
@@ -224,7 +224,7 @@
                                                       <Insets left="7.0" />
                                                    </padding>
                                                 </Label>
-                                                <Button fx:id="notesButton1" layoutX="495.0" layoutY="14.0" mnemonicParsing="false" onAction="#notesWindow" prefHeight="42.0" prefWidth="94.0" style="-fx-background-color: green;" text="Done" textAlignment="CENTER">
+                                                <Button fx:id="notesButton1" layoutX="495.0" layoutY="14.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="94.0" style="-fx-background-color: green;" text="Done" textAlignment="CENTER">
                                                    <font>
                                                       <Font name="Modern No. 20" size="22.0" />
                                                    </font>
@@ -273,7 +273,7 @@
                                                       <Insets left="7.0" />
                                                    </padding>
                                                 </Label>
-                                                <Button fx:id="notesButton12" layoutX="495.0" layoutY="14.0" mnemonicParsing="false" onAction="#notesWindow" prefHeight="42.0" prefWidth="94.0" style="-fx-background-color: green;" text="Done" textAlignment="CENTER">
+                                                <Button fx:id="notesButton12" layoutX="495.0" layoutY="14.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="94.0" style="-fx-background-color: green;" text="Done" textAlignment="CENTER">
                                                    <font>
                                                       <Font name="Modern No. 20" size="22.0" />
                                                    </font>
@@ -322,7 +322,7 @@
                                                       <Insets left="7.0" />
                                                    </padding>
                                                 </Label>
-                                                <Button fx:id="notesButton12" layoutX="495.0" layoutY="14.0" mnemonicParsing="false" onAction="#notesWindow" prefHeight="42.0" prefWidth="94.0" style="-fx-background-color: green;" text="Done" textAlignment="CENTER">
+                                                <Button fx:id="notesButton12" layoutX="495.0" layoutY="14.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="94.0" style="-fx-background-color: green;" text="Done" textAlignment="CENTER">
                                                    <font>
                                                       <Font name="Modern No. 20" size="22.0" />
                                                    </font>
