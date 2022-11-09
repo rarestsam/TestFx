@@ -182,7 +182,7 @@ public class SceneController extends Thread
 				 
 				 if(employees.get(i).getjobType().equals("Kitchen Staff"))
 				 {
-					  Parent root = FXMLLoader.load(getClass().getResource("Waitstaff_Screen.fxml"));
+					  Parent root = FXMLLoader.load(getClass().getResource("Kitchen.fxml"));
 					  stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 					  scene = new Scene(root);
 					  stage.setScene(scene);
@@ -367,6 +367,16 @@ public class SceneController extends Thread
 		 	stage.setScene(scene);
 		 	stage.show();
 			stage.setFullScreen(true);
+	 }
+	 
+	 public void switchToKitchenstaff(ActionEvent event) throws IOException
+	 {
+			  Parent root = FXMLLoader.load(getClass().getResource("Kitchen.fxml"));
+			  stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+			  scene = new Scene(root);
+			  stage.setScene(scene);
+			  stage.show();
+			  stage.setFullScreen(true);
 	 }
 		 
 	 public void addFoodBar(ActionEvent event)throws IOException

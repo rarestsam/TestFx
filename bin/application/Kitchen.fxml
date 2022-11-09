@@ -1,8 +1,380 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.effect.Blend?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1">
-	<!-- TODO Add Nodes -->
+
+<AnchorPane prefHeight="1248.0" prefWidth="1924.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19" fx:controller="application.SceneController">
+   <children>
+      <AnchorPane layoutX="10.0" prefHeight="1332.0" prefWidth="1914.0">
+         <children>
+            <AnchorPane layoutY="-24.0" prefHeight="1436.0" prefWidth="1914.0" style="-fx-background-color: white; -fx-background-color: #d3d3d3;" stylesheets="@application.css">
+               <effect>
+                  <Blend mode="ADD">
+                     <topInput>
+                        <Blend mode="RED" />
+                     </topInput>
+                  </Blend>
+               </effect>
+            </AnchorPane>
+            <SplitPane dividerPositions="0.19165085388994307" layoutX="-10.0" orientation="VERTICAL" prefHeight="1077.0" prefWidth="1924.0">
+              <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                     <children>
+                        <Pane prefHeight="202.0" prefWidth="643.0" style="-fx-background-color: #d3d3d3; -fx-border-color: #89a4dc; -fx-border-width: 10;">
+                           <children>
+                              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="19.0" layoutY="50.0" prefHeight="102.0" prefWidth="610.0" text="Order #2" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="Modern No. 20" size="96.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <Pane layoutX="643.0" prefHeight="202.0" prefWidth="637.0" style="-fx-background-color: #d3d3d3; -fx-border-color: #89a4dc; -fx-border-width: 10;">
+                           <children>
+                              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="50.0" prefHeight="102.0" prefWidth="610.0" text="Order #3" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="Modern No. 20" size="96.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <Pane layoutX="1280.0" prefHeight="202.0" prefWidth="643.0" style="-fx-border-color: #89a4dc; -fx-border-width: 10; -fx-background-color: #d3d3d3;">
+                           <children>
+                              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="17.0" layoutY="50.0" prefHeight="102.0" prefWidth="610.0" text="None" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="Modern No. 20" size="96.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" onMouseClicked="#loginreroute" prefHeight="849.0" prefWidth="1873.0" style="-fx-background-color: #89a4dc;">
+                     <children>
+                        <Pane layoutX="601.0" prefHeight="866.0" prefWidth="720.0" style="-fx-background-color: #d3d3d3;">
+                           <children>
+                              <AnchorPane fx:id="info" prefHeight="214.0" prefWidth="720.0" style="-fx-background-color: #d3d3d3;">
+                                 <children>
+                                    <Label layoutX="233.0" layoutY="108.0" prefHeight="93.0" prefWidth="112.0" text="Table">
+                                       <font>
+                                          <Font name="Modern No. 20" size="48.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="240.0" layoutY="49.0" prefHeight="93.0" prefWidth="112.0" text="Order #">
+                                       <font>
+                                          <Font name="Modern No. 20" size="36.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="orderNumber" layoutX="363.0" layoutY="49.0" prefHeight="93.0" prefWidth="72.0" text="001">
+                                       <font>
+                                          <Font name="Modern No. 20" size="36.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="workerUsername" layoutX="42.0" layoutY="3.0" prefHeight="56.0" prefWidth="237.0" text="Maya">
+                                       <font>
+                                          <Font name="Modern No. 20" size="36.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="timeText" layoutX="580.0" layoutY="3.0" prefHeight="56.0" prefWidth="133.0" text="10:35 pm">
+                                       <font>
+                                          <Font name="Modern No. 20" size="36.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="345.0" layoutY="127.0" prefHeight="56.0" prefWidth="82.0" text="1" textAlignment="CENTER">
+                                       <font>
+                                          <Font name="Modern No. 20" size="38.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <ScrollPane layoutY="209.0" prefHeight="554.0" prefWidth="720.0">
+                                 <content>
+                                    <VBox fx:id="foodBarBox" prefHeight="558.0" prefWidth="704.0">
+                                       <children>
+                                          <Pane fx:id="foodBar1" prefHeight="68.0" prefWidth="697.0" style="-fx-background-color: white;">
+                                             <children>
+                                                <Label fx:id="priceText11" alignment="CENTER" layoutX="11.0" layoutY="8.0" prefHeight="56.0" prefWidth="103.0" text="1">
+                                                   <font>
+                                                      <Font name="Modern No. 20" size="29.0" />
+                                                   </font>
+                                                   <padding>
+                                                      <Insets left="7.0" />
+                                                   </padding>
+                                                </Label>
+                                                <Label fx:id="dollarSign1" layoutX="331.0" layoutY="8.0" prefHeight="56.0" prefWidth="16.0" text="\$">
+                                                   <font>
+                                                      <Font name="Modern No. 20" size="29.0" />
+                                                   </font>
+                                                   <padding>
+                                                      <Insets left="7.0" />
+                                                   </padding>
+                                                </Label>
+                                                <Label fx:id="priceText1" layoutX="348.0" layoutY="7.0" prefHeight="56.0" prefWidth="103.0" text="24.23">
+                                                   <font>
+                                                      <Font name="Modern No. 20" size="29.0" />
+                                                   </font>
+                                                   <padding>
+                                                      <Insets left="7.0" />
+                                                   </padding>
+                                                </Label>
+                                                <Button fx:id="notesButton1" layoutX="495.0" layoutY="14.0" mnemonicParsing="false" onAction="#notesWindow" prefHeight="42.0" prefWidth="94.0" style="-fx-background-color: gray;" text="Done" textAlignment="CENTER">
+                                                   <font>
+                                                      <Font name="Modern No. 20" size="22.0" />
+                                                   </font>
+                                                </Button>
+                                                <Label fx:id="foodText1" layoutX="114.0" layoutY="8.0" prefHeight="56.0" prefWidth="209.0" text="Pizza">
+                                                   <font>
+                                                      <Font name="Modern No. 20" size="29.0" />
+                                                   </font>
+                                                   <padding>
+                                                      <Insets left="7.0" />
+                                                   </padding>
+                                                </Label>
+                                                <Button fx:id="notesButton11" layoutX="600.0" layoutY="15.0" mnemonicParsing="false" onAction="#notesWindow" prefHeight="42.0" prefWidth="90.0" style="-fx-background-color: yellow;" text="Notes" textAlignment="CENTER">
+                                                   <font>
+                                                      <Font name="Modern No. 20" size="22.0" />
+                                                   </font>
+                                                </Button>
+                                             </children>
+                                             <padding>
+                                                <Insets bottom="3.0" top="3.0" />
+                                             </padding>
+                                          </Pane>
+                                          <Pane fx:id="foodBar2" prefHeight="68.0" prefWidth="697.0" style="-fx-background-color: white;">
+                                             <children>
+                                                <Label fx:id="priceText12" alignment="CENTER" layoutX="11.0" layoutY="8.0" prefHeight="56.0" prefWidth="103.0" text="4">
+                                                   <font>
+                                                      <Font name="Modern No. 20" size="29.0" />
+                                                   </font>
+                                                   <padding>
+                                                      <Insets left="7.0" />
+                                                   </padding>
+                                                </Label>
+                                                <Label fx:id="dollarSign2" layoutX="331.0" layoutY="8.0" prefHeight="56.0" prefWidth="16.0" text="\$">
+                                                   <font>
+                                                      <Font name="Modern No. 20" size="29.0" />
+                                                   </font>
+                                                   <padding>
+                                                      <Insets left="7.0" />
+                                                   </padding>
+                                                </Label>
+                                                <Label fx:id="priceText1" layoutX="348.0" layoutY="7.0" prefHeight="56.0" prefWidth="103.0" text="12.08">
+                                                   <font>
+                                                      <Font name="Modern No. 20" size="29.0" />
+                                                   </font>
+                                                   <padding>
+                                                      <Insets left="7.0" />
+                                                   </padding>
+                                                </Label>
+                                                <Button fx:id="notesButton1" layoutX="495.0" layoutY="14.0" mnemonicParsing="false" onAction="#notesWindow" prefHeight="42.0" prefWidth="94.0" style="-fx-background-color: gray;" text="Done" textAlignment="CENTER">
+                                                   <font>
+                                                      <Font name="Modern No. 20" size="22.0" />
+                                                   </font>
+                                                </Button>
+                                                <Label fx:id="foodText2" layoutX="114.0" layoutY="8.0" prefHeight="56.0" prefWidth="209.0" text="Fries">
+                                                   <font>
+                                                      <Font name="Modern No. 20" size="29.0" />
+                                                   </font>
+                                                   <padding>
+                                                      <Insets left="7.0" />
+                                                   </padding>
+                                                </Label>
+                                                <Button fx:id="notesButton12" layoutX="600.0" layoutY="15.0" mnemonicParsing="false" onAction="#notesWindow" prefHeight="42.0" prefWidth="90.0" style="-fx-background-color: gray;" text="Notes" textAlignment="CENTER">
+                                                   <font>
+                                                      <Font name="Modern No. 20" size="22.0" />
+                                                   </font>
+                                                </Button>
+                                             </children>
+                                             <padding>
+                                                <Insets bottom="3.0" top="3.0" />
+                                             </padding>
+                                          </Pane>
+                                          <Pane fx:id="foodBar3" prefHeight="68.0" prefWidth="697.0" style="-fx-background-color: white;">
+                                             <children>
+                                                <Label fx:id="priceText13" alignment="CENTER" layoutX="11.0" layoutY="8.0" prefHeight="56.0" prefWidth="103.0" text="2">
+                                                   <font>
+                                                      <Font name="Modern No. 20" size="29.0" />
+                                                   </font>
+                                                   <padding>
+                                                      <Insets left="7.0" />
+                                                   </padding>
+                                                </Label>
+                                                <Label fx:id="dollarSign3" layoutX="331.0" layoutY="8.0" prefHeight="56.0" prefWidth="16.0" text="\$">
+                                                   <font>
+                                                      <Font name="Modern No. 20" size="29.0" />
+                                                   </font>
+                                                   <padding>
+                                                      <Insets left="7.0" />
+                                                   </padding>
+                                                </Label>
+                                                <Label fx:id="priceText1" layoutX="348.0" layoutY="7.0" prefHeight="56.0" prefWidth="103.0" text="8.60">
+                                                   <font>
+                                                      <Font name="Modern No. 20" size="29.0" />
+                                                   </font>
+                                                   <padding>
+                                                      <Insets left="7.0" />
+                                                   </padding>
+                                                </Label>
+                                                <Button fx:id="notesButton1" layoutX="495.0" layoutY="14.0" mnemonicParsing="false" onAction="#notesWindow" prefHeight="42.0" prefWidth="94.0" style="-fx-background-color: green;" text="Done" textAlignment="CENTER">
+                                                   <font>
+                                                      <Font name="Modern No. 20" size="22.0" />
+                                                   </font>
+                                                </Button>
+                                                <Label fx:id="foodText3" layoutX="114.0" layoutY="8.0" prefHeight="56.0" prefWidth="209.0" text="Soda">
+                                                   <font>
+                                                      <Font name="Modern No. 20" size="29.0" />
+                                                   </font>
+                                                   <padding>
+                                                      <Insets left="7.0" />
+                                                   </padding>
+                                                </Label>
+                                                <Button fx:id="notesButton13" layoutX="600.0" layoutY="15.0" mnemonicParsing="false" onAction="#notesWindow" prefHeight="42.0" prefWidth="90.0" style="-fx-background-color: gray;" text="Notes" textAlignment="CENTER">
+                                                   <font>
+                                                      <Font name="Modern No. 20" size="22.0" />
+                                                   </font>
+                                                </Button>
+                                             </children>
+                                             <padding>
+                                                <Insets bottom="3.0" top="3.0" />
+                                             </padding>
+                                          </Pane>
+                                          <Pane fx:id="foodBar21" prefHeight="68.0" prefWidth="697.0" style="-fx-background-color: white;">
+                                             <children>
+                                                <Label fx:id="priceText121" alignment="CENTER" layoutX="11.0" layoutY="8.0" prefHeight="56.0" prefWidth="103.0" text="5">
+                                                   <font>
+                                                      <Font name="Modern No. 20" size="29.0" />
+                                                   </font>
+                                                   <padding>
+                                                      <Insets left="7.0" />
+                                                   </padding>
+                                                </Label>
+                                                <Label fx:id="dollarSign21" layoutX="331.0" layoutY="8.0" prefHeight="56.0" prefWidth="16.0" text="\$">
+                                                   <font>
+                                                      <Font name="Modern No. 20" size="29.0" />
+                                                   </font>
+                                                   <padding>
+                                                      <Insets left="7.0" />
+                                                   </padding>
+                                                </Label>
+                                                <Label fx:id="priceText12" layoutX="348.0" layoutY="7.0" prefHeight="56.0" prefWidth="103.0" text="17.50">
+                                                   <font>
+                                                      <Font name="Modern No. 20" size="29.0" />
+                                                   </font>
+                                                   <padding>
+                                                      <Insets left="7.0" />
+                                                   </padding>
+                                                </Label>
+                                                <Button fx:id="notesButton12" layoutX="495.0" layoutY="14.0" mnemonicParsing="false" onAction="#notesWindow" prefHeight="42.0" prefWidth="94.0" style="-fx-background-color: green;" text="Done" textAlignment="CENTER">
+                                                   <font>
+                                                      <Font name="Modern No. 20" size="22.0" />
+                                                   </font>
+                                                </Button>
+                                                <Label fx:id="foodText21" layoutX="114.0" layoutY="8.0" prefHeight="56.0" prefWidth="209.0" text="Ice Cream Scoop">
+                                                   <font>
+                                                      <Font name="Modern No. 20" size="29.0" />
+                                                   </font>
+                                                   <padding>
+                                                      <Insets left="7.0" />
+                                                   </padding>
+                                                </Label>
+                                                <Button fx:id="notesButton121" layoutX="600.0" layoutY="15.0" mnemonicParsing="false" onAction="#notesWindow" prefHeight="42.0" prefWidth="90.0" style="-fx-background-color: yellow;" text="Notes" textAlignment="CENTER">
+                                                   <font>
+                                                      <Font name="Modern No. 20" size="22.0" />
+                                                   </font>
+                                                </Button>
+                                             </children>
+                                             <padding>
+                                                <Insets bottom="3.0" top="3.0" />
+                                             </padding>
+                                          </Pane>
+                                          <Pane fx:id="foodBar22" prefHeight="68.0" prefWidth="697.0" style="-fx-background-color: white;">
+                                             <children>
+                                                <Label fx:id="priceText122" alignment="CENTER" layoutX="11.0" layoutY="8.0" prefHeight="56.0" prefWidth="103.0" text="2">
+                                                   <font>
+                                                      <Font name="Modern No. 20" size="29.0" />
+                                                   </font>
+                                                   <padding>
+                                                      <Insets left="7.0" />
+                                                   </padding>
+                                                </Label>
+                                                <Label fx:id="dollarSign22" layoutX="331.0" layoutY="8.0" prefHeight="56.0" prefWidth="16.0" text="\$">
+                                                   <font>
+                                                      <Font name="Modern No. 20" size="29.0" />
+                                                   </font>
+                                                   <padding>
+                                                      <Insets left="7.0" />
+                                                   </padding>
+                                                </Label>
+                                                <Label fx:id="priceText12" layoutX="348.0" layoutY="7.0" prefHeight="56.0" prefWidth="103.0" text="5.08">
+                                                   <font>
+                                                      <Font name="Modern No. 20" size="29.0" />
+                                                   </font>
+                                                   <padding>
+                                                      <Insets left="7.0" />
+                                                   </padding>
+                                                </Label>
+                                                <Button fx:id="notesButton12" layoutX="495.0" layoutY="14.0" mnemonicParsing="false" onAction="#notesWindow" prefHeight="42.0" prefWidth="94.0" style="-fx-background-color: green;" text="Done" textAlignment="CENTER">
+                                                   <font>
+                                                      <Font name="Modern No. 20" size="22.0" />
+                                                   </font>
+                                                </Button>
+                                                <Label fx:id="foodText22" layoutX="114.0" layoutY="8.0" prefHeight="56.0" prefWidth="209.0" text="Water Bottle">
+                                                   <font>
+                                                      <Font name="Modern No. 20" size="29.0" />
+                                                   </font>
+                                                   <padding>
+                                                      <Insets left="7.0" />
+                                                   </padding>
+                                                </Label>
+                                                <Button fx:id="notesButton122" layoutX="600.0" layoutY="15.0" mnemonicParsing="false" onAction="#notesWindow" prefHeight="42.0" prefWidth="90.0" style="-fx-background-color: gray;" text="Notes" textAlignment="CENTER">
+                                                   <font>
+                                                      <Font name="Modern No. 20" size="22.0" />
+                                                   </font>
+                                                </Button>
+                                             </children>
+                                             <padding>
+                                                <Insets bottom="3.0" top="3.0" />
+                                             </padding>
+                                          </Pane>
+                                       </children>
+                                    </VBox>
+                                 </content>
+                              </ScrollPane>
+                              <AnchorPane layoutX="218.0" layoutY="754.0" prefHeight="112.0" prefWidth="495.0">
+                                 <children>
+                                    <Label layoutX="314.0" layoutY="22.0" prefHeight="69.0" prefWidth="17.0" text="\$">
+                                       <font>
+                                          <Font name="Modern No. 20" size="41.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="totalPriceText" layoutX="338.0" layoutY="28.0" prefHeight="56.0" prefWidth="144.0" text="67.49">
+                                       <font>
+                                          <Font name="Modern No. 20" size="41.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="foodPriceText11" layoutX="211.0" layoutY="29.0" prefHeight="56.0" prefWidth="103.0" text="Total:">
+                                       <font>
+                                          <Font name="Modern No. 20" size="41.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </Pane>
+                     </children>
+                  </AnchorPane>
+              </items>
+            </SplitPane>
+         </children>
+      </AnchorPane>
+   </children>
 </AnchorPane>
-
