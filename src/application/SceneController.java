@@ -248,6 +248,25 @@ public class SceneController
 		 }
 	 }
 	 
+	 
+	 public void switchToManager(ActionEvent event) throws IOException 
+	 {
+		 
+		 Parent root = FXMLLoader.load(getClass().getResource("Manager_Screen.fxml"));
+		  stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+		  scene = new Scene(root);
+		  stage.setScene(scene);
+		  stage.show();
+		  stage.setFullScreen(true);
+		     database.closeConnection();
+			 database.closeresultSet();
+			 database.closestatement();
+			 database.closeupdateField();
+	 
+	 
+	 }
+	 
+	 
 	 public void enter_manager(ActionEvent event) 
 	 {
 		 
@@ -373,7 +392,7 @@ public class SceneController
    			 database.closeresultSet();
    			 database.closestatement();
    			 database.closeupdateField();
-   			 verify.setText("Success Please go back to login");
+   			 verify.setText("Success Please press the back button to exit");
           }
 		 }
 		catch (IOException e) 

@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SceneController">
+<AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SceneController">
    <children>
       <AnchorPane layoutY="-24.0" prefHeight="1080.0" prefWidth="1914.0" style="-fx-background-color: white; -fx-background-color: #d3d3d3;" stylesheets="@application.css">
          <children>
@@ -22,7 +22,7 @@
                   <ColorAdjust brightness="-0.01" hue="0.61" />
                </effect>
             </ImageView>
-            <Button fx:id="loginbtn" layoutX="825.0" layoutY="751.0" mnemonicParsing="false" onAction="#loginreroute" prefHeight="92.0" prefWidth="264.0" style="-fx-background-color: green;" stylesheets="@application.css" text="Login" textAlignment="CENTER" textFill="#fffdfd">
+            <Button fx:id="loginbtn" layoutX="677.0" layoutY="751.0" mnemonicParsing="false" onAction="#loginreroute" prefHeight="92.0" prefWidth="264.0" style="-fx-background-color: green;" stylesheets="@application.css" text="Login" textAlignment="CENTER" textFill="#fffdfd">
                <font>
                   <Font name="Modern No. 20" size="49.0" />
                </font>
@@ -36,6 +36,11 @@
                <font>
                   <Font size="38.0" />
                </font></PasswordField>
+            <Button fx:id="loginbtn1" layoutX="984.0" layoutY="751.0" mnemonicParsing="false" onAction="#loginreroute" prefHeight="92.0" prefWidth="264.0" style="-fx-background-color: green;" stylesheets="@application.css" text="Clock In" textAlignment="CENTER" textFill="#fffdfd">
+               <font>
+                  <Font name="Modern No. 20" size="49.0" />
+               </font>
+            </Button>
          </children>
          <effect>
             <Blend mode="ADD">

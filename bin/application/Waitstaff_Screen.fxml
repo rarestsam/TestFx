@@ -4,8 +4,6 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
@@ -16,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<SplitPane dividerPositions="0.6470588235294118" prefHeight="1104.0" prefWidth="1923.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SceneController">
+<SplitPane dividerPositions="0.6470588235294118" prefHeight="1104.0" prefWidth="1923.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SceneController">
   <items>
     <AnchorPane minHeight="0.0" minWidth="0.0" onMouseClicked="#loginreroute" prefHeight="1102.0" prefWidth="1264.0" style="-fx-background-color: #89a4dc;">
          <children>
@@ -123,15 +121,16 @@
                   </Button>
                </children>
             </Pane>
-            <MenuButton contentDisplay="RIGHT" layoutX="8.0" layoutY="14.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="121.0" style="-fx-background-color: red;" text="Menu">
-              <items>
-                <MenuItem mnemonicParsing="false" onAction="#enter_manager" text="Action 2" />
-              </items>
+            <Button fx:id="clearButton1" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#switchToLogin" prefHeight="32.0" prefWidth="112.0" style="-fx-background-color: red;" text="Logout" textAlignment="CENTER">
                <font>
-                  <Font name="Modern No. 20" size="23.0" />
+                  <Font name="Modern No. 20" size="22.0" />
                </font>
-            </MenuButton>
-            <Button fx:id="timeButton" layoutX="205.0" layoutY="23.0" mnemonicParsing="false" onAction="#run1" prefHeight="25.0" prefWidth="133.0" text="Button" />
+            </Button>
+            <Button fx:id="clearButton11" layoutX="137.0" layoutY="14.0" mnemonicParsing="false" onAction="#switchToLogin" prefHeight="32.0" prefWidth="112.0" style="-fx-background-color: red;" text="Clock Out" textAlignment="CENTER">
+               <font>
+                  <Font name="Modern No. 20" size="21.0" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
     <AnchorPane minHeight="0.0" minWidth="0.0" onMouseClicked="#loginreroute" prefHeight="1042.0" prefWidth="1274.0" style="-fx-background-color: #89a4dc;">

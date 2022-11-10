@@ -8,74 +8,74 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: #89a4dc;" stylesheets="@application.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SceneController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: #89a4dc;" stylesheets="@application.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SceneController">
    <children>
       <Label layoutX="153.0" layoutY="38.0" prefHeight="170.0" prefWidth="310.0" text="Name">
          <font>
-            <Font name="Comic Sans MS" size="65.0" />
-         </font>
-      </Label>
-      <Label layoutX="153.0" layoutY="183.0" prefHeight="170.0" prefWidth="310.0" text="Job">
-         <font>
-            <Font name="Comic Sans MS" size="65.0" />
-         </font>
-      </Label>
-      <Label layoutX="153.0" layoutY="347.0" prefHeight="170.0" prefWidth="310.0" text="Wage">
-         <font>
-            <Font name="Comic Sans MS" size="65.0" />
-         </font>
-      </Label>
-      <Label layoutX="153.0" layoutY="491.0" prefHeight="170.0" prefWidth="430.0" text="ID Number">
-         <font>
-            <Font name="Comic Sans MS" size="65.0" />
+            <Font name="Modern No. 20" size="65.0" />
          </font>
       </Label>
       <TextField fx:id="name_texField" layoutX="1298.0" layoutY="97.0" prefHeight="52.0" prefWidth="344.0" />
       <TextField fx:id="wage_texField" layoutX="1308.0" layoutY="406.0" prefHeight="52.0" prefWidth="344.0" />
-      <TextField fx:id="Id_Number_txtField" layoutX="1308.0" layoutY="550.0" prefHeight="52.0" prefWidth="344.0" />
-      <RadioButton fx:id="Manager_rdb" layoutX="1192.0" layoutY="228.0" mnemonicParsing="false" prefHeight="79.0" prefWidth="135.0" text="Manager">
+      <TextField fx:id="Id_Number_txtField" layoutX="1308.0" layoutY="540.0" prefHeight="52.0" prefWidth="344.0" />
+      <RadioButton fx:id="Manager_rdb" layoutX="1017.0" layoutY="238.0" mnemonicParsing="false" prefHeight="79.0" prefWidth="203.0" text="Manager">
          <font>
-            <Font name="Comic Sans MS" size="20.0" />
+            <Font name="Comic Sans MS" size="30.0" />
          </font>
          <toggleGroup>
             <ToggleGroup fx:id="job_type" />
          </toggleGroup>
       </RadioButton>
-      <RadioButton fx:id="Kitchen_Staff_rdb" layoutX="1354.0" layoutY="240.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="179.0" text="Kitchen staff" toggleGroup="$job_type">
+      <RadioButton fx:id="Kitchen_Staff_rdb" layoutX="1223.0" layoutY="249.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="262.0" text="Kitchen Staff" toggleGroup="$job_type">
          <font>
-            <Font name="Comic Sans MS" size="20.0" />
+            <Font name="Comic Sans MS" size="30.0" />
          </font>
       </RadioButton>
-      <RadioButton fx:id="Wait_staff_rdb" layoutX="1545.0" layoutY="240.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="160.0" text="Wait staff" toggleGroup="$job_type">
+      <RadioButton fx:id="Wait_staff_rdb" layoutX="1485.0" layoutY="252.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="226.0" text="Wait Staff" toggleGroup="$job_type">
          <font>
-            <Font name="Comic Sans MS" size="20.0" />
+            <Font name="Comic Sans MS" size="30.0" />
          </font>
       </RadioButton>
-      <RadioButton fx:id="Cashier_rdb" layoutX="1705.0" layoutY="240.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="149.0" text="Cashier" toggleGroup="$job_type">
+      <RadioButton fx:id="Cashier_rdb" layoutX="1718.0" layoutY="251.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="175.0" text="Cashier" toggleGroup="$job_type">
          <font>
-            <Font name="Comic Sans MS" size="20.0" />
+            <Font name="Comic Sans MS" size="30.0" />
          </font>
       </RadioButton>
-      <Button fx:id="enter_manager" layoutX="78.0" layoutY="808.0" mnemonicParsing="false" onAction="#enter_manager" prefHeight="200.0" prefWidth="904.0" style="-fx-background-color: black;" stylesheets="@application.css" text="Enter" textFill="#89a4dc">
-         <font>
-            <Font name="Comic Sans MS" size="96.0" />
-         </font>
-      </Button>
-      <Label fx:id="verify" layoutX="26.0" layoutY="11.0" prefHeight="54.0" prefWidth="1724.0" stylesheets="@application.css" text="Welcome New User">
-         <font>
-            <Font size="40.0" />
-         </font>
-      </Label>
-      <Button layoutX="1118.0" layoutY="808.0" mnemonicParsing="false" onAction="#switchToLogin" prefHeight="200.0" prefWidth="756.0" style="-fx-background-color: black;" text="Back to login" textFill="#89a4dc">
-         <font>
-            <Font name="Comic Sans MS" size="96.0" />
-         </font>
-      </Button>
-      <Label layoutX="153.0" layoutY="682.0" prefHeight="92.0" prefWidth="430.0" text="Hours">
-         <font>
-            <Font name="Comic Sans MS" size="65.0" />
-         </font>
-      </Label>
       <TextField fx:id="hoursTxt" layoutX="1308.0" layoutY="676.0" prefHeight="52.0" prefWidth="344.0" />
+      <Label layoutX="153.0" layoutY="617.0" prefHeight="170.0" prefWidth="310.0" text="Hours">
+         <font>
+            <Font name="Modern No. 20" size="65.0" />
+         </font>
+      </Label>
+      <Label layoutX="153.0" layoutY="481.0" prefHeight="170.0" prefWidth="310.0" text="ID Number">
+         <font>
+            <Font name="Modern No. 20" size="65.0" />
+         </font>
+      </Label>
+      <Label layoutX="153.0" layoutY="347.0" prefHeight="170.0" prefWidth="310.0" text="Wage">
+         <font>
+            <Font name="Modern No. 20" size="65.0" />
+         </font>
+      </Label>
+      <Label layoutX="153.0" layoutY="192.0" prefHeight="170.0" prefWidth="310.0" text="Job">
+         <font>
+            <Font name="Modern No. 20" size="65.0" />
+         </font>
+      </Label>
+      <Button fx:id="enter_manager" layoutX="736.0" layoutY="808.0" mnemonicParsing="false" onAction="#enter_manager" prefHeight="156.0" prefWidth="448.0" style="-fx-background-color: green;" text="Enter">
+         <font>
+            <Font name="Modern No. 20" size="85.0" />
+         </font>
+      </Button>
+      <Label fx:id="verify" alignment="CENTER" layoutX="443.0" layoutY="984.0" prefHeight="58.0" prefWidth="1042.0" stylesheets="@application.css" text="Welcome" textFill="#e41717">
+         <font>
+            <Font name="Modern No. 20" size="29.0" />
+         </font>
+      </Label>
+      <Button fx:id="enter_manager" layoutX="18.0" layoutY="18.0" mnemonicParsing="false" onAction="#switchToManager" prefHeight="32.0" prefWidth="112.0" style="-fx-background-color: red;" text="Back" textAlignment="CENTER">
+         <font>
+            <Font name="Modern No. 20" size="22.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
