@@ -36,13 +36,14 @@ import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.text.TextAlignment;
 
-public class SceneController extends Thread
+public class SceneController 
 {
 	 private static final Paint WHITE = null;
 	 private Stage stage;
@@ -54,6 +55,7 @@ public class SceneController extends Thread
 	 private double tp = 0.0;
 	 private String time;  
 	 private SimpleDateFormat timeFormat;
+	 Calendar calendar;
 	 ArrayList<Employee> employees = new ArrayList<Employee>();
 	 Database database = new Database();
 	 ArrayList<Order> orders = new ArrayList<Order>();
@@ -131,13 +133,13 @@ public class SceneController extends Thread
 	 @FXML
 	 private TextField Id_Number_txtField;
 	
-	 
-	 
+	 @FXML 
+	 private TextField hoursTxt;
 	 
 	 public void loginreroute(ActionEvent event) 
 	 {
 		 try 
-		{			 
+		{	
 		 int value_of_txt; 
 		 String text =  txtField.getText();
 		 value_of_txt = Integer.parseInt(text);
@@ -148,14 +150,20 @@ public class SceneController extends Thread
 			{
 				  Employee employee = new Employee();
 				  employee.setEmployee_name(database.resultSet.getString("Name"));			
-				  employee.setId_number(database.resultSet.getString("Id Number"));
+				  employee.setId_number(database.resultSet.getString("IdNumber"));
 				  employee.setHours(database.resultSet.getInt("Hours"));
 				  employee.setWage(database.resultSet.getDouble("Wage"));
-				  employee.set_Job_Type(database.resultSet.getString("Job Type"));
+				  employee.set_Job_Type(database.resultSet.getString("JobType"));
 				  employee.Set_total_Pay();
 				  employees.add(employee);				
 			}
-		 
+		 //5555
+		 int size = employees.size();
+		 System.out.print(size);
+		 for(int i=0;i<=size;i++ )
+		 {			 
+			 System.out.println(i);
+		 }
 		 for(int i=0;i<=employees.size();i++ )
 		 {		 
 			 if(employees.get(i).getId_number().equals(text))
@@ -167,9 +175,13 @@ public class SceneController extends Thread
 					  scene = new Scene(root);
 					  stage.setScene(scene);
 					  stage.show();
-					  stage.setFullScreen(true);					 
+					  stage.setFullScreen(true);
+					     database.closeConnection();
+						 database.closeresultSet();
+						 database.closestatement();
+						 database.closeupdateField();
 				 }
-				 if(employees.get(i).getjobType().equals("Wait Staff"))
+				 if(employees.get(i).getjobType().equals("WaitStaff"))
 				 {
 					 Parent root = FXMLLoader.load(getClass().getResource("Waitstaff_Screen.fxml"));
 					  stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -177,28 +189,62 @@ public class SceneController extends Thread
 					  stage.setScene(scene);
 					  stage.show();
 				      stage.setFullScreen(true);
-					 
+				      database.closeConnection();
+				      database.closeresultSet();
+				      database.closestatement();
+					  database.closeupdateField();
 				 }
 				 
-				 if(employees.get(i).getjobType().equals("Kitchen Staff"))
+				 if(employees.get(i).getjobType().equals("KitchenStaff"))
 				 {
 					  Parent root = FXMLLoader.load(getClass().getResource("Kitchen.fxml"));
 					  stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 					  scene = new Scene(root);
 					  stage.setScene(scene);
 					  stage.show();
-				      stage.setFullScreen(true);				 
-				 }			 
+				      stage.setFullScreen(true);
+				         database.closeConnection();
+						 database.closeresultSet();
+						 database.closestatement();
+						 database.closeupdateField();
+				 }	
+				 
+				 if(employees.get(i).getjobType().equals("Cashier"))
+				 {
+					  Parent root = FXMLLoader.load(getClass().getResource("Waitstaff_Screen.fxml"));
+					  stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+					  scene = new Scene(root);
+					  stage.setScene(scene);
+					  stage.show();
+				      stage.setFullScreen(true);
+				         database.closeConnection();
+						 database.closeresultSet();
+						 database.closestatement();
+						 database.closeupdateField();
+				 }			
 			 }
-		  }	 
+		  }
+		   
+		     database.closeConnection();
+			 database.closeresultSet();
+			 database.closestatement();
+			 database.closeupdateField();
 		}		 
 		 catch(SQLException e)
 		 {				 
 			 login_Label.setText("Failed to connect to database");
+			 database.closeConnection();
+   			 database.closeresultSet();
+   			 database.closestatement();
+   			 database.closeupdateField();
 		 }
 		 catch(Exception e)
 		 {				 
 			 login_Label.setText("Incorrect Id number or not found in database");
+			 database.closeConnection();
+   			 database.closeresultSet();
+   			 database.closestatement();
+   			 database.closeupdateField();
 		 }
 	 }
 	 
@@ -213,29 +259,36 @@ public class SceneController extends Thread
 		   
 		  */
 		 try {
+			 int lastdatabaseid=0;
+	
 			database.connect_to_database();
 		    database.setResultset();
 		    while(database.resultSet.next())
 			{
 				  Employee employee = new Employee();
+				  employee.setdatabaseid(database.resultSet.getInt("employeeid"));
 				  employee.setEmployee_name(database.resultSet.getString("Name"));			
-				  employee.setId_number(database.resultSet.getString("Id Number"));
+				  employee.setId_number(database.resultSet.getString("IdNumber"));
 				  employee.setHours(database.resultSet.getInt("Hours"));
 				  employee.setWage(database.resultSet.getDouble("Wage"));
-				  employee.set_Job_Type(database.resultSet.getString("Job Type"));
+				  employee.set_Job_Type(database.resultSet.getString("JobType"));
 				  employee.Set_total_Pay();
-				  employees.add(employee);	 
+				  employees.add(employee);
+				  lastdatabaseid = employee.getdatabaseid();
 			}
 		    
           String name = name_texField.getText();
           String wageTxt = wage_texField.getText();
           String id_Number = Id_Number_txtField.getText();
+          String hour = hoursTxt.getText();
           String jobType;
+          int hours = 0;
           double wage = 0;
           int id=0;
-          Boolean checkID =true;
+          Boolean checkID = true;
           int arraysize =employees.size();
-        
+          Employee tdb = new Employee();
+	         
           if(name.equals(""))
           {
           	 verify.setText("Please enter a name");      	
@@ -245,6 +298,10 @@ public class SceneController extends Thread
         	 verify.setText("Please enter a wage");     
          }
          else if(id_Number.equals(""))
+         {
+        	 verify.setText("Please enter an ID");     
+         }
+         else if(hour.equals(""))
          {
         	 verify.setText("Please enter an ID");     
          }
@@ -266,27 +323,57 @@ public class SceneController extends Thread
         	  if(Manager_rdb.isSelected())
         	     {        		  
         		 jobType = "Manager";
+        		 tdb.set_Job_Type(jobType);
         	     }
-        		 
-       
+     
         	  else if( Wait_staff_rdb.isSelected())
     		  {        		  
-    		    jobType = "Wait Staff";
+    		    jobType = "WaitStaff";
+    		    tdb.set_Job_Type(jobType);
     		    
     		  }
         	  else if(Kitchen_Staff_rdb.isSelected())
     		  {        		  
-    		    jobType = "Kitchen Staff";
+    		    jobType = "KitchenStaff";
+    		    tdb.set_Job_Type(jobType);
     		  }
         	  
         	  else if(Cashier_rdb.isSelected())
     		  {     
         		  jobType = "Cashier";   
+        		  tdb.set_Job_Type(jobType);
     		  }
+        	  int newdatabaseid=lastdatabaseid;
+        	  System.out.print(newdatabaseid);
         	  wage = DecimalFormat.getNumberInstance().parse(wageTxt).doubleValue();
-   	          id = Integer.parseInt(id_Number);
-   			  verify.setText("Success Please go back to login");
-   			  System.out.print("just checking");
+   	          id = Integer.parseInt(id_Number);  
+   	          hours = Integer.parseInt(hour);
+   	          tdb.setHours(hours);
+	          tdb.setEmployee_name(name);
+   	          tdb.setWage(wage);
+   	          tdb.setId_number(id_Number);
+   	          tdb.setdatabaseid(newdatabaseid);
+   	          tdb.Set_total_Pay();
+   	          
+   	          
+   	   
+   	          
+   	          
+   	         String insertSQL = "INSERT INTO Employee (employeeid, Name, IdNumber, Hours, Wage, TotalPay, JobType) VALUES (?, ?, ?, ?, ?, ?, ?)";
+			 database.updateField = database.connection.prepareStatement(insertSQL);
+			 database.updateField.setInt(1, tdb.getdatabaseid());
+			 database.updateField.setString(2, tdb.getEmployee_name());
+			 database.updateField.setString(3, tdb.getId_number());
+			 database.updateField.setInt(4, tdb.getHours());
+			 database.updateField.setDouble(5,tdb.getWage());
+			 database.updateField.setDouble(6, tdb.get_totalpay());
+			 database.updateField.setString(7, tdb.getjobType());
+			 database.updateField.executeUpdate();	 
+   			 database.closeConnection();
+   			 database.closeresultSet();
+   			 database.closestatement();
+   			 database.closeupdateField();
+   			 verify.setText("Success Please go back to login");
           }
 		 }
 		catch (IOException e) 
@@ -296,6 +383,7 @@ public class SceneController extends Thread
 		 catch(SQLException e)
 		 {				 
 			 verify.setText("Failed to connect to database");
+			 System.out.print(e);
 		 }
 		 catch (NumberFormatException e) 
 		 {
@@ -303,7 +391,7 @@ public class SceneController extends Thread
 		 }
 		 catch (Exception e) 
 		 {			 
-			 //verify.setText("Please enter the information in the correct formatd");
+			
 			 verify.setText("Please enter the information in the correct format");
 			 System.out.println(e);
 		 }
@@ -503,10 +591,10 @@ public class SceneController extends Thread
 		 
 		 
 		 foodbar.getChildren().addAll(spinner,foodText,dollarSign,priceText,deleteButton,noteButton);
-		 System.out.println("added butt");
+		
 		 
 		 foodBarBox.getChildren().addAll(foodbar);
-		 System.out.println(fb);
+		 
 		 
 		 ph += 100.0;
 		 fb ++;
@@ -622,43 +710,51 @@ public class SceneController extends Thread
 	 }
 	 
 	 
-	 public void run1(ActionEvent event) throws IOException
+	 public void run1(ActionEvent event) throws InterruptedException
 	 {
-		 // mythread.run(new Thread<run>);
-		// timeButton.setOnAction(new EventHandler<ActionEvent>() 
-		 SceneController sceneController = new SceneController();	
-		 sceneController.start();				
-	}
-	 
-	 
-	 @Override
-	 public void run()
-	 {		 
-		 timeFormat = new SimpleDateFormat("hh:mm:ss a");
-		// if(timeButton.isArmed()==true) {				 					   
-		 		Pane info = new AnchorPane();
-				for(int i=0; i<=5;i++) 
-				{				
-				Label timeText = new Label();				
-			    timeText.setMinWidth(103);
-				timeText.setMinHeight(56);
-			    timeText.relocate(180,3.0);
-				timeText.setStyle("-fx-background-color:  #ff0000; ");
-				info.getChildren().addAll(timeText);
-				time = timeFormat.format(Calendar.getInstance().getTime());				
-				timeText.setText(time);
-				System.out.println(timeText.getText());
-				//System.out.println(timeText.getText());
-				  try {
-				   Thread.sleep(1000);
-				  } 
-				  catch (InterruptedException e) 
-				  {
-				   e.printStackTrace();
-				  }
-				  System.out.println(i);
+		 
+		Thread t = new Thread(()->{
+			try {
+			 for(int i=0; i<=100;i++) 
+				{
+				 timeFormat = new SimpleDateFormat("hh:mm:ss a");
+			      time = timeFormat.format(Calendar.getInstance().getTime());				      
+			    
+				System.out.println(time);
+				System.out.println(i);
+				 Platform.runLater(()->
+				 {								      
+				    timeText.setText(time);
+					 
+			     });
+				}
+			 Thread.sleep(1000);
 			}
-	 }			
+			catch(Exception e)
+			{				
+				System.out.print(e);
+			}
+		});
+	 
+		t.start();
+		System.out.println("it worked");
+		
+		 /*
+		 timeFormat = new SimpleDateFormat("hh:mm:ss a");
+		 Platform.runLater(()->
+		 {		
+			 for(int i=0; i<=1000;i++)
+			 {
+		   time = timeFormat.format(Calendar.getInstance().getTime());				      
+		    timeText.setText(time);
+			 }
+	     });
+	*/	 
+		 
+	 }
+	 
+	 
+	 
 }
 	 
 

@@ -46,46 +46,25 @@ public class MyThread extends Thread
 	String time;
 	Calendar calendar;
 	SimpleDateFormat timeFormat;	
+	Label timeText;
+	
+	public MyThread(Label timeText)
+	{
+		this.timeText=timeText;
+		
+	}
 	
 	@Override
 	 public void run()
 	 {
-		
-		for(int i=0;i<100;i++)
-		{
-			
-			System.out.println(i);
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
+		 timeFormat = new SimpleDateFormat("hh:mm:ss a");
+		 for(int i=0; i<=5;i++) 
+			{
+		 
+		    time = timeFormat.format(Calendar.getInstance().getTime());				
+			timeText.setText(time);
+			System.out.println(timeText.getText());
 			}
-		}
-	 }
-	 
-	 public void run(Label timeText)
-	 {
-		
-		 while(true) {		
-			//timeText= new Label();
-			time = timeFormat.format(Calendar.getInstance().getTime());
-			timeText.setText(time);
-			  try {
-			   Thread.sleep(1000);
-			  } catch (InterruptedException e) {
-			   e.printStackTrace();
-			  }
 }
-	 }
-	 public void gettime(Label timeText)
-	 {
-		
-		 	
-			timeText= new Label();
-			time = timeFormat.format(Calendar.getInstance().getTime());
-			timeText.setText(time);
-			
+	
 }
-	 }
-
-

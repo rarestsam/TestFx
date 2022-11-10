@@ -10,17 +10,39 @@ public class Employee
 	private String total_hours;
 	private String jobType;
 	private double wage;
-	private double hours;
+	private int hours;
 	private double totalPay;
+	private int databaseid;
+	
+	
+	public void setdatabaseid(int databaseid)
+	{
+		this.databaseid=databaseid;
+	}
+	
+	public int getdatabaseid()
+	{		
+		return databaseid;
+	}
 	
 	public void setWage(double wage)
 	{
 		 this.wage=wage;
 	}
 	
-	public void setHours(double hours)
+	public double getWage()
+	{
+		 return wage;
+	}
+	
+	public void setHours(int hours)
 	{
 		 this.hours=hours;
+	}
+	
+	public int getHours()
+	{
+		 return hours;
 	}
 	public double get_totalpay()
 	{

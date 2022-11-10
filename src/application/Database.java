@@ -51,6 +51,19 @@ PreparedStatement preparedStatement = connection.prepareStatement(insertSQL);
 preparedStatement.setString(1, "value1");
 preparedStatement.setString(2, "value2");
 preparedStatement.executeUpdate();
+
+
+
+
+
+
+			String insertSQL = "INSERT INTO Books (BookId, Code, Description, ListPrice) VALUES (?, ?, ?, ?)";
+			updateField = connection.prepareStatement(insertSQL);
+			updateField.setInt(1, 8);
+			updateField.setString(2, "value1");
+			updateField.setString(3, "value2");
+			updateField.setDouble(4, 11.2);
+			updateField.executeUpdate();
  */
 public class Database 
 {
@@ -82,19 +95,46 @@ public class Database
 	 public void closeConnection() 
 	 {
 		 try {
-             if(null != connection) {
-                 resultSet.close();
-                 statement.close();	 
-                 updateField.close();
-                 updateField.close();
-                 connection.close();
-             }
+             if(null != connection) {                           
+                 connection.close();           
+             }             
          }
          catch (SQLException sqlex) {
              sqlex.printStackTrace();
          }
 	 }
 	 
-	 
-	 
+	 public void closeupdateField() 
+	 {
+		 try {
+             if(null != updateField) {
+                 updateField.close(); 
+             }             
+         }
+         catch (SQLException sqlex) {
+             sqlex.printStackTrace();
+         }
+	 }
+	 public void closeresultSet() 
+	 {
+		 try {
+             if(null != resultSet) {
+            	 resultSet.close(); 
+             }             
+         }
+         catch (SQLException sqlex) {
+             sqlex.printStackTrace();
+         }
+	 }
+	 public void closestatement() 
+	 {
+		 try {
+             if(null !=  statement) {
+            	 statement.close(); 
+             }             
+         }
+         catch (SQLException sqlex) {
+             sqlex.printStackTrace();
+         }
+	 }
 }

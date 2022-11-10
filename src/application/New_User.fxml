@@ -25,15 +25,15 @@
             <Font name="Comic Sans MS" size="65.0" />
          </font>
       </Label>
-      <Label layoutX="153.0" layoutY="555.0" prefHeight="170.0" prefWidth="430.0" text="ID Number">
+      <Label layoutX="153.0" layoutY="491.0" prefHeight="170.0" prefWidth="430.0" text="ID Number">
          <font>
             <Font name="Comic Sans MS" size="65.0" />
          </font>
       </Label>
       <TextField fx:id="name_texField" layoutX="1298.0" layoutY="97.0" prefHeight="52.0" prefWidth="344.0" />
       <TextField fx:id="wage_texField" layoutX="1308.0" layoutY="406.0" prefHeight="52.0" prefWidth="344.0" />
-      <TextField fx:id="Id_Number_txtField" layoutX="1308.0" layoutY="640.0" prefHeight="52.0" prefWidth="344.0" />
-      <RadioButton fx:id="Manager_rdb" layoutX="1192.0" layoutY="240.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="135.0" text="Manager">
+      <TextField fx:id="Id_Number_txtField" layoutX="1308.0" layoutY="550.0" prefHeight="52.0" prefWidth="344.0" />
+      <RadioButton fx:id="Manager_rdb" layoutX="1192.0" layoutY="228.0" mnemonicParsing="false" prefHeight="79.0" prefWidth="135.0" text="Manager">
          <font>
             <Font name="Comic Sans MS" size="20.0" />
          </font>
@@ -41,22 +41,22 @@
             <ToggleGroup fx:id="job_type" />
          </toggleGroup>
       </RadioButton>
-      <RadioButton fx:id="Kitchen_Staff_rdb" layoutX="1354.0" layoutY="240.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="179.0" text="Kitchen staff" toggleGroup="$job_type">
+      <RadioButton fx:id="Kitchen_Staff_rdb" layoutX="1354.0" layoutY="240.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="179.0" text="Kitchen staff" toggleGroup="$job_type">
          <font>
             <Font name="Comic Sans MS" size="20.0" />
          </font>
       </RadioButton>
-      <RadioButton fx:id="Wait_staff_rdb" layoutX="1545.0" layoutY="240.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="160.0" text="Wait staff" toggleGroup="$job_type">
+      <RadioButton fx:id="Wait_staff_rdb" layoutX="1545.0" layoutY="240.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="160.0" text="Wait staff" toggleGroup="$job_type">
          <font>
             <Font name="Comic Sans MS" size="20.0" />
          </font>
       </RadioButton>
-      <RadioButton fx:id="Cashier_rdb" layoutX="1705.0" layoutY="240.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="149.0" text="Cashier" toggleGroup="$job_type">
+      <RadioButton fx:id="Cashier_rdb" layoutX="1705.0" layoutY="240.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="149.0" text="Cashier" toggleGroup="$job_type">
          <font>
             <Font name="Comic Sans MS" size="20.0" />
          </font>
       </RadioButton>
-      <Button fx:id="enter_manager" layoutX="81.0" layoutY="772.0" mnemonicParsing="false" onAction="#enter_manager" prefHeight="200.0" prefWidth="904.0" style="-fx-background-color: black;" stylesheets="@application.css" text="Enter" textFill="#89a4dc">
+      <Button fx:id="enter_manager" layoutX="78.0" layoutY="808.0" mnemonicParsing="false" onAction="#enter_manager" prefHeight="200.0" prefWidth="904.0" style="-fx-background-color: black;" stylesheets="@application.css" text="Enter" textFill="#89a4dc">
          <font>
             <Font name="Comic Sans MS" size="96.0" />
          </font>
@@ -66,10 +66,16 @@
             <Font size="40.0" />
          </font>
       </Label>
-      <Button layoutX="1115.0" layoutY="766.0" mnemonicParsing="false" onAction="#switchToLogin" prefHeight="200.0" prefWidth="756.0" style="-fx-background-color: black;" text="Back to login" textFill="#89a4dc">
+      <Button layoutX="1118.0" layoutY="808.0" mnemonicParsing="false" onAction="#switchToLogin" prefHeight="200.0" prefWidth="756.0" style="-fx-background-color: black;" text="Back to login" textFill="#89a4dc">
          <font>
             <Font name="Comic Sans MS" size="96.0" />
          </font>
       </Button>
+      <Label layoutX="153.0" layoutY="682.0" prefHeight="92.0" prefWidth="430.0" text="Hours">
+         <font>
+            <Font name="Comic Sans MS" size="65.0" />
+         </font>
+      </Label>
+      <TextField fx:id="hoursTxt" layoutX="1308.0" layoutY="676.0" prefHeight="52.0" prefWidth="344.0" />
    </children>
 </AnchorPane>
