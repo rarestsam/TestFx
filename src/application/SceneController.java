@@ -21,6 +21,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Spinner;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
@@ -28,11 +29,13 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.application.Application;
@@ -660,12 +663,15 @@ public class SceneController
 		 note.setMinWidth(400);
 		 note.setMinHeight(200);
 		 
-		 TextField noteText = new TextField();
+		 Font font29 = Font.font("Modern No. 20", 29);
+		 
+		 TextArea noteText = new TextArea();
 		 noteText.setText(null);
 		 noteText.setMinHeight(180);
 		 noteText.setStyle("-fx-text-alignment: TOP_LEFT; ");
 		 
 		 Button closeButton = new Button("Complete");
+		 closeButton.setFont(font29);
 		 closeButton.setOnAction(e -> note.close());
 		 closeButton.relocate(350.0,170.0);
 		 
@@ -675,6 +681,344 @@ public class SceneController
 		 Scene noteScene = new Scene(layout);
 		 note.setScene(noteScene);
 		 note.showAndWait();
+		 
+	 }
+	 
+	 public void payTypeWindow(ActionEvent event)throws IOException{
+		 
+		 Stage paymentType = new Stage();
+		 
+		 paymentType.initModality(Modality.APPLICATION_MODAL);
+		 paymentType.setTitle("Payment Type");
+		 paymentType.setMinWidth(400);
+		 paymentType.setMinHeight(500);
+		 paymentType.setMaxWidth(400);
+		 paymentType.setMaxHeight(500);
+		 
+		 Font font50 = Font.font("Modern No. 20", 50);
+
+		 Button cashButton = new Button("Cash");
+		 cashButton.setFont(font50);
+		 cashButton.setOnAction(new EventHandler<ActionEvent>() 
+		 	{
+				@Override
+				public void handle(ActionEvent event) 
+				{
+					if(cashButton.isArmed()==true) 
+					 {
+						 try {
+							cashErrorWindow(event);
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					 }
+				}
+		 	});
+		 
+		 Button cardButton = new Button("Card");
+		 cardButton.setFont(font50);
+		 cardButton.setOnAction(new EventHandler<ActionEvent>() 
+		 	{
+				@Override
+				public void handle(ActionEvent event) 
+				{
+					if(cardButton.isArmed()==true) 
+					 {
+						 try {
+							payInfoWindow(event);
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					 }
+				}
+		 	});
+		 
+		 VBox layout = new VBox(10);
+		 layout.setPadding(new Insets(110,0,0,115));
+		 layout.getChildren().addAll(cashButton,cardButton);
+		 
+		 Scene noteScene = new Scene(layout);
+		 paymentType.setScene(noteScene);
+		 paymentType.showAndWait();
+		 
+	 }
+	 
+	 public void payInfoWindow(ActionEvent event)throws IOException{
+		 
+		 Stage paymentInfo = new Stage();
+		 
+		 paymentInfo.initModality(Modality.APPLICATION_MODAL);
+		 paymentInfo.setTitle("Payment Information");
+		 paymentInfo.setMinWidth(600);
+		 paymentInfo.setMinHeight(400);
+		 paymentInfo.setMaxWidth(600);
+		 paymentInfo.setMaxHeight(400);
+		 
+		 Font font29 = Font.font("Modern No. 20", 29);
+		 
+		 Label cardNumText = new Label("Card Number:");
+		 cardNumText.setFont(font29);
+		 cardNumText.setStyle("-fx-text-alignment: TOP_LEFT; ");
+		 
+		 TextField cardNum = new TextField();
+		 cardNum.setText("");
+		 cardNum.setStyle("-fx-text-alignment: TOP_LEFT; ");
+		 
+		 Label expDateText = new Label("Expiration Date (MM/YY):");
+		 expDateText.setFont(font29);
+		 expDateText.setStyle("-fx-text-alignment: TOP_LEFT; ");
+		 
+		 TextField expDateM = new TextField();
+		 expDateM.setText("");
+		 expDateM.setMaxWidth(40);
+		 expDateM.setStyle("-fx-text-alignment: TOP_LEFT; ");
+		 
+		 Label slash = new Label("/");
+		 slash.setFont(font29);
+		 slash.setStyle("-fx-text-alignment: TOP_LEFT; ");
+		 
+		 TextField expDateY = new TextField();
+		 expDateY.setText("");
+		 expDateY.setMaxWidth(40);
+		 expDateY.setStyle("-fx-text-alignment: TOP_LEFT; ");
+		 
+		 Label secCodeText = new Label("Security Code:");
+		 secCodeText.setFont(font29);
+		 secCodeText.setStyle("-fx-text-alignment: TOP_LEFT; ");
+		 
+		 TextField secCode = new TextField();
+		 secCode.setText("");
+		 secCode.setStyle("-fx-text-alignment: TOP_LEFT; ");
+		 
+		 Button closeButton = new Button("Enter");
+		 closeButton.setFont(font29);
+		 closeButton.setOnAction(new EventHandler<ActionEvent>() 
+		 	{
+				@Override
+				public void handle(ActionEvent event) 
+				{
+					if(closeButton.isArmed()==true) 
+					 {
+						  
+				          String cardNumStr = cardNum.getText();
+				          String expDateMStr= expDateM.getText();
+				          String expDateYStr= expDateY.getText();
+				          String secCodeStr= secCode.getText();
+				          //int cardNumInt = 0;
+				          //int expDateMInt = 0;
+				          //int expDateYInt = 0;
+				          //int secCodeInt = 0;
+				          int cardNumLength= 16;
+				          int expDateLength= 2;
+				          int secCodeLength= 3;
+				          
+				          //Boolean checkID = true;
+				          //int arraysize = employees.size();
+				          //Employee tdb = new Employee();
+					         
+				         
+				          
+				        if(cardNum.getTypeSelector()=="Integer")
+				        {
+				        
+				        		 try {
+				        			 cardErrorWindow(event,"Please Enter Digits Only");
+				        		 } catch (IOException e) {
+				        			 // TODO Auto-generated catch block
+				        			 e.printStackTrace();
+				        		 } 
+				        	 
+				         }        
+				         else if(cardNumStr.equals(""))
+				         {
+				        	 try {
+								cardErrorWindow(event,"Enter a Cardnumber");
+							} catch (IOException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+				         }
+				         else if(expDateMStr.equals(""))
+				         {
+				        	 try {
+								cardErrorWindow(event,"Enter an Expiration Month");
+							} catch (IOException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}     
+				         }
+				         else if(expDateYStr.equals(""))
+				         {
+				        	 try {
+								cardErrorWindow(event,"Enter an Expiration Year");
+							} catch (IOException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}     
+				         }
+				         else if(secCodeStr.equals(""))
+				         {
+				        	 try {
+								cardErrorWindow(event,"Enter a Security Code");
+							} catch (IOException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}     
+				         }
+				         else if(cardNumStr.length()!=cardNumLength)
+				         {
+				        	 try {
+									cardErrorWindow(event,"Incorrect Number of Digits for Card Number");
+								} catch (IOException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								} 
+				         }
+				         else if(expDateMStr.length()!=expDateLength || expDateYStr.length()!=expDateLength )
+				         {
+				        	 try {
+									cardErrorWindow(event,"Incorrect Expiration Date Format");
+								} catch (IOException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								} 
+				         }
+				         else if(secCodeStr.length()!=secCodeLength)
+				         {
+				        	 try {
+									cardErrorWindow(event,"Incorrect Number of Digits for Security Code");
+								} catch (IOException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								} 
+				         }
+				         else if(secCodeStr.length()!=secCodeLength)
+				         {
+				        	 try {
+									cardErrorWindow(event,"Incorrect Number of Digits for Security Code");
+								} catch (IOException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								} 
+				         }
+				         else 
+				         {
+				        	 if(cardNumStr== "1234567890123456" && expDateMStr== "10" && expDateYStr=="24" && secCodeStr=="123") 
+				        	 {
+				        		 try{
+										cardErrorWindow(event,"Successful");
+										//closeButton.setOnAction(e ->  paymentInfo.close());
+									} 
+				        		 catch (IOException e) 
+				        		 {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
+				        		 } 
+				        	 }
+				        	 else 
+				        	 {
+				        		 try{
+				        			 	System.out.println(cardNumStr+ " " +expDateMStr+ " / " +expDateYStr + " " +secCodeStr);
+										cardErrorWindow(event,"Declined");
+									} 
+				        		 catch (IOException e) 
+				        		 {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
+				        		 } 
+				        	 }
+				         }
+				        
+				         
+				         
+				         
+				         
+				         
+				         
+				         
+					 }
+				}
+		 	});
+
+		 
+		 
+		 //HBox layout0 = new HBox(10);
+		 //layout0.setPadding(new Insets(0,0,0,-400));
+		 //layout0.getChildren().addAll(errorText);
+		 HBox layout1 = new HBox(10);
+		 layout1.setPadding(new Insets(0,0,0,-360));
+		 layout1.getChildren().addAll(cardNumText,cardNum);
+		 HBox layout2 = new HBox(10);
+		 layout2.setPadding(new Insets(0,0,0,-360));
+		 layout2.getChildren().addAll(expDateText,expDateM,slash,expDateY);
+		 HBox layout3 = new HBox(10);
+		 layout3.setPadding(new Insets(0,0,80,-360));
+		 layout3.getChildren().addAll(secCodeText,secCode);
+		 VBox layout4 = new VBox(10);
+		 layout4.setPadding(new Insets(80,0,0,430));
+		 layout4.getChildren().addAll(layout1,layout2,layout3,closeButton);
+		 
+		 Scene noteScene = new Scene(layout4);
+		 paymentInfo.setScene(noteScene);
+		 paymentInfo.showAndWait();
+		 
+	 }
+	 
+	 public void cashErrorWindow(ActionEvent event)throws IOException{
+		 
+		 Stage cashError = new Stage();
+		 
+		 cashError.initModality(Modality.APPLICATION_MODAL);
+		 cashError.setTitle("Error");
+		 cashError.setMinWidth(650);
+		 cashError.setMinHeight(500);
+		 cashError.setMaxWidth(650);
+		 cashError.setMaxHeight(500);
+		 
+		 Font font35 = Font.font("Modern No. 20", 35);
+		 
+		 Text errorText = new Text(" Please Complete Cash Payment At Register!");
+		 errorText.setFont(font35);
+		 errorText.setStyle("-fx-text-alignment: TOP_LEFT; ");
+		
+		 
+		 VBox layout = new VBox(10);
+		 layout.setPadding(new Insets(180,0,0,0));
+		 layout.getChildren().addAll(errorText);
+		 
+		 Scene noteScene = new Scene(layout);
+		 cashError.setScene(noteScene);
+		 cashError.showAndWait();
+		 
+	 }
+	 
+	 public void cardErrorWindow(ActionEvent event, String errorString)throws IOException{
+		 
+		 Stage cashError = new Stage();
+		 
+		 cashError.initModality(Modality.APPLICATION_MODAL);
+		 cashError.setTitle("Error");
+		 cashError.setMinWidth(650);
+		 cashError.setMinHeight(500);
+		 cashError.setMaxWidth(650);
+		 cashError.setMaxHeight(500);
+		 
+		 Font font35 = Font.font("Modern No. 20", 35);
+		 
+		 Text errorText = new Text(errorString);
+		 errorText.setFont(font35);
+		 errorText.setStyle("-fx-text-alignment: TOP_LEFT; ");
+		
+		 
+		 VBox layout = new VBox(10);
+		 layout.setPadding(new Insets(180,0,0,0));
+		 layout.getChildren().addAll(errorText);
+		 
+		 Scene noteScene = new Scene(layout);
+		 cashError.setScene(noteScene);
+		 cashError.showAndWait();
 		 
 	 }
 	 
