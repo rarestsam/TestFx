@@ -13,7 +13,40 @@ public class Employee
 	private int hours;
 	private double totalPay;
 	private int databaseid;
+	private String day;
+	private String clockedin;
+	private String clockeout;
 	
+	
+	
+	public String getDay() 
+	{
+		return day;
+	}
+
+	public void setDay(String day) 
+	{
+		this.day = day;
+	}
+
+	public String getClockedin() 
+	{
+		return clockedin;
+	}
+
+	public void setClockedin(String clockedin) 
+	{
+		this.clockedin = clockedin;
+	}
+
+	public String getClockeout() {
+		return clockeout;
+	}
+
+	public void setClockeout(String clockeout) 
+	{
+		this.clockeout = clockeout;
+	}
 	
 	public void setdatabaseid(int databaseid)
 	{

@@ -92,6 +92,17 @@ public class Database
 		}
 	 }
 	 
+	 
+	 public void setResultsetorder() throws IOException 
+	 {
+		 try {
+			resultSet=statement.executeQuery("SELECT * FROM Orders");
+		} catch (SQLException e)
+		 {
+			e.printStackTrace();
+		}
+	 }
+	 
 	 public void closeConnection() 
 	 {
 		 try {

@@ -15,7 +15,7 @@
 .metadata/.plugins/org.eclipse.jdt.core/assumedExternalFilesCache
 .metadata/.plugins/org.eclipse.jdt.core/externalFilesCache
 .metadata/.plugins/org.eclipse.jdt.core/externalLibsTimeStamps
-*.txt
+
 .metadata/.plugins/org.eclipse.jdt.core/nonChainingJarsCache
 *.dat
 *.xml

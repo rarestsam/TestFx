@@ -1,16 +1,88 @@
 package application;
+import java.sql.Date;
 import java.util.ArrayList;
 
 public class Order 
 {
 	private String order_number;
-	private String notes;
+	private String table_number;
+	private ArrayList<String> notes = new ArrayList<String>();
+	private String date;
 	private double total;
-	private ArrayList<Double> food_price;
-	private ArrayList<String> food_name;
+	private ArrayList<Double> food_price = new ArrayList<Double>();
+	private ArrayList<String> food_name = new ArrayList<String>();
 	private String time_Of_Order;
 	private String employee_Name;
+	private String complete;
+	private String orderdone;
+	private String paid;
+	private ArrayList<Integer> amount = new ArrayList<Integer>();
+	
+	public String getComplete() {
+		return complete;
+	}
 
+	public void setComplete(String complete) {
+		this.complete = complete;
+	}
+
+	public String getOrderdone() {
+		return orderdone;
+	}
+
+	public void setOrderdone(String orderdone) {
+		this.orderdone = orderdone;
+	}
+
+	public String getPaid() {
+		return paid;
+	}
+
+	public void setPaid(String paid) {
+		this.paid = paid;
+	}
+
+	
+	
+	public String getnote(int i) 
+	{
+		return notes.get(i);
+	}
+	
+	public void setNotes(String note,int i)
+	{
+		notes.add(i,note);
+	}
+	
+	public String getDate() 
+	
+	{
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+	
+	public String getTable_number() 
+	{
+		return table_number;
+	}
+
+	public void setTable_number(String table_number) 
+	{
+		this.table_number = table_number;
+	}
+
+
+	public int getfoodsize() 
+	{
+		int size;
+		size=food_name.size();
+		return size;
+	}
+	
+	
 	public String getOrder_number() 
 	{
 		return order_number;
@@ -26,28 +98,37 @@ public class Order
 		return food_name.get(i);
 	}
 
-	public void setFood_name(String food_name,int i)
-	{
-		this.food_name.set(i,food_name);
-	}
-
-	public double getTotal(int i) 
-	{
-		for(int k=0; k<i; k++)
-		{
-			total = total + food_price.get(i);
-		}
-		return total;
-	}
-
 	public double getFood_price(int i)
 	{
 		return food_price.get(i);
 	}
 
-	public void setFood_price(double food_price,int i)
+	public void setFood_price(Double food_pricel,int i)
 	{
-		this.food_price.set(i, food_price);
+		food_price.add(i, food_pricel);
+	}
+	
+	public void setFood_name(String food_namel,int i)
+	{
+		food_name.add(i,food_namel);
+	}
+
+	public double getTotal() 
+	{
+		/*
+		for(int k=0; k<i; k++)
+		{
+			total = total + food_price.get(i);
+		}
+		return total;
+		*/
+		double total1 = 0;
+		for(int i=0; i<food_price.size();i++)
+		{		
+			total1=total1+food_price.get(i);
+		}
+		total = total1;
+		return total;
 	}
 
 	public String getTime_Of_Order() 
