@@ -73,6 +73,12 @@ public class Database
 	PreparedStatement updateField = null;
 	
 
+	Connection connection1=null;
+	Statement statement1 = null;
+	ResultSet rs2 = null;
+	PreparedStatement updateField1 = null;
+	
+	
 	 public void connect_to_database() throws IOException, SQLException
 	 {
 		 
@@ -93,6 +99,16 @@ public class Database
 	 }
 	 
 	 
+	 
+	 public void connect_to_database1() throws IOException, SQLException
+	 {	 
+			String msAccDB = "restaurant.accdb";
+			String dbURL = "jdbc:ucanaccess://" + msAccDB;
+			connection1 = DriverManager.getConnection(dbURL,"","");
+			statement1=connection1.createStatement(); 	
+	 }
+	 
+	 
 	 public void setResultsetorder() throws IOException 
 	 {
 		 try {
@@ -102,6 +118,18 @@ public class Database
 			e.printStackTrace();
 		}
 	 }
+	 
+	 public void setResultsetclockedin() throws IOException 
+	 {
+		 try {
+			 rs2=statement1.executeQuery("SELECT * FROM Clocked");
+		} catch (SQLException e)
+		 {
+			e.printStackTrace();
+		}
+	 }
+	 
+	 
 	 
 	 public void closeConnection() 
 	 {
@@ -120,7 +148,7 @@ public class Database
 		 try {
              if(null != updateField) {
                  updateField.close(); 
-             }             
+             }
          }
          catch (SQLException sqlex) {
              sqlex.printStackTrace();
@@ -148,4 +176,62 @@ public class Database
              sqlex.printStackTrace();
          }
 	 }
+	 
+	 
+	 
+	 public void closeConnection1() 
+	 {
+		 try {
+             if(null != connection1) {                           
+                 connection1.close();           
+             }             
+         }
+         catch (SQLException sqlex) {
+             sqlex.printStackTrace();
+         }
+	 }
+	 
+	 public void closeupdateField1() 
+	 {
+		 try {
+             if(null != updateField1) {
+                 updateField1.close(); 
+             }
+         }
+         catch (SQLException sqlex) {
+             sqlex.printStackTrace();
+         }
+	 }
+	 public void closers2() 
+	 {
+		 try {
+             if(null != rs2) {
+            	 rs2.close(); 
+             }             
+         }
+         catch (SQLException sqlex) {
+             sqlex.printStackTrace();
+         }
+	 }
+	 public void closestatement1() 
+	 {
+		 try {
+             if(null !=  statement1) {
+            	 statement1.close(); 
+             }             
+         }
+         catch (SQLException sqlex) {
+             sqlex.printStackTrace();
+         }
+	 }
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
 }
