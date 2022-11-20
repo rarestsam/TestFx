@@ -36,7 +36,7 @@
                <font>
                   <Font size="38.0" />
                </font></PasswordField>
-            <Button fx:id="loginbtn1" layoutX="984.0" layoutY="751.0" mnemonicParsing="false" onAction="#clockin" prefHeight="92.0" prefWidth="264.0" style="-fx-background-color: green;" stylesheets="@application.css" text="Clock In" textAlignment="CENTER" textFill="#fffdfd">
+            <Button fx:id="loginbtn1" layoutX="984.0" layoutY="751.0" mnemonicParsing="false" onAction="#loginreroute" prefHeight="92.0" prefWidth="264.0" style="-fx-background-color: green;" stylesheets="@application.css" text="Clock In" textAlignment="CENTER" textFill="#fffdfd">
                <font>
                   <Font name="Modern No. 20" size="49.0" />
                </font>

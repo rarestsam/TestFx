@@ -10,13 +10,25 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.ResourceBundle;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.net.URL;
+import java.util.ResourceBundle;
 
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -25,10 +37,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Spinner;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
@@ -44,13 +59,14 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.text.TextAlignment;
 
-public class SceneController 
+public class SceneController implements Initializable
 {
 	 private static final Paint WHITE = null;
 	 private Stage stage;
@@ -77,6 +93,8 @@ public class SceneController
 	 String[] itemnumbers2 = new String[100];
 	 String[] notes2 = new String[100];
 	 int neworderid;
+	 
+
 	// setEditable(false) use this function for setting text in a textfield and not being played with
 	 @FXML 
 	 private TextField txtField;
@@ -165,7 +183,24 @@ public class SceneController
 	 @FXML
 	 private Label checktable;
 	 
-	 //BufferedWriter writer2 = new BufferedWriter(new FileWriter("order_number.txt"));
+	 @FXML
+	 private TableColumn<Order, String> Food_itemT;
+
+	 @FXML
+	 private TableColumn<Order, String> NotesT;
+
+	 @FXML
+	 private TableColumn<Order, Double> PriceT;
+
+	 @FXML
+	 private TableColumn<Order, Integer> QuantityT;
+
+	 @FXML
+	 private TableView<Order> Waitstaff_table;
+	 
+	 
+	 
+	
 	 
 	 public void loginreroute(ActionEvent event) 
 	 {
@@ -198,7 +233,7 @@ public class SceneController
 			 System.out.println(i);
 		 }
 		 */
-		 for(int i=0;i<=employees.size();i++ )
+		 for(int i=0;i<employees.size();i++ )
 		 {		 
 			 if(employees.get(i).getId_number().equals(text))
 			 {
@@ -279,10 +314,20 @@ public class SceneController
    			 database.closeresultSet();
    			 database.closestatement();
    			 database.closeupdateField();
+   			 System.out.print(e);
 		 }
 	 }
 	 
 	 
+
+	
+	void removeOrder(ActionEvent event) 
+	    {
+	        int selectedID =  Waitstaff_table.getSelectionModel().getSelectedIndex();
+	        Waitstaff_table.getItems().remove(selectedID);
+	    }
+	
+	
 	 public void switchToManager(ActionEvent event) throws IOException 
 	 {
 		 
@@ -1101,7 +1146,7 @@ public class SceneController
 									e.printStackTrace();
 								} 
 				         }
-				         else  
+				         else 
 				         {
 				        	 if(cardNumStr== "1234567890123456" && expDateMStr== "10" && expDateYStr=="24" && secCodeStr=="123") 
 				        	 {
@@ -1221,9 +1266,18 @@ public class SceneController
 	 }
 	 
 	 public void deleteFoodBar(ActionEvent event)throws IOException
-	 {
+	 {		 
+			    Order newordr = new Order();
+		        newordr.setFood_namet("Burger");          		
+		        newordr.setQuantityT(1);;   
+		        newordr.setNotesT("null");;    
+		        newordr.setPriceT(8.42);    
+		        ObservableList<Order> Orders = Waitstaff_table.getItems();
+		        Orders.add(newordr);
+		        Waitstaff_table.setItems(Orders);
+		        
+			 System.out.println("it worked");
 		
-		 
 		 
 	 }
 	 
@@ -1583,7 +1637,8 @@ public class SceneController
 	 
 	 public void clockout(ActionEvent event) 
 	 {
-		 try {
+		 try 
+		 {
 			 
 			 
 		 }
@@ -1595,6 +1650,26 @@ public class SceneController
 		 
 		 
 	 }
+
+
+
+
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) 
+	{
+		
+		Food_itemT.setCellValueFactory(new PropertyValueFactory<Order, String>("food_namet"));
+	    QuantityT.setCellValueFactory(new PropertyValueFactory<Order, Integer>("quantityT"));
+        PriceT.setCellValueFactory(new PropertyValueFactory<Order, Double>("priceT"));
+	    NotesT.setCellValueFactory(new PropertyValueFactory<Order, String>("notesT"));
+		
+		System.out.println("it worked");
+	}
+
+
+
+
+
 	 
 	 
 }

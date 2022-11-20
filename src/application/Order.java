@@ -18,6 +18,46 @@ public class Order
 	private String paid;
 	private ArrayList<Integer> amount = new ArrayList<Integer>();
 	
+	private String food_namet;
+	private Integer quantityT;
+	private Double priceT;
+	private String notesT;
+	
+	
+	public String getFood_namet() {
+		return food_namet;
+	}
+
+	public void setFood_namet(String food_namet) {
+		this.food_namet = food_namet;
+	}
+
+	public Integer getQuantityT() {
+		return quantityT;
+	}
+
+	public void setQuantityT(Integer quantityT) {
+		this.quantityT = quantityT;
+	}
+
+	public Double getPriceT() {
+		return priceT;
+	}
+
+	public void setPriceT(Double priceT) {
+		this.priceT = priceT;
+	}
+
+	public String getNotesT() {
+		return notesT;
+	}
+
+	public void setNotesT(String notesT) {
+		this.notesT = notesT;
+	}
+
+
+	
 	public String getComplete() {
 		return complete;
 	}
