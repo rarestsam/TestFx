@@ -499,8 +499,6 @@ public class SceneController
 		 Label foodText = new Label(null);
 		 Label priceText = new Label(null);
 		 
-		 
-		 
 		 foodbar.setStyle("-fx-background-color: #ffffff; ");
 		 foodbar.setMinWidth(683);
 		 foodbar.setMinHeight(68);
@@ -513,7 +511,7 @@ public class SceneController
 		 spinner.setMinHeight(49);
 		 spinner.relocate(40.0,10.0);
 		 spinner.setId("spinner"+fb);
-
+		 
 		 foodText.setMinWidth(179);
 		 foodText.setMinHeight(56);
 		 foodText.relocate(150.0,8.0);
@@ -547,7 +545,9 @@ public class SceneController
 				{
 					if(deleteButton.isArmed()==true) 
 					 {
-						 deleteButton.getParent().setVisible(false);
+						foodBarBox.get().clear();
+						 //deleteButton.getParent().setVisible(false);
+						
 					 }
 				}
 		 	});
@@ -609,13 +609,53 @@ public class SceneController
 		 {
 			 foodText.setText("Water Bottle");
 			 priceText.setText("2.54");
+			 
+			 System.out.println("price1 "+priceText);
+			 //System.out.println("spinner "+spinner.isEditable());
+			 
+			 if(spinnerEdit(event,spinner)==true)
+			 {
+				 Double totalPriceDub6;
+				 Double price;
+				 
+				 String text = priceText.getText();
+				 totalPriceDub6 = Double.parseDouble(text);
+				 
+				 price = spinner.getValue()*totalPriceDub6;
+				 
+				 String totalPriceStr = Double.toString(price);
+				 priceText.setText(totalPriceStr);
+				 
+				 System.out.println("price2 "+priceText);
+			 }
+			 else 
+			 {
+				 System.out.println("False");
+			 }
+			 
+			 
 		 }
 		 
+		 /*
+		 Double totalPriceDub6;
+		 Double price;
+		 
+		 String text = priceText.getText();
+		 totalPriceDub6 = Double.parseDouble(text);
+		 
+		 price = spinner.getValue()*totalPriceDub6;
+		 
+		 String totalPriceStr = Double.toString(price);
+		 priceText.setText(totalPriceStr);
+		 
+		 System.out.println("price2 "+priceText);
+		 */
 		 
 		 foodbar.getChildren().addAll(spinner,foodText,dollarSign,priceText,deleteButton,noteButton);
 		
 		 
 		 foodBarBox.getChildren().addAll(foodbar);
+		 
 		 
 		 
 		 ph += 100.0;
@@ -634,25 +674,29 @@ public class SceneController
 		 
 	 }
 	 
-	 public void pizzaFoodBar(ActionEvent event)throws IOException
+	 public boolean spinnerEdit(ActionEvent event,Spinner<Integer> spinner)throws IOException
 	 {
-		 /*
-		 addFoodBar(event);
-		 foodText.setText("Pizza");
-		 priceText.setText("24.23");
-		 */
+		 
+		 int old=1;
+		 
+		 String spinValueStr = spinner.getEditor().getText();
+		 int spinValueInt =  Integer.parseInt(spinValueStr);
+		 
+		 if (spinValueInt-old==1 || spinValueInt-old==-1) 	//if there is change
+		 {
+			 System.out.println("int "+ spinValueInt +"old "+ old);
+			 old=spinValueInt;
+			 return true;
+			 
+		 }
+		 else 
+		 {
+			 System.out.println("spinner.getEditor().getText(): "+spinner.getEditor().getText());
+		 
+			 return false;
+		 }
 	 }
 	 
-	 public void burgerFoodBar(ActionEvent event)throws IOException
-	 {
-		 /*
-		 addFoodBar(event);
-		 foodText.setText("Burger");
-		 priceText.setText("8.42");
-		 
-		 ph += 100.0;
-		 */
-	 }
 	 
 	 public void notesWindow(ActionEvent event)throws IOException{
 		 
@@ -1010,7 +1054,6 @@ public class SceneController
 		 Text errorText = new Text(errorString);
 		 errorText.setFont(font35);
 		 errorText.setStyle("-fx-text-alignment: TOP_LEFT; ");
-		
 		 
 		 VBox layout = new VBox(10);
 		 layout.setPadding(new Insets(180,0,0,0));
