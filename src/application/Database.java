@@ -129,7 +129,15 @@ public class Database
 		}
 	 }
 	 
-	 
+	 public void setResultsetclockedout() throws IOException 
+	 {
+		 try {
+			 resultSet = statement.executeQuery("SELECT * FROM clockout1");
+		} catch (SQLException e)
+		 {
+			e.printStackTrace();
+		}
+	 }
 	 
 	 public void closeConnection() 
 	 {
