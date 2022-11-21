@@ -148,6 +148,9 @@ public class SceneController {
 	
 	@FXML 
 	 private Button completeOrder;
+	
+	@FXML 
+	 private Button clearButton;
 
 	@FXML
 	private AnchorPane info;
@@ -632,7 +635,12 @@ public class SceneController {
 
 		}
 	}
-
+	public void clear(ActionEvent event) throws IOException {
+		foodBarBox.getChildren().clear();
+		table_number.setText("");
+		totalPriceText.setText("0.00");
+		tp=0.0;
+	}
 	public void complete(ActionEvent event) {
 		/*
 		 * for(int i=0; i<new_order.getfoodsize();i++) {
@@ -658,7 +666,7 @@ public class SceneController {
 			String orderpaid = "unpaid";
 			String tableNumber = table_number.getText();
 			if (tableNumber.equals("")) {
-				checktable.setText("Enter table number");
+				checktable.setText("Enter Table Number");
 
 			} else {
 				int tablenumber;
@@ -708,26 +716,14 @@ public class SceneController {
 				database.closestatement();
 				database.closeupdateField();
 				checktable.setText("Success");
+				
+				clear(event);
 
 			}
 		} catch (Exception e) {
-			checktable.setText("enter table# in the right format");
+			checktable.setText("Enter table# in the right format");
 			System.out.print(e);
 		}
-	}
-
-	public void pizzaFoodBar(ActionEvent event) throws IOException {
-		/*
-		 * addFoodBar(event); foodText.setText("Pizza"); priceText.setText("24.23");
-		 */
-	}
-
-	public void burgerFoodBar(ActionEvent event) throws IOException {
-		/*
-		 * addFoodBar(event); foodText.setText("Burger"); priceText.setText("8.42");
-		 * 
-		 * ph += 100.0;
-		 */
 	}
 
 	public void notesWindow(ActionEvent event) throws IOException {
@@ -894,82 +890,91 @@ public class SceneController {
 							e.printStackTrace();
 						}
 
-					} else if (cardNumStr.equals("")) {
+					} 
+					else if (cardNumStr.equals("")) {
 						try {
 							cardErrorWindow(event, "Enter a Cardnumber");
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-					} else if (expDateMStr.equals("")) {
+					} 
+					else if (expDateMStr.equals("")) {
 						try {
 							cardErrorWindow(event, "Enter an Expiration Month");
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-					} else if (expDateYStr.equals("")) {
+					} 
+					else if (expDateYStr.equals("")) {
 						try {
 							cardErrorWindow(event, "Enter an Expiration Year");
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-					} else if (secCodeStr.equals("")) {
+					} 
+					else if (secCodeStr.equals("")) {
 						try {
 							cardErrorWindow(event, "Enter a Security Code");
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-					} else if (cardNumStr.length() != cardNumLength) {
+					} 
+					else if (cardNumStr.length() != cardNumLength) {
 						try {
 							cardErrorWindow(event, "Incorrect Number of Digits for Card Number");
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-					} else if (expDateMStr.length() != expDateLength || expDateYStr.length() != expDateLength) {
+					} 
+					else if (expDateMStr.length() != expDateLength || expDateYStr.length() != expDateLength) {
 						try {
 							cardErrorWindow(event, "Incorrect Expiration Date Format");
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-					} else if (secCodeStr.length() != secCodeLength) {
+					} 
+					else if (secCodeStr.length() != secCodeLength) {
 						try {
 							cardErrorWindow(event, "Incorrect Number of Digits for Security Code");
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-					} else if (secCodeStr.length() != secCodeLength) {
+					} 
+					else if (secCodeStr.length() != secCodeLength) {
 						try {
 							cardErrorWindow(event, "Incorrect Number of Digits for Security Code");
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-					} else {
-						if (cardNumStr == "1234567890123456" && expDateMStr == "10" && expDateYStr == "24"
-								&& secCodeStr == "123") {
-							try {
-								cardErrorWindow(event, "Successful");
-								// closeButton.setOnAction(e -> paymentInfo.close());
-							} catch (IOException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-						} else {
+					} 
+					else if (cardNumStr == "1234567890123456" && expDateMStr == "10" && expDateYStr == "24"
+							&& secCodeStr == "123") {
+						try {
+							cardErrorWindow(event, "Successful");
+							// closeButton.setOnAction(e -> paymentInfo.close());
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+					else {
 							try {
 								System.out.println(
 										cardNumStr + " " + expDateMStr + " / " + expDateYStr + " " + secCodeStr);
-								cardErrorWindow(event, "Declined");
+										cardErrorWindow(event, "Declined");
 							} catch (IOException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
 							}
-						}
+						
 					}
 
 				}
@@ -1049,10 +1054,6 @@ public class SceneController {
 		Scene noteScene = new Scene(layout);
 		cashError.setScene(noteScene);
 		cashError.showAndWait();
-
-	}
-
-	public void deleteFoodBar(ActionEvent event) throws IOException {
 
 	}
 

@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -13,34 +11,118 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Polyline?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<SplitPane dividerPositions="0.6470588235294118" prefHeight="1104.0" prefWidth="1923.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SceneController">
+<SplitPane dividerPositions="0.0015616866215512754" prefHeight="1104.0" prefWidth="1923.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SceneController">
   <items>
-    <AnchorPane minHeight="0.0" minWidth="0.0" onMouseClicked="#loginreroute" prefHeight="1102.0" prefWidth="1264.0" style="-fx-background-color: #89a4dc;">
+    <AnchorPane minHeight="0.0" minWidth="0.0" onMouseClicked="#loginreroute" prefHeight="1042.0" prefWidth="1274.0" style="-fx-background-color: #526a9c;">
          <children>
-            <Button fx:id="clearButton" layoutX="935.0" layoutY="804.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="283.0" style="-fx-background-color: red;" text="Clear" textAlignment="CENTER">
+            <Button fx:id="payButton1" layoutX="1542.0" layoutY="511.0" mnemonicParsing="false" onAction="#payTypeWindow" prefHeight="62.0" prefWidth="283.0" style="-fx-background-color: blue;" text="Pay" textAlignment="CENTER">
                <font>
                   <Font name="Modern No. 20" size="46.0" />
                </font>
             </Button>
-            <Button fx:id="payButton" layoutX="935.0" layoutY="896.0" mnemonicParsing="false" onAction="#payTypeWindow" prefHeight="62.0" prefWidth="283.0" style="-fx-background-color: blue;" text="Pay" textAlignment="CENTER">
-               <font>
-                  <Font name="Modern No. 20" size="46.0" />
-               </font>
-            </Button>
-            <Button fx:id="completeButton" layoutX="935.0" layoutY="990.0" mnemonicParsing="false" onAction="#complete" prefHeight="66.0" prefWidth="283.0" style="-fx-background-color: green;" text="Complete" textAlignment="CENTER">
-               <font>
-                  <Font name="Modern No. 20" size="46.0" />
-               </font>
-            </Button>
-            <TextField fx:id="searchBar" layoutX="150.0" layoutY="74.0" prefHeight="42.0" prefWidth="855.0" />
-            <Button fx:id="searchButton" layoutX="1004.0" layoutY="74.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" style="-fx-background-color: green;" text="Search" textAlignment="CENTER">
+            <AnchorPane fx:id="info1" layoutX="825.0" prefHeight="214.0" prefWidth="675.0" style="-fx-background-color: #d3d3d3;">
+               <children>
+                  <Label layoutX="257.0" layoutY="107.0" prefHeight="93.0" prefWidth="112.0" text="Table">
+                     <font>
+                        <Font name="Modern No. 20" size="48.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="264.0" layoutY="48.0" prefHeight="93.0" prefWidth="112.0" text="Order #">
+                     <font>
+                        <Font name="Modern No. 20" size="36.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="orderNumber1" layoutX="387.0" layoutY="48.0" prefHeight="93.0" prefWidth="72.0" text="1">
+                     <font>
+                        <Font name="Modern No. 20" size="36.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="workerUsername1" layoutX="42.0" layoutY="3.0" prefHeight="56.0" prefWidth="237.0" text="Maya">
+                     <font>
+                        <Font name="Modern No. 20" size="36.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="timeText1" layoutX="550.0" layoutY="3.0" prefHeight="56.0" prefWidth="125.0" text="10:35">
+                     <font>
+                        <Font name="Modern No. 20" size="36.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="tableNumber" layoutX="387.0" layoutY="107.0" prefHeight="93.0" prefWidth="72.0" text="1">
+                     <font>
+                        <Font name="Modern No. 20" size="36.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="825.0" layoutY="990.0" prefHeight="112.0" prefWidth="675.0" style="-fx-background-color: #d3d3d3;">
+               <children>
+                  <Label layoutX="495.0" layoutY="22.0" prefHeight="69.0" prefWidth="17.0" text="\$">
+                     <font>
+                        <Font name="Modern No. 20" size="41.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="totalPriceText1" layoutX="519.0" layoutY="28.0" prefHeight="56.0" prefWidth="133.0" text="0.00">
+                     <font>
+                        <Font name="Modern No. 20" size="41.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="foodPriceText111" layoutX="392.0" layoutY="29.0" prefHeight="56.0" prefWidth="103.0" text="Total:">
+                     <font>
+                        <Font name="Modern No. 20" size="41.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <ScrollPane layoutX="825.0" layoutY="199.0" prefHeight="791.0" prefWidth="675.0">
+               <content>
+                  <VBox fx:id="foodBarBox1" onDragDetected="#notesWindow" prefHeight="792.0" prefWidth="672.0" />
+               </content>
+            </ScrollPane>
+            <TextField fx:id="searchBar" layoutX="113.0" layoutY="141.0" prefHeight="42.0" prefWidth="495.0" />
+            <Button fx:id="searchButton1" layoutX="605.0" layoutY="141.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" style="-fx-background-color: green;" text="Search" textAlignment="CENTER">
                <font>
                   <Font name="Modern No. 20" size="24.0" />
                </font>
             </Button>
-            <Pane layoutX="150.0" layoutY="128.0" prefHeight="577.0" prefWidth="965.0" style="-fx-background-color: #89a4dc;">
+            <ScrollPane layoutX="113.0" layoutY="206.0" prefHeight="710.0" prefWidth="608.0">
+               <content>
+                  <VBox prefHeight="713.0" prefWidth="592.0" />
+               </content>
+            </ScrollPane>
+            <Button fx:id="Sync" layoutX="50.0" layoutY="14.0" mnemonicParsing="false" onAction="#pulse" prefHeight="32.0" prefWidth="112.0" style="-fx-background-color: red;" text="Pulse" textAlignment="CENTER">
+               <font>
+                  <Font name="Modern No. 20" size="21.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+    <AnchorPane minHeight="0.0" minWidth="0.0" onMouseClicked="#loginreroute" prefHeight="1102.0" prefWidth="1264.0" style="-fx-background-color: #89a4dc;">
+         <children>
+            <Button fx:id="clearButton" layoutX="871.0" layoutY="785.0" mnemonicParsing="false" onAction="#clear" prefHeight="80.0" prefWidth="283.0" style="-fx-background-color: red;" text="Clear" textAlignment="CENTER">
+               <font>
+                  <Font name="Modern No. 20" size="46.0" />
+               </font>
+            </Button>
+            <Button fx:id="payButton" layoutX="871.0" layoutY="877.0" mnemonicParsing="false" onAction="#payTypeWindow" prefHeight="62.0" prefWidth="283.0" style="-fx-background-color: blue;" text="Pay" textAlignment="CENTER">
+               <font>
+                  <Font name="Modern No. 20" size="46.0" />
+               </font>
+            </Button>
+            <Button fx:id="completeButton" layoutX="871.0" layoutY="971.0" mnemonicParsing="false" onAction="#complete" prefHeight="66.0" prefWidth="283.0" style="-fx-background-color: green;" text="Complete" textAlignment="CENTER">
+               <font>
+                  <Font name="Modern No. 20" size="46.0" />
+               </font>
+            </Button>
+            <Button fx:id="searchButton" layoutX="980.0" layoutY="125.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" style="-fx-background-color: green;" text="Search" textAlignment="CENTER">
+               <font>
+                  <Font name="Modern No. 20" size="24.0" />
+               </font>
+            </Button>
+            <Pane layoutX="126.0" layoutY="177.0" prefHeight="577.0" prefWidth="965.0" style="-fx-background-color: #89a4dc;">
                <children>
                   <ImageView fitHeight="183.0" fitWidth="224.0" layoutX="371.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -132,21 +214,12 @@
                   <Font name="Modern No. 20" size="21.0" />
                </font>
             </Button>
-            <Button fx:id="Sync" layoutX="285.0" layoutY="14.0" mnemonicParsing="false" onAction="#pulse" prefHeight="32.0" prefWidth="112.0" style="-fx-background-color: red;" text="Pulse" textAlignment="CENTER">
+            <Label fx:id="checktable" alignment="CENTER" contentDisplay="CENTER" layoutX="408.0" layoutY="4.0" prefHeight="58.0" prefWidth="818.0" textAlignment="CENTER" textFill="#e80e0e">
                <font>
-                  <Font name="Modern No. 20" size="21.0" />
-               </font>
-            </Button>
-            <Label fx:id="checktable" layoutX="566.0" layoutY="8.0" prefHeight="51.0" prefWidth="675.0">
-               <font>
-                  <Font name="Modern No. 20" size="48.0" />
+                  <Font name="Modern No. 20" size="28.0" />
                </font>
             </Label>
-         </children>
-      </AnchorPane>
-    <AnchorPane minHeight="0.0" minWidth="0.0" onMouseClicked="#loginreroute" prefHeight="1042.0" prefWidth="1274.0" style="-fx-background-color: #89a4dc;">
-         <children>
-            <AnchorPane fx:id="info" prefHeight="214.0" prefWidth="675.0" style="-fx-background-color: #d3d3d3;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <AnchorPane fx:id="info" layoutX="1196.0" layoutY="-5.0" prefHeight="214.0" prefWidth="675.0" style="-fx-background-color: #d3d3d3;">
                <children>
                   <Label layoutX="233.0" layoutY="108.0" prefHeight="93.0" prefWidth="112.0" text="Table">
                      <font>
@@ -158,7 +231,7 @@
                         <Font name="Modern No. 20" size="36.0" />
                      </font>
                   </Label>
-                  <Label fx:id="orderNumber" layoutX="363.0" layoutY="49.0" prefHeight="93.0" prefWidth="72.0" text="001">
+                  <Label fx:id="orderNumber" layoutX="363.0" layoutY="49.0" prefHeight="93.0" prefWidth="72.0" text="1">
                      <font>
                         <Font name="Modern No. 20" size="36.0" />
                      </font>
@@ -180,78 +253,38 @@
                   </TextField>
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="180.0" layoutY="1000.0" prefHeight="112.0" prefWidth="488.0">
+            <AnchorPane layoutX="1196.0" layoutY="995.0" prefHeight="112.0" prefWidth="675.0" style="-fx-background-color: #d3d3d3;">
                <children>
-                  <Label layoutX="314.0" layoutY="22.0" prefHeight="69.0" prefWidth="17.0" text="\$">
+                  <Label layoutX="495.0" layoutY="22.0" prefHeight="69.0" prefWidth="17.0" text="\$">
                      <font>
                         <Font name="Modern No. 20" size="41.0" />
                      </font>
                   </Label>
-                  <Label fx:id="totalPriceText" layoutX="338.0" layoutY="28.0" prefHeight="56.0" prefWidth="133.0" text="0.00">
+                  <Label fx:id="totalPriceText" layoutX="519.0" layoutY="28.0" prefHeight="56.0" prefWidth="133.0" text="0.00">
                      <font>
                         <Font name="Modern No. 20" size="41.0" />
                      </font>
                   </Label>
-                  <Label fx:id="foodPriceText11" layoutX="211.0" layoutY="29.0" prefHeight="56.0" prefWidth="103.0" text="Total:">
+                  <Label fx:id="foodPriceText11" layoutX="392.0" layoutY="29.0" prefHeight="56.0" prefWidth="103.0" text="Total:">
                      <font>
                         <Font name="Modern No. 20" size="41.0" />
                      </font>
                   </Label>
                </children>
             </AnchorPane>
-            <ScrollPane layoutX="-20.0" layoutY="209.0">
+            <ScrollPane layoutX="1196.0" layoutY="204.0" prefHeight="791.0" prefWidth="675.0">
                <content>
-                  <VBox fx:id="foodBarBox" onDragDetected="#notesWindow" prefHeight="789.0" prefWidth="693.0">
-                     <children>
-                        <Pane fx:id="foodBar" prefHeight="68.0" prefWidth="683.0" style="-fx-background-color: white;">
-                           <children>
-                              <Spinner fx:id="foodSpinner" layoutX="32.0" layoutY="10.0" prefHeight="49.0" prefWidth="112.0" />
-                              <Label fx:id="dollarSign" layoutX="331.0" layoutY="8.0" prefHeight="56.0" prefWidth="16.0" text="\$">
-                                 <font>
-                                    <Font name="Modern No. 20" size="29.0" />
-                                 </font>
-                                 <padding>
-                                    <Insets left="7.0" />
-                                 </padding>
-                              </Label>
-                              <Label fx:id="priceText" layoutX="348.0" layoutY="7.0" prefHeight="56.0" prefWidth="103.0" text="0.00">
-                                 <font>
-                                    <Font name="Modern No. 20" size="29.0" />
-                                 </font>
-                                 <padding>
-                                    <Insets left="7.0" />
-                                 </padding>
-                              </Label>
-                              <Button fx:id="notesButton" layoutX="572.0" layoutY="14.0" mnemonicParsing="false" onAction="#notesWindow" prefHeight="42.0" prefWidth="90.0" style="-fx-background-color: gray;" text="Notes" textAlignment="CENTER">
-                                 <font>
-                                    <Font name="Modern No. 20" size="22.0" />
-                                 </font>
-                              </Button>
-                              <Button fx:id="deleteFoodButton" layoutX="470.0" layoutY="14.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="90.0" style="-fx-background-color: red;" text="Delete" textAlignment="CENTER">
-                                 <font>
-                                    <Font name="Modern No. 20" size="22.0" />
-                                 </font>
-                              </Button>
-                              <Label fx:id="foodText" layoutX="144.0" layoutY="8.0" prefHeight="56.0" prefWidth="179.0" text="Food">
-                                 <font>
-                                    <Font name="Modern No. 20" size="29.0" />
-                                 </font>
-                                 <padding>
-                                    <Insets left="7.0" />
-                                 </padding>
-                              </Label>
-                           </children>
-                           <VBox.margin>
-                              <Insets bottom="5.0" left="13.0" top="5.0" />
-                           </VBox.margin>
-                           <padding>
-                              <Insets bottom="3.0" top="3.0" />
-                           </padding>
-                        </Pane>
-                     </children>
-                  </VBox>
+                  <VBox fx:id="foodBarBox" onDragDetected="#notesWindow" prefHeight="792.0" prefWidth="672.0" />
                </content>
             </ScrollPane>
+            <TextField fx:id="searchBar1" layoutX="125.0" layoutY="125.0" prefHeight="42.0" prefWidth="855.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="139.0" layoutX="67.0" layoutY="916.0" rotate="90.0" stroke="#fffdfd" strokeType="INSIDE" width="34.0" />
+            <Polyline fill="WHITE" layoutX="444.0" layoutY="909.0" points="-296.0, 115.0, -244.0, 75.0, -244.0, 75.0, -296.0, 37.0" stroke="WHITE" strokeType="INSIDE" />
+            <Label fx:id="checktable1" contentDisplay="CENTER" layoutX="24.0" layoutY="956.0" prefHeight="58.0" prefWidth="248.0" text="Search Order" textAlignment="CENTER">
+               <font>
+                  <Font name="Modern No. 20" size="22.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
   </items>
