@@ -57,6 +57,8 @@ public class SceneController {
 	String order_number;
 	String table_number_text;
 	private int fb = 1;
+	 private int on = 1;
+	 private int o=1;
 	private double ph = 200.0;
 	private double tp = 0.0;
 	private String time;
@@ -74,6 +76,8 @@ public class SceneController {
 	String[] itemnumbers2 = new String[100];
 	String[] notes2 = new String[100];
 	int neworderid;
+	ArrayList<String> order = new ArrayList<String>();
+	
 	// setEditable(false) use this function for setting text in a textfield and not
 	// being played with
 	@FXML
@@ -108,6 +112,9 @@ public class SceneController {
 
 	@FXML
 	private VBox foodBarBox;
+	
+	@FXML 
+	 private VBox orderList;
 
 	@FXML
 	private Label totalPriceText;
@@ -138,6 +145,9 @@ public class SceneController {
 
 	@FXML
 	private Button timeButton;
+	
+	@FXML 
+	 private Button completeOrder;
 
 	@FXML
 	private AnchorPane info;
@@ -1405,5 +1415,45 @@ public class SceneController {
 		}
 
 	}
+	
+	public void addOrder(ActionEvent event) throws InterruptedException
+	 {
+		 Font font33 = Font.font("Modern No. 20", 33);
+		 
+		 //for (int o = 1; o < 5; o++) {
+			 Button orderButton = new Button("Order #" + o);
+			 orderButton.setFont(font33);
+			 orderButton.setId("order" + o);
+			 orderButton.setMinWidth(704);
+			 orderButton.setMinHeight(87);
+			 orderButton.setMaxWidth(704);
+			 orderButton.setMaxHeight(87);
+			 orderButton.setOnAction(new EventHandler<ActionEvent>() 
+		 		{
+				 	@Override
+				 	public void handle(ActionEvent event) 
+					{
+				 		System.out.println("Order Displayed " + o);
+					}
+				 	
+		 		});
+			 
+			 order.add(0,orderButton.getId());
+			 System.out.println("orders: " + order);
+			 orderList.getChildren().addAll(orderButton);
+			 o++;
+		 
+	 }
+	 
+	 public void orderComplete(ActionEvent event) throws InterruptedException
+	 {
+		 if(completeOrder.isArmed()==true) 
+		 {
+			 orderList.getChildren();
+			 System.out.println(orderList.getChildren());
+			 System.out.println("Order Complete");
+			 
+		 }
+	 }
 
 }
