@@ -5,19 +5,17 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.effect.Blend?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="1248.0" prefWidth="1924.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SceneController">
+<AnchorPane prefHeight="1103.0" prefWidth="1924.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SceneController">
    <children>
-      <AnchorPane layoutX="-4.0" prefHeight="1332.0" prefWidth="1914.0">
+      <AnchorPane layoutX="-4.0" prefHeight="1093.0" prefWidth="1924.0">
          <children>
-            <AnchorPane layoutY="-24.0" prefHeight="1436.0" prefWidth="1914.0" style="-fx-background-color: white; -fx-background-color: #d3d3d3;" stylesheets="@application.css">
+            <AnchorPane layoutY="-24.0" prefHeight="1125.0" prefWidth="1914.0" style="-fx-background-color: white; -fx-background-color: #d3d3d3;" stylesheets="@application.css">
                <effect>
                   <Blend mode="ADD">
                      <topInput>
@@ -26,7 +24,7 @@
                   </Blend>
                </effect>
             </AnchorPane>
-            <SplitPane fx:id="right" dividerPositions="0.41103017689906346" prefHeight="1412.0" prefWidth="1924.0">
+            <SplitPane fx:id="right" dividerPositions="0.4375650364203954" prefHeight="1103.0" prefWidth="1924.0">
               <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" style="-fx-background-color: #89a4dc;">
                      <children>
@@ -40,31 +38,39 @@
                               <Font name="Modern No. 20" size="21.0" />
                            </font>
                         </Button>
-                        <ScrollPane layoutX="22.0" layoutY="108.0" prefHeight="1223.0" prefWidth="736.0">
+                        <ScrollPane layoutX="76.0" layoutY="191.0" prefHeight="740.0" prefWidth="720.0">
                            <content>
-                              <TableView fixedCellSize="5.0" prefHeight="1222.0" prefWidth="720.0" style="-fx-background-color: #6f85b3;">
-                                <columns>
-                                  <TableColumn minWidth="50.0" prefWidth="735.0" text="Orders" />
-                                  <TableColumn minWidth="0.0" prefWidth="0.0" text="C2" />
-                                </columns>
-                              </TableView>
+                              <VBox fx:id="orderList" prefHeight="749.0" prefWidth="704.0" style="-fx-background-color: #526a9c;">
+                                 <children>
+                                    <Button mnemonicParsing="false" prefHeight="87.0" prefWidth="704.0" text="Button">
+                                       <font>
+                                          <Font name="Modern No. 20" size="33.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </VBox>
                            </content>
                         </ScrollPane>
-                        <Button layoutX="809.0" layoutY="932.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="161.0" text="delete">
+                        <Label layoutX="340.0" layoutY="111.0" prefHeight="80.0" prefWidth="174.0" text="Orders">
                            <font>
-                              <Font name="Modern No. 20" size="35.0" />
+                              <Font name="Modern No. 20" size="62.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="clearButton111" layoutX="652.0" layoutY="946.0" mnemonicParsing="false" onAction="#addOrder" prefHeight="57.0" prefWidth="144.0" style="-fx-background-color: #dac62f;" text="Refresh" textAlignment="CENTER">
+                           <font>
+                              <Font name="Modern No. 20" size="32.0" />
                            </font>
                         </Button>
-                        <Button layoutX="809.0" layoutY="834.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="161.0" text="add">
+                        <Button fx:id="clearButton111" layoutX="652.0" layoutY="94.0" mnemonicParsing="false" onAction="#addOrder" prefHeight="57.0" prefWidth="144.0" style="-fx-background-color: #dac62f;" text="Refresh" textAlignment="CENTER">
                            <font>
-                              <Font name="Modern No. 20" size="40.0" />
+                              <Font name="Modern No. 20" size="32.0" />
                            </font>
                         </Button>
                      </children>
                   </AnchorPane>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: #89a4dc;">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1186.0" prefWidth="1045.0" style="-fx-background-color: #89a4dc;">
                      <children>
-                        <Pane prefHeight="1410.0" prefWidth="736.0" style="-fx-background-color: #d3d3d3;">
+                        <Pane prefHeight="1103.0" prefWidth="736.0" style="-fx-background-color: #d3d3d3;">
                            <children>
                               <AnchorPane fx:id="info" prefHeight="214.0" prefWidth="720.0" style="-fx-background-color: #d3d3d3;">
                                  <children>
@@ -100,9 +106,9 @@
                                     </Label>
                                  </children>
                               </AnchorPane>
-                              <ScrollPane layoutY="209.0" prefHeight="1036.0" prefWidth="737.0">
+                              <ScrollPane layoutY="209.0" prefHeight="740.0" prefWidth="737.0">
                                  <content>
-                                    <VBox fx:id="foodBarBox" prefHeight="1038.0" prefWidth="722.0">
+                                    <VBox fx:id="foodBarBox" prefHeight="740.0" prefWidth="722.0">
                                        <children>
                                           <Pane fx:id="foodBar1" prefHeight="68.0" prefWidth="697.0" style="-fx-background-color: white;">
                                              <children>
@@ -353,7 +359,7 @@
                                     </VBox>
                                  </content>
                               </ScrollPane>
-                              <AnchorPane layoutX="261.0" layoutY="1263.0" prefHeight="112.0" prefWidth="495.0">
+                              <AnchorPane layoutX="225.0" layoutY="959.0" prefHeight="112.0" prefWidth="495.0">
                                  <children>
                                     <Label layoutX="314.0" layoutY="22.0" prefHeight="69.0" prefWidth="17.0" text="\$">
                                        <font>
@@ -374,7 +380,7 @@
                               </AnchorPane>
                            </children>
                         </Pane>
-                        <Button layoutX="786.0" layoutY="636.0" mnemonicParsing="false" prefHeight="138.0" prefWidth="296.0" style="-fx-background-color: green;" text="Complete" textAlignment="CENTER">
+                        <Button fx:id="completeOrder" layoutX="782.0" layoutY="494.0" mnemonicParsing="false" onAction="#orderComplete" prefHeight="112.0" prefWidth="265.0" style="-fx-background-color: green;" text="Complete" textAlignment="CENTER">
                            <font>
                               <Font name="Modern No. 20" size="52.0" />
                            </font>

@@ -21,10 +21,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Spinner;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
@@ -54,6 +57,8 @@ public class SceneController
 	 private Parent root;
 	 String [] j = new String[10];
 	 private int fb = 1;
+	 private int on = 1;
+	 private int o=1;
 	 private double ph = 200.0;
 	 private double tp = 0.0;
 	 private String time;  
@@ -62,6 +67,7 @@ public class SceneController
 	 ArrayList<Employee> employees = new ArrayList<Employee>();
 	 Database database = new Database();
 	 ArrayList<Order> orders = new ArrayList<Order>();
+	 ArrayList<String> order = new ArrayList<String>();
 	 
 	// setEditable(false) use this function for setting text in a textfield and not being played with
 	 @FXML 
@@ -97,6 +103,9 @@ public class SceneController
 	 @FXML 
 	 private VBox foodBarBox;
 	 
+	 @FXML 
+	 private VBox orderList;
+	 
 	 @FXML
 	 private Label totalPriceText;
 	 
@@ -128,6 +137,9 @@ public class SceneController
 	 private Button timeButton;
 	 
 	 @FXML 
+	 private Button completeOrder;
+	 
+	 @FXML 
 	 private AnchorPane info;
 	 	 
 	 @FXML
@@ -138,6 +150,13 @@ public class SceneController
 	
 	 @FXML 
 	 private TextField hoursTxt;
+	 
+	 @FXML
+	 private TableView<orderTable> orderTable;
+	 
+	 @FXML
+	 private TableColumn<orderTable,String> orderCol;
+	 
 	 
 	 public void loginreroute(ActionEvent event) 
 	 {
@@ -545,7 +564,7 @@ public class SceneController
 				{
 					if(deleteButton.isArmed()==true) 
 					 {
-						foodBarBox.get().clear();
+						 //foodBarBox.get().clear();
 						 //deleteButton.getParent().setVisible(false);
 						
 					 }
@@ -652,8 +671,6 @@ public class SceneController
 		 */
 		 
 		 foodbar.getChildren().addAll(spinner,foodText,dollarSign,priceText,deleteButton,noteButton);
-		
-		 
 		 foodBarBox.getChildren().addAll(foodbar);
 		 
 		 
@@ -1065,12 +1082,7 @@ public class SceneController
 		 
 	 }
 	 
-	 public void deleteFoodBar(ActionEvent event)throws IOException
-	 {
-		
-		 
-		 
-	 }
+	 
 	 
 	 public void totalPrice(ActionEvent event)throws IOException
 	 {
@@ -1157,6 +1169,47 @@ public class SceneController
 	     });
 	*/	 
 		 
+	 }
+	 
+	 
+	 public void addOrder(ActionEvent event) throws InterruptedException
+	 {
+		 Font font33 = Font.font("Modern No. 20", 33);
+		 
+		 //for (int o = 1; o < 5; o++) {
+			 Button orderButton = new Button("Order #" + o);
+			 orderButton.setFont(font33);
+			 orderButton.setId("order" + o);
+			 orderButton.setMinWidth(704);
+			 orderButton.setMinHeight(87);
+			 orderButton.setMaxWidth(704);
+			 orderButton.setMaxHeight(87);
+			 orderButton.setOnAction(new EventHandler<ActionEvent>() 
+		 		{
+				 	@Override
+				 	public void handle(ActionEvent event) 
+					{
+				 		System.out.println("Order Displayed " + o);
+					}
+				 	
+		 		});
+			 
+			 order.add(0,orderButton.getId());
+			 System.out.println("orders: " + order);
+			 orderList.getChildren().addAll(orderButton);
+			 o++;
+		 
+	 }
+	 
+	 public void orderComplete(ActionEvent event) throws InterruptedException
+	 {
+		 if(completeOrder.isArmed()==true) 
+		 {
+			 orderList.getChildren();
+			 System.out.println(orderList.getChildren());
+			 System.out.println("Order Complete");
+			 
+		 }
 	 }
 	 
 	 
