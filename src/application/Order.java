@@ -17,7 +17,34 @@ public class Order
 	private String orderdone;
 	private String paid;
 	private ArrayList<Integer> amount = new ArrayList<Integer>();
+	private String Waitress;
 	
+	
+	public String getamountString(int i)
+	{
+		int k = amount.get(i);
+		 String h =Integer.toString(k);
+		 return h;
+	}
+	
+	public double getamount(int i)
+	{
+		return amount.get(i);
+	}
+
+	public void setamount(Integer amount,int i)
+	{
+	       this.amount.add(i, amount);
+	}
+	
+	public String getWaitress() {
+		return Waitress;
+	}
+
+	public void setWaitress(String waitress) {
+		Waitress = waitress;
+	}
+
 	public String getComplete() {
 		return complete;
 	}
@@ -38,10 +65,23 @@ public class Order
 		return paid;
 	}
 
+	public void setTotal1(Double paid) 
+	{
+		total = paid;
+	}
+	
+	public String getTotal1() 
+	{
+		Double k = total;
+		 String h = Double.toString(k);
+		 return h;
+	}
+	
+	
+	
 	public void setPaid(String paid) {
 		this.paid = paid;
 	}
-
 	
 	
 	public String getnote(int i) 
