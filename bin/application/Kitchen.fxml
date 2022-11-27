@@ -40,15 +40,7 @@
                         </Button>
                         <ScrollPane layoutX="76.0" layoutY="191.0" prefHeight="740.0" prefWidth="720.0">
                            <content>
-                              <VBox fx:id="orderList" prefHeight="749.0" prefWidth="704.0" style="-fx-background-color: #526a9c;">
-                                 <children>
-                                    <Button mnemonicParsing="false" prefHeight="87.0" prefWidth="704.0" text="Button">
-                                       <font>
-                                          <Font name="Modern No. 20" size="33.0" />
-                                       </font>
-                                    </Button>
-                                 </children>
-                              </VBox>
+                              <VBox fx:id="orderList" prefHeight="749.0" prefWidth="704.0" style="-fx-background-color: #526a9c;" />
                            </content>
                         </ScrollPane>
                         <Label layoutX="340.0" layoutY="111.0" prefHeight="80.0" prefWidth="174.0" text="Orders">
@@ -56,11 +48,6 @@
                               <Font name="Modern No. 20" size="62.0" />
                            </font>
                         </Label>
-                        <Button fx:id="clearButton111" layoutX="652.0" layoutY="946.0" mnemonicParsing="false" onAction="#addOrder" prefHeight="57.0" prefWidth="144.0" style="-fx-background-color: #dac62f;" text="Refresh" textAlignment="CENTER">
-                           <font>
-                              <Font name="Modern No. 20" size="32.0" />
-                           </font>
-                        </Button>
                         <Button fx:id="clearButton111" layoutX="652.0" layoutY="94.0" mnemonicParsing="false" onAction="#addOrder" prefHeight="57.0" prefWidth="144.0" style="-fx-background-color: #dac62f;" text="Refresh" textAlignment="CENTER">
                            <font>
                               <Font name="Modern No. 20" size="32.0" />
@@ -76,6 +63,11 @@
                               <Font name="Modern No. 20" size="32.0" />
                            </font>
                         </Button>
+                        <Label fx:id="errorKO" layoutX="4.0" layoutY="931.0" prefHeight="112.0" prefWidth="830.0">
+                           <font>
+                              <Font name="Modern No. 20" size="62.0" />
+                           </font>
+                        </Label>
                      </children>
                   </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1186.0" prefWidth="1045.0" style="-fx-background-color: #89a4dc;">
@@ -217,9 +209,9 @@
                               </AnchorPane>
                            </children>
                         </Pane>
-                        <Button fx:id="completeOrder" layoutX="782.0" layoutY="494.0" mnemonicParsing="false" onAction="#orderComplete" prefHeight="112.0" prefWidth="265.0" style="-fx-background-color: green;" text="Complete" textAlignment="CENTER">
+                        <Button fx:id="completeOrder" layoutX="891.0" mnemonicParsing="false" onAction="#orderComplete" prefHeight="1101.0" prefWidth="189.0" style="-fx-background-color: green;" text="Complete" textAlignment="CENTER">
                            <font>
-                              <Font name="Modern No. 20" size="52.0" />
+                              <Font name="Modern No. 20" size="35.0" />
                            </font>
                         </Button>
                      </children>

@@ -67,6 +67,7 @@ public class SceneController {
 	ArrayList<Employee> employees = new ArrayList<Employee>();
 	Database database = new Database();
 	ArrayList<Order> orders = new ArrayList<Order>();
+	ArrayList<Order> orderdone1 = new ArrayList<Order>();
 	Order new_order = new Order();
 	int iterator = 0;
 	int lastordernumber;
@@ -78,8 +79,12 @@ public class SceneController {
 	int neworderid;
 	ArrayList<String> order = new ArrayList<String>();
 	boolean checkdelete = false;
+	int currentbutton = 110000;
 	// setEditable(false) use this function for setting text in a textfield and not
 	// being played with
+	
+	@FXML
+	private Label errorKO;
 	
 	@FXML
 	private Label notesText2;
@@ -1492,7 +1497,7 @@ public class SceneController {
 				 		priceText12.setText(orders.get(of).getamountString(1));
 				 		foodText2.setText(orders.get(of).getFood_name(1));
 				 		notesText2.setText(orders.get(of).getnote(1));
-				 	
+				 	    currentbutton = of;
 					}				 	
 		 		});
 			 
@@ -1513,20 +1518,94 @@ public class SceneController {
 	 public void orderComplete(ActionEvent event) throws InterruptedException
 	 {
 		 // table name  done
-		 if(completeOrder.isArmed()==true) 
+		 //order.get(of)
+		 System.out.println(currentbutton);
+		 
+		 int k = currentbutton;
+		 int lastdatabaseid = 0;
+		 try 
 		 {
-			 orderList.getChildren();
-			 System.out.println(orderList.getChildren());
-			 System.out.println(" Complete");
-			 
-		 }
+			 if(orders.size() == 0)
+			 {
+				 errorKO.setText("refresh again and hit a button");
+				 currentbutton = 11000;
+				 System.out.println(k);
+			 }
+			 else {
+				 
+			SimpleDateFormat timeFormat;				
+			String time;			
+			timeFormat = new SimpleDateFormat("hh:mm:ss a");
+			time = timeFormat.format(Calendar.getInstance().getTime());
+				
+			errorKO.setText("");
+			database.connect_to_database();
+			database.setResultset10();
+			while(database.resultSet.next())
+			{
+				lastdatabaseid = database.resultSet.getInt(1);
+			}
+			
+			int newdatabaseid;
+			newdatabaseid = lastdatabaseid + 1;
+			String SQL = "INSERT INTO Orderdone (ID, OrderNumber, Tablenumber, Waitstaff,TimeofOrder,timeofcomplete,month_day_year,Price,item1,itemamount1,notes1,item2,itemamount2,notes2 ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			database.updateField = database.connection.prepareStatement(SQL);
+			database.updateField.setInt(1,newdatabaseid);
+			database.updateField.setString(2, orders.get(k).getOrder_number());
+			database.updateField.setString(3, orders.get(k).getTable_number());
+			database.updateField.setString(4, orders.get(k).getWaitress());
+			database.updateField.setString(5, orders.get(k).getTime_Of_Order());
+			database.updateField.setString(6, time);
+			database.updateField.setString(7, orders.get(k).getDate());
+			database.updateField.setDouble(8, orders.get(k).getTotal2());
+			
+			database.updateField.setString(9, orders.get(k).getFood_name(0));
+			database.updateField.setString(10, orders.get(k).getamountString(0));
+			database.updateField.setString(11, orders.get(k).getnote(0));
+			
+			database.updateField.setString(12, orders.get(k).getFood_name(1));
+			database.updateField.setString(13, orders.get(k).getamountString(1));
+			database.updateField.setString(14, orders.get(k).getnote(1));
+			
+			database.updateField.executeUpdate();
+			
+			database.closeConnection();
+			database.closeresultSet();
+			database.closestatement();
+			database.closeupdateField();
+			errorKO.setText("Success");
+			System.out.println( orders.get(k).getOrder_number());
+			 }
+		} 
+		 catch (IOException e) 
+		 {
+			 database.closeConnection();
+				database.closeresultSet();
+				database.closestatement();
+				database.closeupdateField();
+		
+			e.printStackTrace();
+		} 
+		 catch (SQLException e) 
+		 {
+			 database.closeConnection();
+				database.closeresultSet();
+				database.closestatement();
+				database.closeupdateField();
+		
+			e.printStackTrace();			
+		}
+		 
 	 }
 	 
 	 public void clear1(ActionEvent event) throws InterruptedException
 	 {
 		 	o=0;
 		 	orders.clear();
-			System.out.println(orders.size());		 
+			//System.out.println(orders.size());	
+			orderList.getChildren().clear();
+			orderNumberk.setText("");
+			tablek.setText("");
 	 }	 
 	 
 	 
@@ -1563,4 +1642,41 @@ public class SceneController {
 
 			}
 		}
+	 public void exportdata(ActionEvent event)
+	 {
+		 /*
+		  // Initialize a Workbook object
+			Workbook workbook = new Workbook();
+
+// Obtaining the reference of the worksheet
+			Worksheet worksheet = workbook.getWorksheets().get(0);
+
+// Instantiating an ArrayList object
+ArrayList<String> list = new ArrayList<String>();
+
+// Add few names to the list as string values
+			list.add("Laurence Chen");
+			list.add("Roman Korchagin");
+			list.add("Kyle Huang");
+			list.add("Tommy Wang");
+
+// Exporting the contents of ArrayList vertically at the first row and first column of the worksheet. 
+			worksheet.getCells().importArrayList(list, 0, 0, true);
+
+// Saving the Excel file
+			workbook.save("C:\\Files\\Output.xlsx");
+		  */
+		 
+		 
+	 }
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
 }

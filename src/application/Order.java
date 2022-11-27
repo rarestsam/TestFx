@@ -77,6 +77,12 @@ public class Order
 		 return h;
 	}
 	
+	public Double getTotal2()
+	{
+		
+		return total;
+	}
+	
 	
 	
 	public void setPaid(String paid) {

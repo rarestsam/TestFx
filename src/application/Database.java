@@ -133,7 +133,8 @@ public class Database
 	 {
 		 try {
 			 resultSet = statement.executeQuery("SELECT * FROM clockout1");
-		} catch (SQLException e)
+		 	} 
+		 catch (SQLException e)
 		 {
 			e.printStackTrace();
 		}
@@ -247,7 +248,15 @@ public class Database
 	 }
 	 
 	 
-	 
+	 public void setResultset10() throws IOException 
+	 {
+		 try {
+			resultSet=statement.executeQuery("SELECT * FROM Orderdone");
+		} catch (SQLException e)
+		 {
+			e.printStackTrace();
+		}
+	 }
 	 
 	 
 	 
