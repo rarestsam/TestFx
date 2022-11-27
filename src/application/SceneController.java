@@ -1519,6 +1519,9 @@ public class SceneController {
 	 {
 		 // table name  done
 		 //order.get(of)
+		    int fn = 9;
+			int am = 10;	
+			int n = 11;	
 		 System.out.println(currentbutton);
 		 
 		 int k = currentbutton;
@@ -1558,14 +1561,18 @@ public class SceneController {
 			database.updateField.setString(6, time);
 			database.updateField.setString(7, orders.get(k).getDate());
 			database.updateField.setDouble(8, orders.get(k).getTotal2());
-			
-			database.updateField.setString(9, orders.get(k).getFood_name(0));
-			database.updateField.setString(10, orders.get(k).getamountString(0));
-			database.updateField.setString(11, orders.get(k).getnote(0));
-			
-			database.updateField.setString(12, orders.get(k).getFood_name(1));
-			database.updateField.setString(13, orders.get(k).getamountString(1));
-			database.updateField.setString(14, orders.get(k).getnote(1));
+			for(int i = 0; i<2; i++)
+			{			
+			database.updateField.setString(fn, orders.get(k).getFood_name(i));
+			database.updateField.setString(am, orders.get(k).getamountString(i));
+			database.updateField.setString(n, orders.get(k).getnote(i));
+			fn = fn + 3;
+			am = am + 3;
+			n = n + 3;
+			}
+			//database.updateField.setString(12, orders.get(k).getFood_name(1));
+			//database.updateField.setString(13, orders.get(k).getamountString(1));
+			//database.updateField.setString(14, orders.get(k).getnote(1));
 			
 			database.updateField.executeUpdate();
 			
