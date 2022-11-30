@@ -140,6 +140,18 @@ public class Database
 		}
 	 }
 	 
+	 public void setResultsetorderdone() throws IOException 
+	 {
+		 try {
+			 resultSet = statement.executeQuery("SELECT * FROM Orderdone");
+		 	} 
+		 catch (SQLException e)
+		 {
+			e.printStackTrace();
+		}
+	 }
+	 
+	 
 	 public void closeConnection() 
 	 {
 		 try {

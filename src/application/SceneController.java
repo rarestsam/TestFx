@@ -80,8 +80,24 @@ public class SceneController {
 	ArrayList<String> order = new ArrayList<String>();
 	boolean checkdelete = false;
 	int currentbutton = 110000;
+	
 	// setEditable(false) use this function for setting text in a textfield and not
 	// being played with
+	
+	@FXML
+	private Label workerUsername10;
+	
+	@FXML
+	private Label Label1;
+	
+	@FXML
+	private Label Label2;
+	
+	@FXML
+	private Label Label3;
+		
+	@FXML
+	private Label Label4;
 	
 	@FXML
 	private Label errorKO;
@@ -146,9 +162,18 @@ public class SceneController {
 	@FXML
 	private Pane foodBar;
 
-	@FXML
-	private VBox foodBarBox;
-	
+	 @FXML
+	 private VBox foodBarBox;
+	 
+	 @FXML
+	 private VBox foodBarBox1;
+	 
+	 @FXML
+	 private VBox buttonbarbox12;
+	 
+	 @FXML
+	 private VBox orderlistK;
+	 
 	@FXML 
 	 private VBox orderList;
 
@@ -1048,7 +1073,15 @@ public class SceneController {
 	}
 
 	public void cashErrorWindow(ActionEvent event) throws IOException {
-
+		/* differentiate between cashier and waitstaff here
+		   most likly connect to a database and retrieve employees
+		   find where the employyee name in file matches job description and then execute
+		 */
+		
+		
+		
+		
+		
 		Stage cashError = new Stage();
 
 		cashError.initModality(Modality.APPLICATION_MODAL);
@@ -1456,8 +1489,7 @@ public class SceneController {
 				database.closestatement();
 				database.closeupdateField();
 		
-		// ArrayList.clear() vs ArrayList.removeAll().
-		 
+		// ArrayList.clear() vs ArrayList.removeAll().		 
 		//ArrayList<Order> orders = new ArrayList<Order>();
 		 //orders.
 		 //Order order = new
@@ -1469,6 +1501,7 @@ public class SceneController {
 		//workerUsernamek	
 		//priceText12 amount	
 		//foodText2		
+				
 		for (int i = 0; i < orders.size() ; i++) 
 		{
 			 Button orderButton = new Button("Order #" + orders.get(o).getOrder_number());
@@ -1489,11 +1522,12 @@ public class SceneController {
 				 		tablek.setText(orders.get(of).getTable_number());
 				 		totalPriceText1.setText(orders.get(of).getTotal1());
 				 		workerUsernamek.setText(orders.get(of).getWaitress());
-				 		
+				 		//for(int i =0; i<2;i++)
+				 		//{
 				 		notesText1.setText(orders.get(of).getnote(0));
 				 		foodText1.setText(orders.get(of).getFood_name(0));
 				 		priceText11.setText(orders.get(of).getamountString(0));
-				 		
+				 		//}
 				 		priceText12.setText(orders.get(of).getamountString(1));
 				 		foodText2.setText(orders.get(of).getFood_name(1));
 				 		notesText2.setText(orders.get(of).getnote(1));
@@ -1534,7 +1568,8 @@ public class SceneController {
 				 currentbutton = 11000;
 				 System.out.println(k);
 			 }
-			 else {
+			 else 
+			 {
 				 
 			SimpleDateFormat timeFormat;				
 			String time;			
@@ -1586,21 +1621,20 @@ public class SceneController {
 		} 
 		 catch (IOException e) 
 		 {
-			 database.closeConnection();
+			    database.closeConnection();
 				database.closeresultSet();
 				database.closestatement();
 				database.closeupdateField();
 		
-			e.printStackTrace();
+			   e.printStackTrace();
 		} 
 		 catch (SQLException e) 
 		 {
-			 database.closeConnection();
+			    database.closeConnection();
 				database.closeresultSet();
 				database.closestatement();
-				database.closeupdateField();
-		
-			e.printStackTrace();			
+				database.closeupdateField();		
+			  e.printStackTrace();			
 		}
 		 
 	 }
@@ -1609,30 +1643,33 @@ public class SceneController {
 	 {
 		 	o=0;
 		 	orders.clear();
-			//System.out.println(orders.size());	
 			orderList.getChildren().clear();
 			orderNumberk.setText("");
 			tablek.setText("");
+			workerUsernamek.setText("");
 	 }	 
 	 
 	 
 	 
 	 
-	 public void pulse1(ActionEvent event) {
+	 public void pulse1(ActionEvent event) 
+	 {
+		 
 			/*
 			 * for(int i=0; i<new_order.getfoodsize();i++) {
 			 * System.out.println(new_order.getFood_name(i)); } int lastordernumber; int
 			 * newordernumber; String lastorderstring ; String newordernumber1; id =
 			 * Integer.parseInt(id_Number);
 			 */
-		 
 
-			try {
+			try 
+			{
 
 				database.connect_to_database();
 				database.setResultsetorder();
 
-				while (database.resultSet.next()) {
+				while (database.resultSet.next())
+				{
 					lastorderstring = database.resultSet.getString("OrderNumber");
 				}
 
@@ -1644,11 +1681,14 @@ public class SceneController {
 				employee_name = readeremp.readLine();
 				workerUsername.setText(employee_name);
 				orderNumber.setText(newordernumber1);
-			} catch (Exception e) {
+			} 
+			catch (Exception e) 
+			{
 				System.out.print(e);
 
 			}
 		}
+	 
 	 public void exportdata(ActionEvent event)
 	 {
 		 /*
@@ -1679,11 +1719,134 @@ ArrayList<String> list = new ArrayList<String>();
 	 
 	 
 	 
+	 public void  refresh1(ActionEvent event)
+	 {
+		 
+		 Font font33 = Font.font("Modern No. 20", 33);
+		 try {
+			 int lastdatabaseid;
+			database.connect_to_database();
+			database.setResultsetorderdone();
+			
+			 while(database.resultSet.next())
+			 {
+				Order previousorder = new Order();
+				previousorder.setOrder_number(database.resultSet.getString("OrderNumber"));
+				previousorder.setWaitress(database.resultSet.getString("WaitStaff"));
+				previousorder.setTime_Of_Order(database.resultSet.getString("TimeOfOrder"));
+				previousorder.setDate(database.resultSet.getString("month_day_year"));
+				previousorder.setTotal1(database.resultSet.getDouble("Price"));
+				previousorder.setTable_number(database.resultSet.getString("Tablenumber"));
+				
+				previousorder.setFood_name(database.resultSet.getString("item1"), 0);
+				//previousorder.setFood_price(database.resultSet.getDouble("itemcost1"), 0);
+				previousorder.setamount(database.resultSet.getInt("itemamount1"), 0);
+				previousorder.setNotes(database.resultSet.getString("notes1"), 0);
+				
+				previousorder.setFood_name(database.resultSet.getString("item2"), 1);
+				//previousorder.setFood_price(database.resultSet.getDouble("itemcost2"), 1);
+				previousorder.setamount(database.resultSet.getInt("itemamount2"), 1);
+				previousorder.setNotes(database.resultSet.getString("notes2"), 1);
+				
+				orderdone1.add(previousorder);
+				lastdatabaseid = database.resultSet.getInt(1);
+			 }		 
+			 
+			    database.closeConnection();
+				database.closeresultSet();
+				database.closestatement();
+				database.closeupdateField();
+		
+		// ArrayList.clear() vs ArrayList.removeAll().		 
+		//ArrayList<Order> orders = new ArrayList<Order>();
+		 //orders.
+		 //Order order = new
+		 //priceText11 first amount tag
+		 // orderNumberk ordernumber kitchen
+		//tablek table number k
+		// foodText1 		
+		//totalPriceText1	
+		//workerUsername10	
+		//priceText12 amount	
+		//foodText2	
+				
+				
+		for (int i = 0; i < orderdone1.size() ; i++) 
+		{
+			 Button orderButton = new Button("Order #" + orderdone1.get(o).getOrder_number());
+			 orderButton.setFont(font33);
+			 String ji = Integer.toString(o);
+			 orderButton.setId(ji);
+			 orderButton.setMinWidth(704);
+			 orderButton.setMinHeight(87);
+			 orderButton.setMaxWidth(704);
+			 orderButton.setMaxHeight(87);
+			 orderButton.setOnAction(new EventHandler<ActionEvent>() 
+		 		{
+				 	@Override
+				 	public void handle(ActionEvent event) 
+					{
+				 		/*
+				 		int of = Integer.parseInt(orderButton.getId());
+				 		orderNumberk.setText(orderdone1.get(of).getOrder_number());
+				 		tablek.setText(orderdone1.get(of).getTable_number());
+				 		totalPriceText1.setText(orderdone1.get(of).getTotal1());
+				 		workerUsername10.setTextorderdone1.get(of).getWaitress());
+				 		//for(int i =0; i<2;i++)
+				 		//{
+				 		notesText1.setText(orderdone1.get(of).getnote(0));
+				 		foodText1.setText(orderdone1.get(of).getFood_name(0));
+				 		priceText11.setText(orderdone1.get(of).getamountString(0));
+				 		//}
+				 		priceText12.setText(orderdone1.get(of).getamountString(1));
+				 		foodText2.setText(orderdone1.get(of).getFood_name(1));
+				 		notesText2.setText(orderdone1.get(of).getnote(1));
+				 	    currentbutton = of;
+				 	    */
+				 		System.out.println("it worked");
+					}
+		 
+				});
+			
+			 order.add(o,orderButton.getId());
+			 orderlistK.getChildren().addAll(orderButton);
+			 o++;
+		}
+		System.out.println(o);
+		System.out.println(orders.size());
+
+		 }
+		 catch (IOException e) 
+		 {
+			    database.closeConnection();
+				database.closeresultSet();
+				database.closestatement();
+				database.closeupdateField();
+		
+			   e.printStackTrace();
+		} 
+		 catch (SQLException e) 
+		 {
+			    database.closeConnection();
+				database.closeresultSet();
+				database.closestatement();
+				database.closeupdateField();		
+			  e.printStackTrace();			
+		}
+		 
+	 }
 	 
 	 
-	 
-	 
-	 
+	 public void clear2(ActionEvent event) throws InterruptedException
+	 {
+		 	o=0;
+		 	orderdone1.clear();
+		 	orderlistK.getChildren().clear();
+		 	order.clear();
+			//orderNumberk.setText("");
+			//tablek.setText("");
+			//workerUsernamek.setText("");
+	 }	 
 	 
 	 
 }
