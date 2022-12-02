@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: #89a4dc;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SceneController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: #89a4dc;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SceneController">
    <children>
       <Button fx:id="clearButton1" layoutX="24.0" layoutY="24.0" mnemonicParsing="false" onAction="#switchToLogin" prefHeight="32.0" prefWidth="112.0" style="-fx-background-color: red;" text="Logout" textAlignment="CENTER">
          <font>
@@ -31,7 +31,7 @@
             <Font name="Modern No. 20" size="61.0" />
          </font>
       </Button>
-      <Button layoutX="459.0" layoutY="641.0" mnemonicParsing=" false" prefHeight="113.0" prefWidth="981.0" text="Edit User" textFill="#1d1e1e">
+      <Button layoutX="459.0" layoutY="641.0" mnemonicParsing=" false" onAction="#switchToCreate_Edit_User" prefHeight="113.0" prefWidth="981.0" text="Edit User" textFill="#1d1e1e">
          <font>
             <Font name="Modern No. 20" size="61.0" />
          </font>

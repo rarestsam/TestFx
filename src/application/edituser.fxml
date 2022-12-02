@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: #89a4dc;" stylesheets="@application.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SceneController">
+   <children>
+      <Label layoutX="60.0" layoutY="181.0" prefHeight="95.0" prefWidth="624.0" text="Change ID">
+         <font>
+            <Font size="49.0" />
+         </font>
+      </Label>
+      <TextField fx:id="employeeId_text_field" layoutX="923.0" layoutY="181.0" prefHeight="62.0" prefWidth="859.0" />
+      <Button layoutX="483.0" layoutY="892.0" mnemonicParsing="false" onAction="#edituser" prefHeight="174.0" prefWidth="729.0" style="-fx-background-color: green;" text="Submit">
+         <font>
+            <Font size="82.0" />
+         </font>
+      </Button>
+      <Label layoutX="66.0" layoutY="302.0" prefHeight="95.0" prefWidth="624.0" text="Change wage">
+         <font>
+            <Font size="49.0" />
+         </font>
+      </Label>
+      <TextField fx:id="employeewage_text_field" layoutX="923.0" layoutY="302.0" prefHeight="62.0" prefWidth="859.0" />
+      <Label layoutX="66.0" layoutY="463.0" prefHeight="95.0" prefWidth="624.0" text="Change job_type">
+         <font>
+            <Font size="49.0" />
+         </font>
+      </Label>
+      <Label layoutX="66.0" layoutY="620.0" prefHeight="95.0" prefWidth="624.0" text="Change hours">
+         <font>
+            <Font size="49.0" />
+         </font>
+      </Label>
+      <TextField fx:id="employeehours_text_field" layoutX="907.0" layoutY="637.0" prefHeight="62.0" prefWidth="859.0" />
+      <Label fx:id="errorlabeledit" layoutX="279.0" prefHeight="78.0" prefWidth="1582.0">
+         <font>
+            <Font size="49.0" />
+         </font>
+      </Label>
+      <RadioButton fx:id="Manager_rdbE" layoutX="923.0" layoutY="463.0" mnemonicParsing="false" prefHeight="79.0" prefWidth="203.0" text="Manager">
+         <font>
+            <Font name="Comic Sans MS" size="30.0" />
+         </font>
+         <toggleGroup>
+            <ToggleGroup fx:id="job_typeE" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="Kitchen_Staff_rdbE" layoutX="1129.0" layoutY="474.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="262.0" text="Kitchen Staff" toggleGroup="$job_typeE">
+         <font>
+            <Font name="Comic Sans MS" size="30.0" />
+         </font>
+      </RadioButton>
+      <RadioButton fx:id="Wait_staff_rdbE" layoutX="1391.0" layoutY="477.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="226.0" text="Wait Staff" toggleGroup="$job_typeE">
+         <font>
+            <Font name="Comic Sans MS" size="30.0" />
+         </font>
+      </RadioButton>
+      <RadioButton fx:id="Cashier_rdbE" layoutX="1624.0" layoutY="476.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="175.0" text="Cashier" toggleGroup="$job_typeE">
+         <font>
+            <Font name="Comic Sans MS" size="30.0" />
+         </font>
+      </RadioButton>
+      <Button layoutX="40.0" layoutY="27.0" mnemonicParsing="false" onAction="#switchTomanager" prefHeight="36.0" prefWidth="167.0" style="-fx-background-color: red;" text="Back" />
+      <Label layoutX="66.0" layoutY="752.0" prefHeight="95.0" prefWidth="624.0" text="Promoted to customer?">
+         <font>
+            <Font size="49.0" />
+         </font>
+      </Label>
+      <RadioButton layoutX="1005.0" layoutY="752.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="510.0" text="yes?">
+         <font>
+            <Font size="54.0" />
+         </font>
+         <toggleGroup>
+            <ToggleGroup fx:id="Fired" />
+         </toggleGroup>
+      </RadioButton>
+      <TextField fx:id="employeepass_text_field" layoutX="923.0" layoutY="86.0" prefHeight="62.0" prefWidth="859.0" />
+      <Label layoutX="66.0" layoutY="86.0" prefHeight="80.0" prefWidth="624.0" text="Employee password">
+         <font>
+            <Font size="49.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

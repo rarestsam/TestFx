@@ -236,6 +236,21 @@ public class SceneController {
 
 	@FXML
 	private Label checktable;
+	
+	@FXML
+    private TextField employeeId_text_field;
+
+    @FXML
+    private TextField employeewage_text_field;
+
+    @FXML
+    private TextField employeewage_text_field1;
+
+    @FXML
+    private TextField employeewage_text_field11;
+
+    @FXML
+    private Label errorlabeledit;
 
 	// BufferedWriter writer2 = new BufferedWriter(new
 	// FileWriter("order_number.txt"));
@@ -502,6 +517,17 @@ public class SceneController {
 
 	}
 
+	public void switchToCreate_Edit_User(ActionEvent event) throws IOException {
+		Parent root = FXMLLoader.load(getClass().getResource("edituser.fxml"));
+		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
+		stage.setFullScreen(true);
+
+	}
+	
+	
 	public void switchToSceneWaitstaff(ActionEvent event) throws IOException {
 		Parent root = FXMLLoader.load(getClass().getResource("Waitstaff_Screen.fxml"));
 		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -523,6 +549,15 @@ public class SceneController {
 
 	public void switchToKitchenstaff(ActionEvent event) throws IOException {
 		Parent root = FXMLLoader.load(getClass().getResource("Kitchen.fxml"));
+		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
+		stage.setFullScreen(true);
+	}
+	
+	public void switchTomanager(ActionEvent event) throws IOException {
+		Parent root = FXMLLoader.load(getClass().getResource("Manager_Screen.fxml"));
 		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
@@ -1842,11 +1877,23 @@ ArrayList<String> list = new ArrayList<String>();
 		 	o=0;
 		 	orderdone1.clear();
 		 	orderlistK.getChildren().clear();
-		 	order.clear();
+		 	//order.clear();
 			//orderNumberk.setText("");
 			//tablek.setText("");
 			//workerUsernamek.setText("");
 	 }	 
 	 
-	 
+	 public void edituser(ActionEvent event) throws IOException
+	    {
+		 /*
+		 
+    private TextField employeeId_text_field;  
+    private TextField employeewage_text_field; 
+    private TextField employeewage_text_field1;  
+    private TextField employeewage_text_field11;
+    private Label errorlabeledit;
+		  */
+		System.out.print("hello");
+		}
+		
 }

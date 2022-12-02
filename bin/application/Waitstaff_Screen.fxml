@@ -104,7 +104,7 @@
                   <Font name="Modern No. 20" size="29.0" />
                </font>
             </Button>
-            <Button layoutX="186.0" layoutY="28.0" mnemonicParsing="false" onAction="#refresh1" prefHeight="93.0" prefWidth="125.0" style="-fx-background-color: #dac62f;" text="clear">
+            <Button layoutX="186.0" layoutY="28.0" mnemonicParsing="false" onAction="#clear2" prefHeight="93.0" prefWidth="125.0" style="-fx-background-color: #dac62f;" text="clear">
                <font>
                   <Font name="Modern No. 20" size="29.0" />
                </font>
