@@ -487,7 +487,8 @@ public class SceneController {
 		}
 	}
 
-	public Boolean verify_Nametext(String txt) {
+	public Boolean verify_Nametext(String txt) 
+	{
 		try {
 			int s = Integer.parseInt(txt);
 			return true;
@@ -1887,11 +1888,134 @@ ArrayList<String> list = new ArrayList<String>();
 	    {
 		 /*
 		 
-    private TextField employeeId_text_field;  
-    private TextField employeewage_text_field; 
-    private TextField employeewage_text_field1;  
-    private TextField employeewage_text_field11;
-    private Label errorlabeledit;
+  double newPrice = 20.99;
+			String newPrice1 = Double.toString(newPrice);
+			String jsp = "jsp";
+			/*
+			
+			int newdatabaseid=lastdatabaseid +1;
+		
+           
+
+            statement.executeUpdate(sql);
+            */
+		 /*
+            //statement.excecuteUpdate();
+            // use a Prepared Statement for better security
+			 String sql1 = "UPDATE Books " + "SET ListPrice = " + newPrice + " WHERE Code = " + jsp ;
+            String updField = "value1";
+            String updatesql = "UPDATE Books " + "SET ListPrice = ? WHERE Code = ?";
+            updateField = connection.prepareStatement(updatesql);
+            updateField.setDouble(1, newPrice);
+            updateField.setString(2, updField);
+            updateField.executeUpdate();
+            try {
+			int lastdatabaseid = 0;
+
+			database.connect_to_database();
+			database.setResultset();
+			while (database.resultSet.next()) {
+				Employee employee = new Employee();
+				employee.setdatabaseid(database.resultSet.getInt("employeeid"));
+				employee.setEmployee_name(database.resultSet.getString("Name"));
+				employee.setId_number(database.resultSet.getString("IdNumber"));
+				employee.setHours(database.resultSet.getInt("Hours"));
+				employee.setWage(database.resultSet.getDouble("Wage"));
+				employee.set_Job_Type(database.resultSet.getString("JobType"));
+				employee.Set_total_Pay();
+				employees.add(employee);
+				lastdatabaseid = employee.getdatabaseid();
+			}
+
+			String name = name_texField.getText();
+			String wageTxt = wage_texField.getText();
+			String id_Number = Id_Number_txtField.getText();
+			String hour = hoursTxt.getText();
+			String jobType;
+			int hours = 0;
+			double wage = 0;
+			int id = 0;
+			Boolean checkID = true;
+			int arraysize = employees.size();
+			Employee tdb = new Employee();
+
+			if (name.equals("")) {
+				verify.setText("Please enter a name");
+			} else if (wageTxt.equals("")) {
+				verify.setText("Please enter a wage");
+			} else if (id_Number.equals("")) {
+				verify.setText("Please enter an ID");
+			} else if (hour.equals("")) {
+				verify.setText("Please enter an ID");
+			} else if (!Cashier_rdb.isSelected() && !Kitchen_Staff_rdb.isSelected() && !Manager_rdb.isSelected()
+					&& !Wait_staff_rdb.isSelected()) {
+				verify.setText("Please select a job type.");
+			} else if (verify_Nametext(name)) {
+				verify.setText("Please enter name in the correct format");
+			} else if (checkdatabaseid(employees, id_Number)) {
+				verify.setText("ID has been taken, please change it.");
+			}
+
+			else {
+
+				if (Manager_rdb.isSelected()) {
+					jobType = "Manager";
+					tdb.set_Job_Type(jobType);
+				}
+
+				else if (Wait_staff_rdb.isSelected()) {
+					jobType = "WaitStaff";
+					tdb.set_Job_Type(jobType);
+
+				} else if (Kitchen_Staff_rdb.isSelected()) {
+					jobType = "KitchenStaff";
+					tdb.set_Job_Type(jobType);
+				}
+
+				else if (Cashier_rdb.isSelected()) {
+					jobType = "Cashier";
+					tdb.set_Job_Type(jobType);
+				}
+				int newdatabaseid = lastdatabaseid +1;
+				System.out.print(newdatabaseid);
+				wage = DecimalFormat.getNumberInstance().parse(wageTxt).doubleValue();
+				id = Integer.parseInt(id_Number);
+				hours = Integer.parseInt(hour);
+				tdb.setHours(hours);
+				tdb.setEmployee_name(name);
+				tdb.setWage(wage);
+				tdb.setId_number(id_Number);
+				tdb.setdatabaseid(newdatabaseid);
+				tdb.Set_total_Pay();
+
+				String insertSQL = "INSERT INTO Employee (employeeid, Name, IdNumber, Hours, Wage, TotalPay, JobType) VALUES (?, ?, ?, ?, ?, ?, ?)";
+				database.updateField = database.connection.prepareStatement(insertSQL);
+				database.updateField.setInt(1, tdb.getdatabaseid());
+				database.updateField.setString(2, tdb.getEmployee_name());
+				database.updateField.setString(3, tdb.getId_number());
+				database.updateField.setInt(4, tdb.getHours());
+				database.updateField.setDouble(5, tdb.getWage());
+				database.updateField.setDouble(6, tdb.get_totalpay());
+				database.updateField.setString(7, tdb.getjobType());
+				database.updateField.executeUpdate();
+				database.closeConnection();
+				database.closeresultSet();
+				database.closestatement();
+				database.closeupdateField();
+				verify.setText("Success Please press the back button to exit");
+			}
+		} catch (IOException e) {
+			verify.setText("Please enter the information in the correct format");
+		} catch (SQLException e) {
+			verify.setText("Failed to connect to database");
+			System.out.print(e);
+		} catch (NumberFormatException e) {
+			verify.setText("Please enter the information in the correct format");
+		} catch (Exception e) {
+
+			verify.setText("Please enter the information in the correct format");
+			System.out.println(e);
+		}
 		  */
 		System.out.print("hello");
 		}

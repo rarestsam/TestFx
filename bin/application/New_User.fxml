@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: #89a4dc;" stylesheets="@application.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SceneController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: #89a4dc;" stylesheets="@application.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SceneController">
    <children>
       <Label layoutX="153.0" layoutY="38.0" prefHeight="170.0" prefWidth="310.0" text="Name">
          <font>
@@ -62,12 +62,12 @@
             <Font name="Modern No. 20" size="65.0" />
          </font>
       </Label>
-      <Button fx:id="enter_manager" layoutX="736.0" layoutY="808.0" mnemonicParsing="false" onAction="#enter_manager" prefHeight="156.0" prefWidth="448.0" style="-fx-background-color: green;" text="Enter">
+      <Button fx:id="enter_manager" layoutX="740.0" layoutY="852.0" mnemonicParsing="false" onAction="#enter_manager" prefHeight="156.0" prefWidth="448.0" style="-fx-background-color: green;" text="Enter">
          <font>
             <Font name="Modern No. 20" size="85.0" />
          </font>
       </Button>
-      <Label fx:id="verify" alignment="CENTER" layoutX="443.0" layoutY="984.0" prefHeight="58.0" prefWidth="1042.0" stylesheets="@application.css" text="Welcome" textFill="#e41717">
+      <Label fx:id="verify" alignment="CENTER" layoutX="443.0" layoutY="1008.0" prefHeight="58.0" prefWidth="1042.0" stylesheets="@application.css" text="Welcome" textFill="#e41717">
          <font>
             <Font name="Modern No. 20" size="29.0" />
          </font>
@@ -77,5 +77,11 @@
             <Font name="Modern No. 20" size="22.0" />
          </font>
       </Button>
+      <Label layoutX="153.0" layoutY="751.0" prefHeight="111.0" prefWidth="578.0" text="Employee Password">
+         <font>
+            <Font name="Modern No. 20" size="65.0" />
+         </font>
+      </Label>
+      <TextField fx:id="employee_passwordTextfield" layoutX="1313.0" layoutY="751.0" prefHeight="52.0" prefWidth="344.0" />
    </children>
 </AnchorPane>
