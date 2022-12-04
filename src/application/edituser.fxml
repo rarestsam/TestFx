@@ -8,15 +8,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: #89a4dc;" stylesheets="@application.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SceneController">
    <children>
-      <Label layoutX="60.0" layoutY="181.0" prefHeight="95.0" prefWidth="624.0" text="Change ID">
+      <Label layoutX="66.0" layoutY="79.0" prefHeight="95.0" prefWidth="624.0" text="Id number">
          <font>
             <Font size="49.0" />
          </font>
       </Label>
-      <TextField fx:id="employeeId_text_field" layoutX="923.0" layoutY="181.0" prefHeight="62.0" prefWidth="859.0" />
+      <TextField fx:id="employeeId_text_field" layoutX="923.0" layoutY="95.0" prefHeight="62.0" prefWidth="859.0" />
       <Button layoutX="483.0" layoutY="892.0" mnemonicParsing="false" onAction="#edituser" prefHeight="174.0" prefWidth="729.0" style="-fx-background-color: green;" text="Submit">
          <font>
             <Font size="82.0" />
@@ -68,12 +67,12 @@
          </font>
       </RadioButton>
       <Button layoutX="40.0" layoutY="27.0" mnemonicParsing="false" onAction="#switchTomanager" prefHeight="36.0" prefWidth="167.0" style="-fx-background-color: red;" text="Back" />
-      <Label layoutX="66.0" layoutY="752.0" prefHeight="95.0" prefWidth="624.0" text="Promoted to customer?">
+      <Label layoutX="66.0" layoutY="752.0" prefHeight="95.0" prefWidth="624.0" text="Fired?">
          <font>
             <Font size="49.0" />
          </font>
       </Label>
-      <RadioButton layoutX="1005.0" layoutY="752.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="510.0" text="yes?">
+      <RadioButton fx:id="EmployedStatusRBE" layoutX="1005.0" layoutY="752.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="510.0">
          <font>
             <Font size="54.0" />
          </font>
@@ -81,8 +80,8 @@
             <ToggleGroup fx:id="Fired" />
          </toggleGroup>
       </RadioButton>
-      <TextField fx:id="employeepass_text_field" layoutX="923.0" layoutY="86.0" prefHeight="62.0" prefWidth="859.0" />
-      <Label layoutX="66.0" layoutY="86.0" prefHeight="80.0" prefWidth="624.0" text="Employee password">
+      <TextField fx:id="employeepass_text_field" layoutX="923.0" layoutY="181.0" prefHeight="62.0" prefWidth="859.0" />
+      <Label layoutX="66.0" layoutY="172.0" prefHeight="80.0" prefWidth="624.0" text="Change Password">
          <font>
             <Font size="49.0" />
          </font>

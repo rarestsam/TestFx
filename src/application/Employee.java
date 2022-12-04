@@ -16,8 +16,18 @@ public class Employee
 	private String day;
 	private String clockedin;
 	private String clockeout;
+	private String password;
 	
 	
+	public String getpassword() 
+	{
+		return password;
+	}
+
+	public void setpassword(String password) 
+	{
+		this.password = password;
+	}
 	
 	public String getDay() 
 	{

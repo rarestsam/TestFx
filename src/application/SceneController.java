@@ -237,20 +237,41 @@ public class SceneController {
 	@FXML
 	private Label checktable;
 	
+    @FXML
+	private RadioButton Cashier_rdbE;
+
 	@FXML
-    private TextField employeeId_text_field;
+	private ToggleGroup Fired;
 
-    @FXML
-    private TextField employeewage_text_field;
+	 @FXML
+	 private RadioButton Kitchen_Staff_rdbE;
 
-    @FXML
-    private TextField employeewage_text_field1;
+	 @FXML
+	private RadioButton Manager_rdbE;
+	
+	@FXML
+	private RadioButton Wait_staff_rdbE;
 
-    @FXML
-    private TextField employeewage_text_field11;
+	 @FXML
+	 private TextField employeeId_text_field;
 
-    @FXML
+	 @FXML
+	 private TextField employeehours_text_field;
+
+	 @FXML
+	 private TextField employeepass_text_field;
+
+	 @FXML
+	 private TextField employeewage_text_field;
+
+	 @FXML
     private Label errorlabeledit;
+
+	 @FXML
+	 private ToggleGroup job_typeE;
+	 
+	 @FXML
+	 private RadioButton EmployedStatusRBE;
 
 	// BufferedWriter writer2 = new BufferedWriter(new
 	// FileWriter("order_number.txt"));
@@ -272,6 +293,7 @@ public class SceneController {
 				employee.setHours(database.resultSet.getInt("Hours"));
 				employee.setWage(database.resultSet.getDouble("Wage"));
 				employee.set_Job_Type(database.resultSet.getString("JobType"));
+				employee.setpassword(database.resultSet.getString("Password"));
 				employee.Set_total_Pay();
 				employees.add(employee);
 			}
@@ -280,8 +302,10 @@ public class SceneController {
 			 * ) { System.out.println(i); }
 			 */
 			for (int i = 0; i < employees.size(); i++) {
-				if (employees.get(i).getId_number().equals(text)) {
-					if (employees.get(i).getjobType().equals("Manager")) {
+				if (employees.get(i).getpassword().equals(text)) 
+				{
+					if (employees.get(i).getjobType().equals("Manager")) 
+					{
 						Parent root = FXMLLoader.load(getClass().getResource("Manager_Screen.fxml"));
 						stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 						scene = new Scene(root);
@@ -294,7 +318,8 @@ public class SceneController {
 						database.closeupdateField();
 
 					}
-					if (employees.get(i).getjobType().equals("WaitStaff")) {
+					if (employees.get(i).getjobType().equals("WaitStaff"))
+					{
 						Parent root = FXMLLoader.load(getClass().getResource("Waitstaff_Screen.fxml"));
 						stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 						scene = new Scene(root);
@@ -310,7 +335,8 @@ public class SceneController {
 						writer.close();
 					}
 
-					if (employees.get(i).getjobType().equals("KitchenStaff")) {
+					if (employees.get(i).getjobType().equals("KitchenStaff")) 
+					{
 						Parent root = FXMLLoader.load(getClass().getResource("Kitchen.fxml"));
 						stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 						scene = new Scene(root);
@@ -1887,137 +1913,208 @@ ArrayList<String> list = new ArrayList<String>();
 	 public void edituser(ActionEvent event) throws IOException
 	    {
 		 /*
-		 
-  double newPrice = 20.99;
+		   @FXML
+  private RadioButton Cashier_rdbE;
+
+  @FXML
+  private RadioButton Wait_staff_rdbE;
+  
+  @FXML
+  private TextField employeehours_text_field;
+  
+			double newPrice = 20.99;
 			String newPrice1 = Double.toString(newPrice);
 			String jsp = "jsp";
 			/*
 			
 			int newdatabaseid=lastdatabaseid +1;
 		
-           
-
-            statement.executeUpdate(sql);
-            */
+          statement.executeUpdate(sql);
+          */
 		 /*
-            //statement.excecuteUpdate();
-            // use a Prepared Statement for better security
+          //statement.excecuteUpdate();
+          // use a Prepared Statement for better security
 			 String sql1 = "UPDATE Books " + "SET ListPrice = " + newPrice + " WHERE Code = " + jsp ;
-            String updField = "value1";
-            String updatesql = "UPDATE Books " + "SET ListPrice = ? WHERE Code = ?";
-            updateField = connection.prepareStatement(updatesql);
-            updateField.setDouble(1, newPrice);
-            updateField.setString(2, updField);
-            updateField.executeUpdate();
-            try {
-			int lastdatabaseid = 0;
-
-			database.connect_to_database();
-			database.setResultset();
-			while (database.resultSet.next()) {
+          String updField = "value1";
+          String updatesql = "UPDATE Books " + "SET ListPrice = ? WHERE Code = ?";
+          updateField = connection.prepareStatement(updatesql);
+          updateField.setDouble(1, newPrice);
+          updateField.setString(2, updField);
+          updateField.executeUpdate();
+          
+           String value1 = "value1";
+			String deletesql2  = "DELETE FROM Books WHERE BookId = " + 8;
+		      
+          database.updateField = database.connection.prepareStatement(deletesql2);
+           database.updateField.executeUpdate();
+      */
+		
+		 String idnumber = employeeId_text_field.getText();
+		 String wage = employeewage_text_field.getText();
+		String password = employeepass_text_field.getText();
+		String hours = employeehours_text_field.getText();
+		// System.out.println(idnumber);		
+	try {
+		 database.connect_to_database();
+		 database.setResultset();
+		 int lastdatabaseid=0;
+		 int newdatabaseid=0;
+		 while (database.resultSet.next()) {
 				Employee employee = new Employee();
-				employee.setdatabaseid(database.resultSet.getInt("employeeid"));
+				employee.setdatabaseid(database.resultSet.getInt("id"));
 				employee.setEmployee_name(database.resultSet.getString("Name"));
 				employee.setId_number(database.resultSet.getString("IdNumber"));
 				employee.setHours(database.resultSet.getInt("Hours"));
 				employee.setWage(database.resultSet.getDouble("Wage"));
 				employee.set_Job_Type(database.resultSet.getString("JobType"));
 				employee.Set_total_Pay();
+				employee.setpassword(database.resultSet.getString("Password"));
 				employees.add(employee);
 				lastdatabaseid = employee.getdatabaseid();
 			}
+		 newdatabaseid = lastdatabaseid + 1;
+		 //System.out.println(employees.get(3).getdatabaseid());
+		 //System.out.println(employees.get(3).getId_number());
+		 
+		 if(idnumber.equals(""))
+		 {			 
+			 errorlabeledit.setText("please enter an id");
+		 } 
+		 
+		 else if (checkdatabaseid(employees, idnumber))
+		 {			 		
+		        if(EmployedStatusRBE.isSelected())
+		         {		
+			 for(int i = 0;i<employees.size();i++)
+			 {
+				 if(employees.get(i).getId_number().equals(idnumber))
+				 {				
+					 
+					 	String deletesql2  = "DELETE FROM Employee WHERE id = " + employees.get(i).getdatabaseid();
+			            database.updateField = database.connection.prepareStatement(deletesql2);
+			            database.updateField.executeUpdate();
+					 	
+					 	database.closeConnection();
+						database.closeresultSet();
+						database.closestatement();
+						database.closeupdateField();						
+						
+					 errorlabeledit.setText("employee fired");
+				 }
+			 }
+		        }
+		         else 
+		             {		
+		        	 //update clause
+		        	 Double wagedb = Double.parseDouble(wage);
+		        	   Integer idnumberI = Integer.parseInt(idnumber);
+		        	   Integer hoursI = Integer.parseInt(hours);
+		        	   Double totalpay = wagedb * hoursI;
+			             if (wage.equals("")) 
+			             {
+			            	 errorlabeledit.setText("Please enter a wage");
+			 			 }
+			            else if (idnumber.equals(""))
+			            {
+			            	errorlabeledit.setText("Please enter an ID");
+			 			} 
+			            else if (hours.equals("")) 
+			            {
+			             errorlabeledit.setText("Please enter hours");
+			            }
+			            else if (password.equals("")) 
+			            {
+			             errorlabeledit.setText("Please enter hours");
+			            }
+			            else if (!Cashier_rdbE.isSelected() && !Kitchen_Staff_rdbE.isSelected() && !Manager_rdbE.isSelected()
+								&& !Wait_staff_rdbE.isSelected()) 
+			            {
+			            	  errorlabeledit.setText("please select a job type");
+			            }
+		        	  
+		             
+		          
+		            else 
+		            
+		        	   {
+		            	String jobType  = "";
+		            	
+		            	if (Manager_rdbE.isSelected())
+		            	{
+							jobType = "Manager";
+					
+						}
 
-			String name = name_texField.getText();
-			String wageTxt = wage_texField.getText();
-			String id_Number = Id_Number_txtField.getText();
-			String hour = hoursTxt.getText();
-			String jobType;
-			int hours = 0;
-			double wage = 0;
-			int id = 0;
-			Boolean checkID = true;
-			int arraysize = employees.size();
-			Employee tdb = new Employee();
+						else if (Wait_staff_rdbE.isSelected()) 
+						{
+							jobType = "WaitStaff";
+						
 
-			if (name.equals("")) {
-				verify.setText("Please enter a name");
-			} else if (wageTxt.equals("")) {
-				verify.setText("Please enter a wage");
-			} else if (id_Number.equals("")) {
-				verify.setText("Please enter an ID");
-			} else if (hour.equals("")) {
-				verify.setText("Please enter an ID");
-			} else if (!Cashier_rdb.isSelected() && !Kitchen_Staff_rdb.isSelected() && !Manager_rdb.isSelected()
-					&& !Wait_staff_rdb.isSelected()) {
-				verify.setText("Please select a job type.");
-			} else if (verify_Nametext(name)) {
-				verify.setText("Please enter name in the correct format");
-			} else if (checkdatabaseid(employees, id_Number)) {
-				verify.setText("ID has been taken, please change it.");
-			}
+						} 
+						else if (Kitchen_Staff_rdbE.isSelected())
+						{
+							jobType = "KitchenStaff";
+						
+						}
 
-			else {
-
-				if (Manager_rdb.isSelected()) {
-					jobType = "Manager";
-					tdb.set_Job_Type(jobType);
-				}
-
-				else if (Wait_staff_rdb.isSelected()) {
-					jobType = "WaitStaff";
-					tdb.set_Job_Type(jobType);
-
-				} else if (Kitchen_Staff_rdb.isSelected()) {
-					jobType = "KitchenStaff";
-					tdb.set_Job_Type(jobType);
-				}
-
-				else if (Cashier_rdb.isSelected()) {
-					jobType = "Cashier";
-					tdb.set_Job_Type(jobType);
-				}
-				int newdatabaseid = lastdatabaseid +1;
-				System.out.print(newdatabaseid);
-				wage = DecimalFormat.getNumberInstance().parse(wageTxt).doubleValue();
-				id = Integer.parseInt(id_Number);
-				hours = Integer.parseInt(hour);
-				tdb.setHours(hours);
-				tdb.setEmployee_name(name);
-				tdb.setWage(wage);
-				tdb.setId_number(id_Number);
-				tdb.setdatabaseid(newdatabaseid);
-				tdb.Set_total_Pay();
-
-				String insertSQL = "INSERT INTO Employee (employeeid, Name, IdNumber, Hours, Wage, TotalPay, JobType) VALUES (?, ?, ?, ?, ?, ?, ?)";
-				database.updateField = database.connection.prepareStatement(insertSQL);
-				database.updateField.setInt(1, tdb.getdatabaseid());
-				database.updateField.setString(2, tdb.getEmployee_name());
-				database.updateField.setString(3, tdb.getId_number());
-				database.updateField.setInt(4, tdb.getHours());
-				database.updateField.setDouble(5, tdb.getWage());
-				database.updateField.setDouble(6, tdb.get_totalpay());
-				database.updateField.setString(7, tdb.getjobType());
-				database.updateField.executeUpdate();
-				database.closeConnection();
+						else if (Cashier_rdbE.isSelected()) 
+						{
+							jobType = "Cashier";
+					
+						} 
+		           
+				 		  System.out.println(jobType);
+				 		  /*
+				 		    			  
+			String updatesql = "UPDATE Books " + "SET ListPrice = ?, " + "Description = ? " + "WHERE BookId = " +1 ;
+            updateField = connection.prepareStatement(updatesql);        
+            updateField.setString(2, "describe");
+            updateField.setDouble(1, newPrice);
+     
+            updateField.executeUpdate();	
+				 		   
+				 		   */
+				 		String updatesql = "UPDATE Employee " + "SET Password = ?," + "Hours = ?, "  + "Wage = ?, " + "TotalPay = ?, " + "JobType = ? "+ "WHERE IdNumber = " + idnumber;
+				 	    database.updateField = database.connection.prepareStatement(updatesql);
+			            //database.updateField.setDouble(1, newPrice);
+			            database.updateField.setString(1, password);
+			            database.updateField.setInt(2, hoursI);
+			            database.updateField.setDouble(3, wagedb);
+			            database.updateField.setDouble(4, totalpay);
+			            database.updateField.setString(5, jobType);
+			            database.updateField.executeUpdate();
+			            
+		        	 errorlabeledit.setText("Update Success");
+					 database.closeConnection();
+	                 database.closeConnection();
+					 database.closeresultSet();
+					 database.closestatement();
+					 database.closeupdateField();
+		             }
+		       }
+		 }
+		 	else
+		 		{
+		 			            
+			    errorlabeledit.setText("id number not found");
+			 	database.closeConnection();
 				database.closeresultSet();
 				database.closestatement();
 				database.closeupdateField();
-				verify.setText("Success Please press the back button to exit");
-			}
-		} catch (IOException e) {
-			verify.setText("Please enter the information in the correct format");
-		} catch (SQLException e) {
-			verify.setText("Failed to connect to database");
-			System.out.print(e);
-		} catch (NumberFormatException e) {
-			verify.setText("Please enter the information in the correct format");
-		} catch (Exception e) {
-
-			verify.setText("Please enter the information in the correct format");
-			System.out.println(e);
-		}
-		  */
-		System.out.print("hello");
-		}
+		 		}
+		 }
+					  
+		 catch(Exception e)
+		 {
+			 database.closeConnection();
+			 database.closeresultSet();
+			 database.closestatement();
+			 database.closeupdateField();
+			 errorlabeledit.setText("please enter the information in the right format and all the fields");
+			 System.out.println(e);		         
+			 
+		 }
+		
+	  }
 		
 }
