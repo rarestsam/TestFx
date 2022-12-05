@@ -60,8 +60,7 @@ public class SceneController {
 	private String lastorderstring;
 	private String newordernumber1;
 	private String time;
-	private String[] itemnumbers2 = new String[100];
-	private String[] notes2 = new String[100];
+
 	private int neworderid;
 	
 	private int fb = 1;
@@ -85,9 +84,6 @@ public class SceneController {
 	private SimpleDateFormat timeFormat;
 	private Calendar calendar;
 	private Database database = new Database();
-	
-	// setEditable(false) use this function for setting text in a textfield and not
-	// being played with
 	
 	@FXML
 	private Label workerUsername10;
@@ -648,8 +644,6 @@ public class SceneController {
 
 	public void addFoodBar(ActionEvent event) 
 	{
-		// new_order.setEmployee_Name("jack");
-		// new_order.setOrder_number("13");
 
 		try {
 			
@@ -787,7 +781,9 @@ public class SceneController {
 			totalPriceText.setText(totalPriceStr);
 			iterator++;
 
-		} catch (Exception e) {
+		}
+		catch (Exception e) 
+		{
 			System.out.print(e);
 		}
 	}
@@ -872,7 +868,6 @@ public class SceneController {
 				database.updateField.setString(10, new_order.getPaid());
 				database.updateField.setString(11, new_order.getPaid());
 				
-				
 				int foodnameiterator = 12;
 				int foodamountiterator = 13;
 				int foodnotesiterator = 14;
@@ -889,15 +884,13 @@ public class SceneController {
 				foodnotesiterator =  foodnotesiterator +4;
 				foodpriceiterator =foodpriceiterator +4;
 				}
-				
-				
+								
 				database.updateField.executeUpdate();
 				database.closeConnection();
 				database.closeresultSet();
 				database.closestatement();
 				database.closeupdateField();
-				
-				
+							
 				checktable.setText("Success");
 				
 				clear(event);
@@ -1286,6 +1279,7 @@ public class SceneController {
 			login_Label.setStyle("-fx-text-alignment: center; ");
 			database.connect_to_database();
 			database.setResultset();
+			int id = 0;
 			while (database.resultSet.next()) {
 				Employee employee = new Employee();
 				employee.setEmployee_name(database.resultSet.getString("Name"));
@@ -1293,12 +1287,15 @@ public class SceneController {
 				employee.setHours(database.resultSet.getInt("Hours"));
 				employee.setWage(database.resultSet.getDouble("Wage"));
 				employee.set_Job_Type(database.resultSet.getString("JobType"));
+				employee.setpassword(database.resultSet.getString("Password"));
 				employee.Set_total_Pay();
+				id = database.resultSet.getInt("ID");
 				employees.add(employee);
 			}
 
 			for (int i = 0; i < employees.size(); i++) {
-				if (employees.get(i).getId_number().equals(text)) {
+				if (employees.get(i).getpassword().equals(text)) 
+						{
 					if (employees.get(i).getjobType().equals("Manager")) {
 
 						employee_name = employees.get(i).getEmployee_name();
@@ -1314,31 +1311,22 @@ public class SceneController {
 						dateFormat = new SimpleDateFormat("MM/dd/yyyy");
 						time = timeFormat.format(Calendar.getInstance().getTime());
 						date = dateFormat.format(Calendar.getInstance().getTime());
-						int id = 0;
-						database.connect_to_database1();
-						database.setResultsetclockedin();
-						while (database.rs2.next()) {
-							id = database.rs2.getInt("ID");
-						}
+			
 						int newid = id + 1;
 
-						String insertSQL = "INSERT INTO ClockIn_Out (ID,employeename,month_day_year,clockin) VALUES (?,?,?,?)";
-						database.updateField1 = database.connection1.prepareStatement(insertSQL);
-						database.updateField1.setInt(1, newid);
-						database.updateField1.setString(2, employee_name);
-						database.updateField1.setString(3, date);
-						database.updateField1.setString(4, time);
-						database.updateField1.executeUpdate();
+						String insertSQL = "INSERT INTO ClockIn_Out (ID,EmployeeName,IdNumber,ClockInDate,ClockIn) VALUES (?,?,?,?,?)";
+						database.updateField = database.connection.prepareStatement(insertSQL);
+						database.updateField.setInt(1, newid);
+						database.updateField.setString(2, employee_name);
+						database.updateField.setString(3, employees.get(i).getId_number());
+						database.updateField.setString(4, date);
+						database.updateField.setString(5, time);
+						database.updateField.executeUpdate();
 
 						database.closeConnection();
 						database.closeresultSet();
 						database.closestatement();
 						database.closeupdateField();
-
-						database.closeConnection1();
-						database.closers2();
-						database.closestatement1();
-						database.closeupdateField1();
 
 						Parent root = FXMLLoader.load(getClass().getResource("Manager_Screen.fxml"));
 						stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -1362,32 +1350,23 @@ public class SceneController {
 						dateFormat = new SimpleDateFormat("MM/dd/yyyy");
 						time = timeFormat.format(Calendar.getInstance().getTime());
 						date = dateFormat.format(Calendar.getInstance().getTime());
-						int id = 0;
-						database.connect_to_database1();
-						database.setResultsetclockedin();
-						while (database.rs2.next()) {
-							id = database.rs2.getInt("ID");
-
-						}
+					
 
 						int newid = id + 1;
-						String insertSQL = "INSERT INTO Clocked (ID,employeename,month_day_year,clockin) VALUES (?,?,?,?)";
-						database.updateField1 = database.connection1.prepareStatement(insertSQL);
-						database.updateField1.setInt(1, newid);
-						database.updateField1.setString(2, employee_name);
-						database.updateField1.setString(3, date);
-						database.updateField1.setString(4, time);
-						database.updateField1.executeUpdate();
+
+						String insertSQL = "INSERT INTO ClockIn_Out (ID,EmployeeName,IdNumber,ClockInDate,ClockIn) VALUES (?,?,?,?,?)";
+						database.updateField = database.connection.prepareStatement(insertSQL);
+						database.updateField.setInt(1, newid);
+						database.updateField.setString(2, employee_name);
+						database.updateField.setString(3, employees.get(i).getId_number());
+						database.updateField.setString(4, date);
+						database.updateField.setString(5, time);
+						database.updateField.executeUpdate();
 
 						database.closeConnection();
 						database.closeresultSet();
 						database.closestatement();
 						database.closeupdateField();
-
-						database.closeConnection1();
-						database.closers2();
-						database.closestatement1();
-						database.closeupdateField1();
 
 						Parent root = FXMLLoader.load(getClass().getResource("Waitstaff_Screen.fxml"));
 						stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -1413,32 +1392,23 @@ public class SceneController {
 						dateFormat = new SimpleDateFormat("MM/dd/yyyy");
 						time = timeFormat.format(Calendar.getInstance().getTime());
 						date = dateFormat.format(Calendar.getInstance().getTime());
-						int id = 0;
-						database.connect_to_database1();
-						database.setResultsetclockedin();
-						while (database.rs2.next()) {
-							id = database.rs2.getInt("ID");
-
-						}
+						
 
 						int newid = id + 1;
-						String insertSQL = "INSERT INTO Clocked (ID,employeename,month_day_year,clockin) VALUES (?,?,?,?)";
-						database.updateField1 = database.connection1.prepareStatement(insertSQL);
-						database.updateField1.setInt(1, newid);
-						database.updateField1.setString(2, employee_name);
-						database.updateField1.setString(3, date);
-						database.updateField1.setString(4, time);
-						database.updateField1.executeUpdate();
+
+						String insertSQL = "INSERT INTO ClockIn_Out (ID,EmployeeName,IdNumber,ClockInDate,ClockIn) VALUES (?,?,?,?,?)";
+						database.updateField = database.connection.prepareStatement(insertSQL);
+						database.updateField.setInt(1, newid);
+						database.updateField.setString(2, employee_name);
+						database.updateField.setString(3, employees.get(i).getId_number());
+						database.updateField.setString(4, date);
+						database.updateField.setString(5, time);
+						database.updateField.executeUpdate();
 
 						database.closeConnection();
 						database.closeresultSet();
 						database.closestatement();
 						database.closeupdateField();
-
-						database.closeConnection1();
-						database.closers2();
-						database.closestatement1();
-						database.closeupdateField1();
 
 						Parent root = FXMLLoader.load(getClass().getResource("Kitchen.fxml"));
 						stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -1464,33 +1434,23 @@ public class SceneController {
 						dateFormat = new SimpleDateFormat("MM/dd/yyyy");
 						time = timeFormat.format(Calendar.getInstance().getTime());
 						date = dateFormat.format(Calendar.getInstance().getTime());
-						int id = 0;
-						database.connect_to_database1();
-						database.setResultsetclockedin();
-						while (database.rs2.next()) {
-							id = database.rs2.getInt("ID");
-
-						}
+					
 						int newid = id + 1;
 
-						String insertSQL = "INSERT INTO Clocked (ID,employeename,month_day_year,clockin) VALUES (?,?,?,?)";
-						database.updateField1 = database.connection1.prepareStatement(insertSQL);
-						database.updateField1.setInt(1, newid);
-						database.updateField1.setString(2, employee_name);
-						database.updateField1.setString(3, date);
-						database.updateField1.setString(4, time);
-						database.updateField1.executeUpdate();
+
+						String insertSQL = "INSERT INTO ClockIn_Out (ID,EmployeeName,IdNumber,ClockInDate,ClockIn) VALUES (?,?,?,?,?)";
+						database.updateField = database.connection.prepareStatement(insertSQL);
+						database.updateField.setInt(1, newid);
+						database.updateField.setString(2, employee_name);
+						database.updateField.setString(3, employees.get(i).getId_number());
+						database.updateField.setString(4, date);
+						database.updateField.setString(5, time);
+						database.updateField.executeUpdate();
 
 						database.closeConnection();
 						database.closeresultSet();
 						database.closestatement();
 						database.closeupdateField();
-
-						database.closeConnection1();
-						database.closers2();
-						database.closestatement1();
-						database.closeupdateField1();
-
 						Parent root = FXMLLoader.load(getClass().getResource("Waitstaff_Screen.fxml"));
 						stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 						scene = new Scene(root);
@@ -1540,7 +1500,7 @@ public class SceneController {
 			}
 			int newid = id + 1;
 	
-			String SQL = "INSERT INTO clockout1 (ID, clockout, employeename, month_day_year) VALUES (?,?,?,?)";
+			String SQL = "UPDATE ClockIn_Out " + "SET ListPrice = ?, " + "Description = ? " + "WHERE BookId = " + "7";
 			database.updateField = database.connection.prepareStatement(SQL);
 			database.updateField.setInt(1, newid);
 			database.updateField.setString(2, time);
