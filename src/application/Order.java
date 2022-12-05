@@ -6,17 +6,19 @@ public class Order
 {
 	private String order_number;
 	private String table_number;
-	private ArrayList<String> notes = new ArrayList<String>();
-	private String date;
-	private double total;
-	private ArrayList<Double> food_price = new ArrayList<Double>();
-	private ArrayList<String> food_name = new ArrayList<String>();
 	private String time_Of_Order;
 	private String employee_Name;
 	private String complete;
 	private String orderdone;
 	private String paid;
+	private String date;
+	
+	private double total;
+	private ArrayList<Double> food_price = new ArrayList<Double>();
+	private ArrayList<String> food_name = new ArrayList<String>();
 	private ArrayList<Integer> amount = new ArrayList<Integer>();
+	private ArrayList<String> notes = new ArrayList<String>();
+
 	private String Waitress;
 	
 	
@@ -34,7 +36,7 @@ public class Order
 
 	public void setamount(Integer amount,int i)
 	{
-	       this.amount.add(i, amount);
+	       this.amount.set(i, amount);
 	}
 	
 	public String getWaitress() {
@@ -97,7 +99,7 @@ public class Order
 	
 	public void setNotes(String note,int i)
 	{
-		notes.add(i,note);
+		notes.set(i,note);
 	}
 	
 	public String getDate() 
@@ -124,7 +126,7 @@ public class Order
 	public int getfoodsize() 
 	{
 		int size;
-		size=food_name.size();
+		size= food_name.size();
 		return size;
 	}
 	
@@ -151,12 +153,12 @@ public class Order
 
 	public void setFood_price(Double food_pricel,int i)
 	{
-		food_price.add(i, food_pricel);
+		food_price.set(i, food_pricel);
 	}
 	
 	public void setFood_name(String food_namel,int i)
 	{
-		food_name.add(i,food_namel);
+		food_name.set(i,food_namel);
 	}
 
 	public double getTotal() 
@@ -196,5 +198,56 @@ public class Order
 	{
 		this.employee_Name = employee_Name;
 	}
+	
 
+	public void setnullamount() 
+	{
+		amount.clear();
+		for(int i=0; i<20;i++)
+		{
+			 amount.add(0);
+		}
+	}
+
+	public void setnullfood_name() 
+	{
+		food_name.clear();
+		for(int i=0; i<20;i++)
+		{
+			 food_name.add("null");
+		}
+	}
+	
+	
+	public void setnullfood_price() 
+	{
+	food_price.clear();	
+		for(int i=0; i<20;i++)
+		{
+			 food_price.add(0.0);
+		}
+	}
+	
+	
+	public void setnullfoodnotes() 
+	{
+		notes.clear();
+		for(int i=0; i<20;i++)
+		{
+			 notes.add("null");
+		}
+	}
+	
+	public void setnullall()
+	{
+		
+		setnullamount(); 
+		setnullfood_name(); 	
+		setnullfood_price(); 
+		setnullfoodnotes();
+	}
+	
+	
+	
+	
 }

@@ -122,7 +122,7 @@ public class Database
 	 public void setResultsetclockedin() throws IOException 
 	 {
 		 try {
-			 rs2=statement1.executeQuery("SELECT * FROM Clocked");
+			 rs2=statement1.executeQuery("SELECT * FROM ClockIn_Out");
 		} catch (SQLException e)
 		 {
 			e.printStackTrace();
@@ -132,7 +132,7 @@ public class Database
 	 public void setResultsetclockedout() throws IOException 
 	 {
 		 try {
-			 resultSet = statement.executeQuery("SELECT * FROM clockout1");
+			 resultSet = statement.executeQuery("SELECT * FROM ClockIn_Out");
 		 	} 
 		 catch (SQLException e)
 		 {
@@ -143,7 +143,7 @@ public class Database
 	 public void setResultsetorderdone() throws IOException 
 	 {
 		 try {
-			 resultSet = statement.executeQuery("SELECT * FROM Orderdone");
+			 resultSet = statement.executeQuery("SELECT * FROM Orders");
 		 	} 
 		 catch (SQLException e)
 		 {
@@ -263,7 +263,7 @@ public class Database
 	 public void setResultset10() throws IOException 
 	 {
 		 try {
-			resultSet=statement.executeQuery("SELECT * FROM Orderdone");
+			resultSet=statement.executeQuery("SELECT * FROM Orders");
 		} catch (SQLException e)
 		 {
 			e.printStackTrace();

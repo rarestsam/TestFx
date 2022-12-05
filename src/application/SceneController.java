@@ -53,33 +53,38 @@ public class SceneController {
 	private Stage stage;
 	private Scene scene;
 	private Parent root;
-	String employee_name;
-	String order_number;
-	String table_number_text;
+	
+	private String employee_name;
+	private String order_number;	
+	private String table_number_text;
+	private String lastorderstring;
+	private String newordernumber1;
+	private String time;
+	private String[] itemnumbers2 = new String[100];
+	private String[] notes2 = new String[100];
+	private int neworderid;
+	
 	private int fb = 1;
-	 private int on = 1;
-	 private int o=0;
+	private int on = 1;
+	private int o=0;
+	private int currentbutton = 110000;
+	private int iterator = 0;
+	private int lastordernumber;
+	private int newordernumber;
 	private double ph = 200.0;
 	private double tp = 0.0;
-	private String time;
-	private SimpleDateFormat timeFormat;
-	Calendar calendar;
-	ArrayList<Employee> employees = new ArrayList<Employee>();
-	Database database = new Database();
+
+	private boolean checkdelete = false;
+
+	ArrayList<String> order = new ArrayList<String>();
 	ArrayList<Order> orders = new ArrayList<Order>();
 	ArrayList<Order> orderdone1 = new ArrayList<Order>();
-	Order new_order = new Order();
-	int iterator = 0;
-	int lastordernumber;
-	int newordernumber;
-	String lastorderstring;
-	String newordernumber1;
-	String[] itemnumbers2 = new String[100];
-	String[] notes2 = new String[100];
-	int neworderid;
-	ArrayList<String> order = new ArrayList<String>();
-	boolean checkdelete = false;
-	int currentbutton = 110000;
+	ArrayList<Employee> employees = new ArrayList<Employee>();
+	
+	private Order new_order = new Order();
+	private SimpleDateFormat timeFormat;
+	private Calendar calendar;
+	private Database database = new Database();
 	
 	// setEditable(false) use this function for setting text in a textfield and not
 	// being played with
@@ -276,6 +281,55 @@ public class SceneController {
 	// BufferedWriter writer2 = new BufferedWriter(new
 	// FileWriter("order_number.txt"));
 
+	 
+	 
+	 public void pulse(ActionEvent event) {
+			/*
+			 * for(int i=0; i<new_order.getfoodsize();i++) {
+			 * System.out.println(new_order.getFood_name(i)); } int lastordernumber; int
+			 * newordernumber; String lastorderstring ; String newordernumber1; id =
+			 * Integer.parseInt(id_Number);
+			 */
+
+			try {
+
+				database.connect_to_database();
+				database.setResultsetorder();
+				new_order.setnullall();
+				
+				while (database.resultSet.next()) {
+					lastorderstring = database.resultSet.getString("OrderNumber");
+				}
+
+				lastordernumber = Integer.parseInt(lastorderstring);
+				newordernumber = lastordernumber + 1;
+				newordernumber1 = String.valueOf(newordernumber);
+
+				BufferedReader readeremp = new BufferedReader(new FileReader("employee_name.txt"));
+				employee_name = readeremp.readLine();
+				readeremp.close();
+				workerUsername.setText(employee_name);
+				orderNumber.setText(newordernumber1);
+				
+			} catch (Exception e) 
+			{
+				System.out.print(e);
+
+			}
+		}
+		public void clear(ActionEvent event) throws IOException
+		{
+			new_order.setnullall();
+			foodBarBox.getChildren().clear();
+			table_number.setText("");
+			totalPriceText.setText("0.00");
+			tp=0.0;
+		}
+	 
+	 
+	 
+	 
+	 
 	public void loginreroute(ActionEvent event) {
 		try {
 			BufferedWriter writer = new BufferedWriter(new FileWriter("employee_name.txt"));
@@ -592,7 +646,8 @@ public class SceneController {
 		stage.setFullScreen(true);
 	}
 
-	public void addFoodBar(ActionEvent event) {
+	public void addFoodBar(ActionEvent event) 
+	{
 		// new_order.setEmployee_Name("jack");
 		// new_order.setOrder_number("13");
 
@@ -643,15 +698,18 @@ public class SceneController {
 			deleteButton.relocate(482.0, 14.0);
 			deleteButton.setStyle("-fx-background-color: #ff0000; ");
 			deleteButton.setFont(font21);
-			deleteButton.setId("deleteButton" + fb);
-			deleteButton.setOnAction(new EventHandler<ActionEvent>() {
+			String ss = Integer.toString(fb);
+			deleteButton.setId("delete" + ss);
+			deleteButton.setOnAction(new EventHandler<ActionEvent>() 
+			{
 				@Override
 				public void handle(ActionEvent event) 
 				{
 					if (deleteButton.isArmed() == true)
 					{
-						deleteButton.getParent().setVisible(false);
+						foodBarBox.getChildren().remove(deleteButton.getParent());
 						iterator = iterator -1;
+						fb = fb-1;
 					}
 				}
 			});
@@ -714,7 +772,6 @@ public class SceneController {
 			}
 		
 			foodbar.getChildren().addAll(spinner, foodText, dollarSign, priceText, deleteButton, noteButton);
-
 			foodBarBox.getChildren().addAll(foodbar);
 
 			ph += 100.0;
@@ -735,52 +792,26 @@ public class SceneController {
 		}
 	}
 
-	public void pulse(ActionEvent event) {
-		/*
-		 * for(int i=0; i<new_order.getfoodsize();i++) {
-		 * System.out.println(new_order.getFood_name(i)); } int lastordernumber; int
-		 * newordernumber; String lastorderstring ; String newordernumber1; id =
-		 * Integer.parseInt(id_Number);
-		 */
-
-		try {
-
-			database.connect_to_database();
-			database.setResultsetorder();
-
-			while (database.resultSet.next()) {
-				lastorderstring = database.resultSet.getString("OrderNumber");
-			}
-
-			lastordernumber = Integer.parseInt(lastorderstring);
-			newordernumber = lastordernumber + 1;
-			newordernumber1 = String.valueOf(newordernumber);
-
-			BufferedReader readeremp = new BufferedReader(new FileReader("employee_name.txt"));
-			employee_name = readeremp.readLine();
-			readeremp.close();
-			workerUsername.setText(employee_name);
-			orderNumber.setText(newordernumber1);
-		} catch (Exception e) {
-			System.out.print(e);
-
-		}
-	}
-	public void clear(ActionEvent event) throws IOException {
-		foodBarBox.getChildren().clear();
-		table_number.setText("");
-		totalPriceText.setText("0.00");
-		tp=0.0;
-	}
+	
 	public void complete(ActionEvent event) {
 		/*
 		 * for(int i=0; i<new_order.getfoodsize();i++) {
 		 * System.out.println(new_order.getFood_name(i)); }
 		 */
-
+		
+		/*
+		for(int i=0;i<fb;i++)
+		{
+			
+			new_order.setFood_name(, i);
+		}
+		*/
+		
+		
+		
+		
 		try {
 			SimpleDateFormat timeFormat;
-			SimpleDateFormat dayFormat;
 			SimpleDateFormat dateFormat;
 			String time;
 			String date;
@@ -792,21 +823,22 @@ public class SceneController {
 			// System.out.println(time);
 			// System.out.println(date);
 
-			String incomplete = "complete";
-			String orderdone = "undone";
+			String incomplete = "incomplete";
 			String orderpaid = "unpaid";
 			String tableNumber = table_number.getText();
 			if (tableNumber.equals("")) {
 				checktable.setText("Enter Table Number");
 
-			} else {
+			} 
+		
+			else {
+				database.connect_to_database();
 				int tablenumber;
 				int orderid = 0;
 				tablenumber = Integer.parseInt(tableNumber);
 				BufferedReader readeremp = new BufferedReader(new FileReader("employee_name.txt"));
 				employee_name = readeremp.readLine();
-				neworderid = orderid + 1;
-
+				neworderid = orderid + 1;				
 				new_order.setEmployee_Name(employee_name);
 				new_order.setOrder_number(newordernumber1);
 				new_order.setTable_number(tableNumber);
@@ -815,45 +847,67 @@ public class SceneController {
 				new_order.setNotes("extra", 0);
 				new_order.setComplete(incomplete);
 				new_order.setPaid(orderpaid);
-				new_order.setOrderdone(orderdone);
+				// ITEMAMOUNT7   item7amount
 				// System.out.print(new_order.getTotal());
-
-				String insertSQL = "INSERT INTO Orders (ID,OrderNumber, WaitStaff,TimeofOrder, month_day_year, Price, Complete, orderdone, Paid, Tablenumber, item1, itemamount1, notes1, itemcost1, item2, itemamount2, notes2, itemcost2) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+				String customername = "jack";
+				String phonenumber = "708";
+				String insertSQL = "INSERT INTO Orders (ID,OrderNumber, Customername, PhoneNumber, WaitStaff,Tablenumber,TimeofOrder, month_day_year, Price, Complete, Paid, "
+						+ "item1, item1amount, notes1, item1cost, item2, item2amount, notes2, item2cost, item3, item3amount, notes3, item3cost, item4, item4amount, notes4, item4cost, "
+						+ "item5, item5amount, notes5, item5cost, item6, item6amount, notes6, item6cost, item7, item7amount, notes7, item7cost, item8, item8amount, notes8, item8cost, "
+						+ "item9, item9amount, notes9, item9cost, item10, item10amount, notes10, item10cost, item11, item11amount, notes11, item11cost, item12, item12amount, notes12, item12cost,"
+						+ " item13, item13amount, notes13, item13cost, item14, item14amount, notes14, item14cost, item15, item15amount, notes15, item15cost, item16, item16amount, notes16, item16cost, "
+						+ "item17, item17amount, notes17, item17cost, item18, item18amount, notes18, item18cost, item19, item19amount, notes19, item19cost, item20, item20amount, notes20, item20cost) "
+	+ "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+				
 				database.updateField = database.connection.prepareStatement(insertSQL);
-				database.updateField.setInt(1, 2);
+				database.updateField.setInt(1, 7);
 				database.updateField.setString(2, new_order.getOrder_number());
-				database.updateField.setString(3, new_order.getEmployee_Name());
-				database.updateField.setString(4, new_order.getTime_Of_Order());
-				database.updateField.setString(5, new_order.getDate());
-				database.updateField.setDouble(6, new_order.getTotal());
-				database.updateField.setString(7, new_order.getComplete());
-				database.updateField.setString(8, new_order.getOrder_number());
-				database.updateField.setString(9, new_order.getPaid());
-				database.updateField.setString(10, new_order.getTable_number());
-
-				database.updateField.setString(11, new_order.getFood_name(0));
-				database.updateField.setInt(12, 1);
-				database.updateField.setString(13, new_order.getnote(0));
-				database.updateField.setDouble(14, new_order.getFood_price(0));
-
-				database.updateField.setString(15, new_order.getFood_name(1));
-				database.updateField.setInt(16, 1);
-				database.updateField.setString(17, new_order.getnote(0));
-				database.updateField.setDouble(18, new_order.getFood_price(1));
-
+				database.updateField.setString(3, customername);
+				database.updateField.setString(4, phonenumber);
+				database.updateField.setString(5, new_order.getEmployee_Name());
+				database.updateField.setString(6, new_order.getTable_number());
+				database.updateField.setString(7, new_order.getTime_Of_Order());
+				database.updateField.setString(8, new_order.getDate());
+				database.updateField.setString(9, new_order.getTotal1());
+				database.updateField.setString(10, new_order.getPaid());
+				database.updateField.setString(11, new_order.getPaid());
+				
+				
+				int foodnameiterator = 12;
+				int foodamountiterator = 13;
+				int foodnotesiterator = 14;
+				int foodpriceiterator = 15;
+				
+				for(int i = 0; i<new_order.getfoodsize();i++)
+				{
+				database.updateField.setString(foodnameiterator, new_order.getFood_name(i));
+				database.updateField.setInt(foodamountiterator, 1);
+				database.updateField.setString(foodnotesiterator, new_order.getnote(i));
+				database.updateField.setDouble(foodpriceiterator, new_order.getFood_price(i));
+				foodnameiterator = foodnameiterator + 4;
+				foodamountiterator = foodamountiterator + 4;
+				foodnotesiterator =  foodnotesiterator +4;
+				foodpriceiterator =foodpriceiterator +4;
+				}
+				
+				
 				database.updateField.executeUpdate();
 				database.closeConnection();
 				database.closeresultSet();
 				database.closestatement();
 				database.closeupdateField();
+				
+				
 				checktable.setText("Success");
 				
 				clear(event);
 				readeremp.close();
 			}
-		} catch (Exception e) {
+		} 
+		catch (Exception e) {
 			checktable.setText("Enter table# in the right format");
-			System.out.print(e);
+			System.out.println(e);
+		    //e.printStackTrace();
 		}
 	}
 
@@ -1268,7 +1322,7 @@ public class SceneController {
 						}
 						int newid = id + 1;
 
-						String insertSQL = "INSERT INTO Clocked (ID,employeename,month_day_year,clockin) VALUES (?,?,?,?)";
+						String insertSQL = "INSERT INTO ClockIn_Out (ID,employeename,month_day_year,clockin) VALUES (?,?,?,?)";
 						database.updateField1 = database.connection1.prepareStatement(insertSQL);
 						database.updateField1.setInt(1, newid);
 						database.updateField1.setString(2, employee_name);
@@ -1517,7 +1571,11 @@ public class SceneController {
 	
 	public void addOrder(ActionEvent event) throws InterruptedException
 	 {
-		
+		//setnullamount(); 
+		//setnullfood_name() 	
+		//setnullfood_price(); 
+		//setnullfoodnotes() 
+	
 		 Font font33 = Font.font("Modern No. 20", 33);
 		 try {
 			 int lastdatabaseid;
@@ -1526,6 +1584,7 @@ public class SceneController {
 			 while(database.resultSet.next())
 			 {
 				Order previousorder = new Order();
+				previousorder.setnullall();
 				previousorder.setOrder_number(database.resultSet.getString("OrderNumber"));
 				previousorder.setWaitress(database.resultSet.getString("WaitStaff"));
 				previousorder.setTime_Of_Order(database.resultSet.getString("TimeOfOrder"));
@@ -1615,6 +1674,7 @@ public class SceneController {
 	 {
 		 // table name  done
 		 //order.get(of)
+		 /*
 		    int fn = 9;
 			int am = 10;	
 			int n = 11;	
@@ -1698,7 +1758,8 @@ public class SceneController {
 				database.closeupdateField();		
 			  e.printStackTrace();			
 		}
-		 
+		 */
+		 System.out.println("function called");
 	 }
 	 
 	 public void clear1(ActionEvent event) throws InterruptedException
@@ -1912,42 +1973,6 @@ ArrayList<String> list = new ArrayList<String>();
 	 
 	 public void edituser(ActionEvent event) throws IOException
 	    {
-		 /*
-		   @FXML
-  private RadioButton Cashier_rdbE;
-
-  @FXML
-  private RadioButton Wait_staff_rdbE;
-  
-  @FXML
-  private TextField employeehours_text_field;
-  
-			double newPrice = 20.99;
-			String newPrice1 = Double.toString(newPrice);
-			String jsp = "jsp";
-			/*
-			
-			int newdatabaseid=lastdatabaseid +1;
-		
-          statement.executeUpdate(sql);
-          */
-		 /*
-          //statement.excecuteUpdate();
-          // use a Prepared Statement for better security
-			 String sql1 = "UPDATE Books " + "SET ListPrice = " + newPrice + " WHERE Code = " + jsp ;
-          String updField = "value1";
-          String updatesql = "UPDATE Books " + "SET ListPrice = ? WHERE Code = ?";
-          updateField = connection.prepareStatement(updatesql);
-          updateField.setDouble(1, newPrice);
-          updateField.setString(2, updField);
-          updateField.executeUpdate();
-          
-           String value1 = "value1";
-			String deletesql2  = "DELETE FROM Books WHERE BookId = " + 8;
-		      
-          database.updateField = database.connection.prepareStatement(deletesql2);
-           database.updateField.executeUpdate();
-      */
 		
 		 String idnumber = employeeId_text_field.getText();
 		 String wage = employeewage_text_field.getText();
@@ -2063,20 +2088,10 @@ ArrayList<String> list = new ArrayList<String>();
 					
 						} 
 		           
-				 		  System.out.println(jobType);
-				 		  /*
-				 		    			  
-			String updatesql = "UPDATE Books " + "SET ListPrice = ?, " + "Description = ? " + "WHERE BookId = " +1 ;
-            updateField = connection.prepareStatement(updatesql);        
-            updateField.setString(2, "describe");
-            updateField.setDouble(1, newPrice);
-     
-            updateField.executeUpdate();	
-				 		   
-				 		   */
+				 
+				
 				 		String updatesql = "UPDATE Employee " + "SET Password = ?," + "Hours = ?, "  + "Wage = ?, " + "TotalPay = ?, " + "JobType = ? "+ "WHERE IdNumber = " + idnumber;
 				 	    database.updateField = database.connection.prepareStatement(updatesql);
-			            //database.updateField.setDouble(1, newPrice);
 			            database.updateField.setString(1, password);
 			            database.updateField.setInt(2, hoursI);
 			            database.updateField.setDouble(3, wagedb);
@@ -2111,7 +2126,7 @@ ArrayList<String> list = new ArrayList<String>();
 			 database.closestatement();
 			 database.closeupdateField();
 			 errorlabeledit.setText("please enter the information in the right format and all the fields");
-			 System.out.println(e);		         
+			       
 			 
 		 }
 		
