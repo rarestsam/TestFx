@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: #89a4dc;" stylesheets="@application.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SceneController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: #89a4dc;" stylesheets="@application.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SceneController">
    <children>
       <Label layoutX="153.0" layoutY="38.0" prefHeight="170.0" prefWidth="310.0" text="Name">
          <font>
@@ -72,16 +72,16 @@
             <Font name="Modern No. 20" size="29.0" />
          </font>
       </Label>
-      <Button fx:id="enter_manager" layoutX="18.0" layoutY="18.0" mnemonicParsing="false" onAction="#switchToManager" prefHeight="32.0" prefWidth="112.0" style="-fx-background-color: red;" text="Back" textAlignment="CENTER">
-         <font>
-            <Font name="Modern No. 20" size="22.0" />
-         </font>
-      </Button>
       <Label layoutX="153.0" layoutY="751.0" prefHeight="111.0" prefWidth="578.0" text="Employee Password">
          <font>
             <Font name="Modern No. 20" size="65.0" />
          </font>
       </Label>
       <TextField fx:id="employee_passwordTextfield" layoutX="1313.0" layoutY="751.0" prefHeight="52.0" prefWidth="344.0" />
+      <Button layoutX="53.0" layoutY="36.0" mnemonicParsing="false" onAction="#switchTomanager" prefHeight="36.0" prefWidth="167.0" style="-fx-background-color: red;" text="Back">
+         <font>
+            <Font name="Modern No. 20" size="24.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

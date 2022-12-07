@@ -15,7 +15,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<SplitPane dividerPositions="0.011452368558042686" prefHeight="1104.0" prefWidth="1923.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SceneController">
+<SplitPane dividerPositions="0.00676730869338886" prefHeight="1104.0" prefWidth="1923.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SceneController">
   <items>
     <AnchorPane minHeight="0.0" minWidth="0.0" onMouseClicked="#loginreroute" prefHeight="1102.0" prefWidth="168.0" style="-fx-background-color: #526a9c;">
          <children>
@@ -26,17 +26,12 @@
             </Button>
             <AnchorPane fx:id="info1" layoutX="825.0" prefHeight="214.0" prefWidth="675.0" style="-fx-background-color: #d3d3d3;">
                <children>
-                  <Label layoutX="257.0" layoutY="107.0" prefHeight="93.0" prefWidth="112.0" text="Table">
-                     <font>
-                        <Font name="Modern No. 20" size="48.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="264.0" layoutY="48.0" prefHeight="93.0" prefWidth="112.0" text="Order #">
+                  <Label layoutX="259.0" layoutY="-15.0" prefHeight="93.0" prefWidth="112.0" text="Order #">
                      <font>
                         <Font name="Modern No. 20" size="36.0" />
                      </font>
                   </Label>
-                  <Label fx:id="orderNumber1" layoutX="387.0" layoutY="48.0" prefHeight="93.0" prefWidth="72.0" text="1">
+                  <Label fx:id="orderNumber1" layoutX="382.0" layoutY="-15.0" prefHeight="93.0" prefWidth="72.0">
                      <font>
                         <Font name="Modern No. 20" size="36.0" />
                      </font>
@@ -51,11 +46,36 @@
                         <Font name="Modern No. 20" size="36.0" />
                      </font>
                   </Label>
-                  <Label fx:id="tableNumber" layoutX="387.0" layoutY="107.0" prefHeight="93.0" prefWidth="72.0" text="1">
+                  <Label layoutX="280.0" layoutY="153.0" prefHeight="34.0" prefWidth="78.0" text="Table:">
                      <font>
-                        <Font name="Modern No. 20" size="36.0" />
+                        <Font name="Modern No. 20" size="29.0" />
                      </font>
                   </Label>
+                  <TextField fx:id="tableNumber" layoutX="358.0" layoutY="149.0" prefHeight="34.0" prefWidth="64.0">
+                     <font>
+                        <Font name="Modern No. 20" size="23.0" />
+                     </font>
+                  </TextField>
+                  <Label layoutX="121.0" layoutY="108.0" prefHeight="34.0" prefWidth="237.0" text="Customer's Number:">
+                     <font>
+                        <Font name="Modern No. 20" size="29.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="149.0" layoutY="59.0" prefHeight="42.0" prefWidth="209.0" text="Customer's Name:">
+                     <font>
+                        <Font name="Modern No. 20" size="29.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="customers_number2" layoutX="358.0" layoutY="104.0" prefHeight="42.0" prefWidth="216.0">
+                     <font>
+                        <Font name="Modern No. 20" size="23.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="customers_name2" layoutX="358.0" layoutY="59.0" prefHeight="42.0" prefWidth="188.0">
+                     <font>
+                        <Font name="Modern No. 20" size="23.0" />
+                     </font>
+                  </TextField>
                </children>
             </AnchorPane>
             <AnchorPane layoutX="825.0" layoutY="990.0" prefHeight="112.0" prefWidth="675.0" style="-fx-background-color: #d3d3d3;">
@@ -79,13 +99,7 @@
             </AnchorPane>
             <ScrollPane layoutX="825.0" layoutY="199.0" prefHeight="791.0" prefWidth="675.0">
                <content>
-                  <VBox fx:id="foodInfoBox" prefHeight="792.0" prefWidth="672.0">
-                     <children>
-                        <Label fx:id="Label1" prefHeight="71.0" prefWidth="651.0" text="Label">
-                           <font>
-                              <Font name="Modern No. 20" size="18.0" />
-                           </font></Label>
-                     </children></VBox>
+                  <VBox fx:id="foodBarBox1" prefHeight="792.0" prefWidth="672.0" />
                </content>
             </ScrollPane>
             <TextField fx:id="searchBar" layoutX="113.0" layoutY="141.0" prefHeight="42.0" prefWidth="495.0" />
@@ -99,12 +113,12 @@
                   <VBox fx:id="orderlistK" prefHeight="713.0" prefWidth="592.0" />
                </content>
             </ScrollPane>
-            <Button layoutX="26.0" layoutY="28.0" mnemonicParsing="false" onAction="#refresh1" prefHeight="93.0" prefWidth="125.0" style="-fx-background-color: #dac62f;" text="refresh">
+            <Button layoutX="26.0" layoutY="28.0" mnemonicParsing="false" onAction="#refresh1" prefHeight="51.0" prefWidth="141.0" style="-fx-background-color: #dac62f;" text="Refresh">
                <font>
                   <Font name="Modern No. 20" size="29.0" />
                </font>
             </Button>
-            <Button layoutX="186.0" layoutY="28.0" mnemonicParsing="false" onAction="#clear2" prefHeight="93.0" prefWidth="125.0" style="-fx-background-color: #dac62f;" text="clear">
+            <Button layoutX="186.0" layoutY="28.0" mnemonicParsing="false" onAction="#clear2" prefHeight="34.0" prefWidth="139.0" style="-fx-background-color: #dac62f;" text="Clear">
                <font>
                   <Font name="Modern No. 20" size="29.0" />
                </font>
@@ -232,17 +246,17 @@
             </Label>
             <AnchorPane fx:id="info" layoutX="1196.0" layoutY="-5.0" prefHeight="214.0" prefWidth="675.0" style="-fx-background-color: #d3d3d3;">
                <children>
-                  <Label layoutX="233.0" layoutY="108.0" prefHeight="93.0" prefWidth="112.0" text="Table">
+                  <Label layoutX="251.0" layoutY="159.0" prefHeight="34.0" prefWidth="78.0" text="Table:">
                      <font>
-                        <Font name="Modern No. 20" size="48.0" />
+                        <Font name="Modern No. 20" size="29.0" />
                      </font>
                   </Label>
-                  <Label layoutX="240.0" layoutY="49.0" prefHeight="93.0" prefWidth="112.0" text="Order #">
+                  <Label layoutX="265.0" layoutY="-15.0" prefHeight="93.0" prefWidth="112.0" text="Order #">
                      <font>
                         <Font name="Modern No. 20" size="36.0" />
                      </font>
                   </Label>
-                  <Label fx:id="orderNumber" layoutX="363.0" layoutY="49.0" prefHeight="93.0" prefWidth="72.0" text="1">
+                  <Label fx:id="orderNumber" layoutX="386.0" layoutY="-15.0" prefHeight="93.0" prefWidth="72.0">
                      <font>
                         <Font name="Modern No. 20" size="36.0" />
                      </font>
@@ -252,12 +266,32 @@
                         <Font name="Modern No. 20" size="36.0" />
                      </font>
                   </Label>
-                  <Label fx:id="timeText" layoutX="527.0" layoutY="3.0" prefHeight="56.0" prefWidth="141.0" text="10:35">
+                  <Label fx:id="timeText" layoutX="527.0" layoutY="3.0" prefHeight="56.0" prefWidth="141.0">
                      <font>
                         <Font name="Modern No. 20" size="36.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="table_number" layoutX="363.0" layoutY="133.0" prefHeight="42.0" prefWidth="64.0">
+                  <TextField fx:id="table_number" layoutX="329.0" layoutY="155.0" prefHeight="34.0" prefWidth="64.0">
+                     <font>
+                        <Font name="Modern No. 20" size="23.0" />
+                     </font>
+                  </TextField>
+                  <Label layoutX="92.0" layoutY="114.0" prefHeight="34.0" prefWidth="237.0" text="Customer's Number:">
+                     <font>
+                        <Font name="Modern No. 20" size="29.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="120.0" layoutY="65.0" prefHeight="42.0" prefWidth="209.0" text="Customer's Name:">
+                     <font>
+                        <Font name="Modern No. 20" size="29.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="customers_number" layoutX="329.0" layoutY="110.0" prefHeight="42.0" prefWidth="216.0">
+                     <font>
+                        <Font name="Modern No. 20" size="23.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="customers_name" layoutX="329.0" layoutY="65.0" prefHeight="42.0" prefWidth="188.0">
                      <font>
                         <Font name="Modern No. 20" size="23.0" />
                      </font>
@@ -296,7 +330,7 @@
                   <Font name="Modern No. 20" size="22.0" />
                </font>
             </Label>
-            <Button fx:id="Sync" layoutX="282.0" layoutY="12.0" mnemonicParsing="false" onAction="#pulse" prefHeight="32.0" prefWidth="112.0" style="-fx-background-color: red;" text="Pulse" textAlignment="CENTER">
+            <Button fx:id="Sync" layoutX="272.0" layoutY="14.0" mnemonicParsing="false" onAction="#pulse" prefHeight="32.0" prefWidth="112.0" style="-fx-background-color: #dac62f;" text="Pulse" textAlignment="CENTER">
                <font>
                   <Font name="Modern No. 20" size="21.0" />
                </font>
