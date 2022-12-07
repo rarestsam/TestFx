@@ -12,6 +12,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -75,6 +76,8 @@ public class SceneController {
 	private int newordernumber;
 	private double ph = 200.0;
 	private double tp = 0.0;
+	Double priceText2 = null;
+	Double totalPriceDub;
 
 	private boolean checkdelete = false;
 
@@ -82,6 +85,13 @@ public class SceneController {
 	ArrayList<Order> orders = new ArrayList<Order>();
 	ArrayList<Order> orderdone1 = new ArrayList<Order>();
 	ArrayList<Employee> employees = new ArrayList<Employee>();
+	ArrayList<String> foodbarList = new ArrayList<String>();
+	ArrayList<String> testNote= new ArrayList<String>();
+	
+	HashMap<String,String> map= new HashMap<>();
+	HashMap<String,String> nameMap= new HashMap<>();
+	HashMap<String,Integer> amountMap= new HashMap<>();
+	HashMap<String,String> priceMap= new HashMap<>();
 	
 	private Order new_order = new Order();
 	private SimpleDateFormat timeFormat;
@@ -283,6 +293,9 @@ public class SceneController {
 	 
 	 @FXML
 	 private RadioButton EmployedStatusRBE;
+	 
+	 @FXML 
+	 private VBox foodInfoBox;
 
 	// BufferedWriter writer2 = new BufferedWriter(new
 	// FileWriter("order_number.txt"));
@@ -330,6 +343,10 @@ public class SceneController {
 			table_number.setText("");
 			totalPriceText.setText("0.00");
 			tp=0.0;
+			nameMap.clear();
+			amountMap.clear();
+			priceMap.clear();
+			
 		}
 	 
 	 
@@ -678,11 +695,11 @@ public class SceneController {
 		stage.setFullScreen(true);
 	}
 
-	public void addFoodBar(ActionEvent event) 
-	{
-
+	public void addFoodBar(ActionEvent event) {
 		try {
 			
+			Font font14 = Font.font("Modern No. 20", 14);
+			Font font15 = Font.font("Modern No. 20", 15);
 			Font font21 = Font.font("Modern No. 20", 21);
 			Font font29 = Font.font("Modern No. 20", 29);
 
@@ -694,14 +711,123 @@ public class SceneController {
 			foodbar.setMinWidth(683);
 			foodbar.setMinHeight(68);
 			AnchorPane.setTopAnchor(foodbar, ph);
-			// foodbar.setPadding(new Insets(0,0,0,0));
 			foodbar.setId("foodbar" + fb);
-
+			foodbarList.add(foodbar.getId());
+			
 			Spinner<Integer> spinner = new Spinner<>(1, 1000, 1);
 			spinner.setMaxWidth(100);
 			spinner.setMinHeight(49);
 			spinner.relocate(40.0, 10.0);
 			spinner.setId("spinner" + fb);
+			
+			TextField foodAmountText = new TextField("1");
+			foodAmountText.setMaxWidth(60);
+			foodAmountText.relocate(40.0, 16.0);
+			foodAmountText.setFont(font21);
+			
+			Button plusButton = new Button("+");
+			plusButton.setMaxWidth(20);
+			plusButton.setMaxHeight(9);
+			plusButton.relocate(105.0, 8.0);
+			plusButton.setStyle("-fx-background-color: #d4c935; ");
+			plusButton.setFont(font14);
+			plusButton.setId("plusButton" + fb);
+			plusButton.setOnAction(new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent event) 
+				{	
+					
+					
+					int foodAmountTextInt= Integer.parseInt(foodAmountText.getText());
+					foodAmountTextInt++;//
+					foodAmountText.setText(Integer.toString(foodAmountTextInt));
+					
+					Double foodAmountTextDub = Double.parseDouble(foodAmountText.getText());
+					
+					if(foodText.getText()=="Pizza") {
+						priceText2= 24.23;
+					}
+					if(foodText.getText()=="Burger") {
+						priceText2 = 8.42;
+					}
+					if(foodText.getText()=="Ice Cream Scoop") {
+						priceText2 = 3.50;
+					}
+					if(foodText.getText()=="Fries") {
+						priceText2 = 3.02;
+					}
+					if(foodText.getText()=="Soda") {
+						priceText2 = 4.30;
+					}
+					if(foodText.getText()=="Water Bottle") {
+						priceText2 = 2.54;
+					}
+					
+					Double totalp = foodAmountTextDub*priceText2;
+					String totalpStr = Double.toString(totalp);
+					
+					priceText.setText(totalpStr);
+					
+					amountMap.replace(foodbar.getId(),Integer.parseInt(foodAmountText.getText()));
+					priceMap.replace(foodbar.getId(),priceText.getText());
+					System.out.println("Plus " + priceMap);
+					
+					
+				}
+			});
+			
+			Button minusButton = new Button("-");
+			minusButton.setMaxWidth(20);
+			minusButton.setMaxHeight(9);
+			minusButton.relocate(105.0, 34.0);
+			minusButton.setStyle("-fx-background-color: #d4c935; ");
+			minusButton.setFont(font15);
+			minusButton.setOnAction(new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent event) 
+				{	
+					String foodAmountActual= String.valueOf(foodAmountText.getText());
+					
+					if(!foodAmountActual.equals("1")) {
+						int foodAmountTextInt= Integer.parseInt(foodAmountText.getText());
+						foodAmountTextInt--;
+						foodAmountText.setText(Integer.toString(foodAmountTextInt));
+						
+						Double foodAmountTextDub = Double.parseDouble(foodAmountText.getText());
+						
+						if(foodText.getText()=="Pizza") {
+							priceText2= 24.23;
+						}
+						if(foodText.getText()=="Burger") {
+							priceText2 = 8.42;
+						}
+						if(foodText.getText()=="Ice Cream Scoop") {
+							priceText2 = 3.50;
+						}
+						if(foodText.getText()=="Fries") {
+							priceText2 = 3.02;
+						}
+						if(foodText.getText()=="Soda") {
+							priceText2 = 4.30;
+						}
+						if(foodText.getText()=="Water Bottle") {
+							priceText2 = 2.54;
+						}
+						
+						Double totalp = foodAmountTextDub*priceText2;
+						String totalpStr = Double.toString(totalp);
+						
+						priceText.setText(totalpStr);
+						
+						amountMap.replace(foodbar.getId(),Integer.parseInt(foodAmountText.getText()));
+						priceMap.replace(foodbar.getId(),priceText.getText());
+						System.out.println("Minus " +priceMap);
+						
+						
+					}
+					
+				}
+			});
 
 			foodText.setMinWidth(179);
 			foodText.setMinHeight(56);
@@ -728,22 +854,22 @@ public class SceneController {
 			deleteButton.relocate(482.0, 14.0);
 			deleteButton.setStyle("-fx-background-color: #ff0000; ");
 			deleteButton.setFont(font21);
-			String ss = Integer.toString(fb);
-			deleteButton.setId("delete" + ss);
-			deleteButton.setOnAction(new EventHandler<ActionEvent>() 
-			{
+			deleteButton.setId("deleteButton" + fb);
+			deleteButton.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent event) 
 				{
 					if (deleteButton.isArmed() == true)
 					{
 						foodBarBox.getChildren().remove(deleteButton.getParent());
+						nameMap.replace(foodbar.getId(),null);
+						amountMap.replace(foodbar.getId(),null);
+						priceMap.replace(foodbar.getId(),null);
+
 						iterator = iterator -1;
-						fb = fb-1;
 					}
 				}
 			});
-			
 			
 			Button noteButton = new Button("Notes");
 			noteButton.setMinWidth(90);
@@ -755,71 +881,98 @@ public class SceneController {
 			noteButton.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent event) {
-					if (noteButton.isArmed() == true) {
-						try {
-							notesWindow(event);
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					}
+									
+							Stage note = new Stage();
+
+							note.initModality(Modality.APPLICATION_MODAL);
+							note.setTitle("Note");
+							note.setMinWidth(400);
+							note.setMinHeight(200);
+
+							Font font29 = Font.font("Modern No. 20", 29);
+
+							TextArea noteText = new TextArea();
+							noteText.setText(null);
+							noteText.setMinHeight(180);
+							noteText.setStyle("-fx-text-alignment: TOP_LEFT; ");
+							
+							
+							Button completeButton = new Button("Complete");
+							completeButton.setFont(font29);
+							completeButton.relocate(350.0, 170.0);
+							completeButton.setOnAction(new EventHandler<ActionEvent>() {
+								@Override
+								public void handle(ActionEvent event) {
+									String noteEntered= noteText.getText();
+									testNote.add(noteEntered);
+									if(map.get(foodbar.getId())== foodbar.getId()) {
+										System.out.println("id found");
+										map.replace(foodbar.getId(),noteEntered);
+									}
+									else {
+										System.out.println("id NOT found");
+										map.put(foodbar.getId(),noteEntered);
+									}
+								}
+									
+							});
+
+							VBox layout = new VBox(10);
+							layout.getChildren().addAll(noteText, completeButton);
+
+							Scene noteScene = new Scene(layout);
+							note.setScene(noteScene);
+							note.showAndWait();
 				}
 			});
-			
-			
 			
 			if (pizzaButton.isArmed() == true) {
 				foodText.setText("Pizza");
 				priceText.setText("24.23");
-				new_order.setFood_name("pizza", iterator);
-				new_order.setFood_price(24.23, iterator);
+				priceText2= 24.23;
 			} else if (burgerButton.isArmed() == true) {
 				foodText.setText("Burger");
 				priceText.setText("8.42");
-				new_order.setFood_name("burger", iterator);
-				new_order.setFood_price(8.42, iterator);
+				priceText2= 24.23;
 			} else if (icecreamButton.isArmed() == true) {
 				foodText.setText("Ice Cream Scoop");
 				priceText.setText("3.50");
-				new_order.setFood_name("Ice Cream Scoop", iterator);
-				new_order.setFood_price(3.50, iterator);
+				priceText2= 3.50;
 			} else if (friesButton.isArmed() == true) {
 				foodText.setText("Fries");
 				priceText.setText("3.02");
-				new_order.setFood_name("Fries", iterator);
-				new_order.setFood_price(3.02, iterator);
+				priceText2= 3.02;
 			} else if (sodaButton.isArmed() == true) {
 				foodText.setText("Soda");
 				priceText.setText("4.30");
-				new_order.setFood_name("Soda", iterator);
-				new_order.setFood_price(4.30, iterator);
+				priceText2= 4.30;
 				// new_order.(4.30, iterator);
 			} else if (waterButton.isArmed() == true) {
 				foodText.setText("Water Bottle");
 				priceText.setText("2.54");
-				new_order.setFood_name("Water Bottle", iterator);
-				new_order.setFood_price(2.54, iterator);
+				priceText2= 2.54;
 			}
-		
-			foodbar.getChildren().addAll(spinner, foodText, dollarSign, priceText, deleteButton, noteButton);
+			
+			foodbar.getChildren().addAll(foodAmountText, plusButton, minusButton, foodText, dollarSign, priceText, deleteButton, noteButton);
 			foodBarBox.getChildren().addAll(foodbar);
-
+			
+			nameMap.put(foodbar.getId(),foodText.getText());
+			amountMap.put(foodbar.getId(),Integer.parseInt(foodAmountText.getText()));
+			priceMap.put(foodbar.getId(),priceText.getText());
+			
 			ph += 100.0;
 			fb++;
 
-			Double totalPriceDub;
-			String text = priceText.getText();
-			totalPriceDub = Double.parseDouble(text);
+			
+			totalPriceDub = Double.parseDouble(priceText.getText());
 
 			tp = tp + totalPriceDub;
 
 			String totalPriceStr = Double.toString(tp);
 			totalPriceText.setText(totalPriceStr);
 			iterator++;
-
-		}
-		catch (Exception e) 
-		{
+			
+		} catch (Exception e) {
 			System.out.print(e);
 		}
 	}
@@ -831,15 +984,33 @@ public class SceneController {
 		 * System.out.println(new_order.getFood_name(i)); }
 		 */
 		
-		/*
-		for(int i=0;i<fb;i++)
-		{
+		
+		for(int i=1;i<fb;i++) {
+		
+			if(nameMap.get("foodbar"+i)!= null){
+				new_order.setFood_name(nameMap.get("foodbar"+i),i);
+			}
+			else {
+				new_order.setFood_name(null,i);
+			}
+			if(amountMap.get("foodbar"+i)!= null) {
+				new_order.setamount(amountMap.get("foodbar"+i),i);
+			}
+			else {
+				new_order.setamount(null,i);
+			}
+			if(priceMap.get("foodbar"+i)!= null) {
+				Double priceinMap= Double.parseDouble(priceMap.get("foodbar"+i));
+				new_order.setFood_price(priceinMap,i);
+			}
+			else {
+				new_order.setFood_price(null,i);
+			}
 			
-			new_order.setFood_name(, i);
+			System.out.println("Name "+ nameMap.get("foodbar"+i));
+			System.out.println("Amount "+ amountMap.get("foodbar"+i));
+			System.out.println("Price "+ priceMap.get("foodbar"+i));
 		}
-		*/
-		
-		
 		
 		
 		try
@@ -1083,14 +1254,10 @@ public class SceneController {
 			public void handle(ActionEvent event) {
 				if (closeButton.isArmed() == true) {
 
-					String cardNumStr = cardNum.getText();
-					String expDateMStr = expDateM.getText();
+					String cardNumStr = String.valueOf(cardNum.getText());
+					String expDateMStr = String.valueOf(expDateM.getText());
 					String expDateYStr = expDateY.getText();
 					String secCodeStr = secCode.getText();
-					// int cardNumInt = 0;
-					// int expDateMInt = 0;
-					// int expDateYInt = 0;
-					// int secCodeInt = 0;
 					int cardNumLength = 16;
 					int expDateLength = 2;
 					int secCodeLength = 3;
@@ -1173,8 +1340,8 @@ public class SceneController {
 							e.printStackTrace();
 						}
 					} 
-					else if (cardNumStr == "1234567890123456" && expDateMStr == "10" && expDateYStr == "24"
-							&& secCodeStr == "123") {
+					else if (cardNumStr.equals("1234567890123456") && expDateMStr.equals("10")&& expDateYStr.equals("24")
+							&& secCodeStr.equals("123")) {
 						try {
 							cardErrorWindow(event, "Successful");
 							// closeButton.setOnAction(e -> paymentInfo.close());
@@ -1226,11 +1393,7 @@ public class SceneController {
 		   most likly connect to a database and retrieve employees
 		   find where the employyee name in file matches job description and then execute
 		 */
-		
-		
-		
-		
-		
+
 		Stage cashError = new Stage();
 
 		cashError.initModality(Modality.APPLICATION_MODAL);
@@ -1281,13 +1444,6 @@ public class SceneController {
 		Scene noteScene = new Scene(layout);
 		cashError.setScene(noteScene);
 		cashError.showAndWait();
-
-	}
-
-	public void totalPrice(ActionEvent event) throws IOException 
-	{
-		String totalPriceStr = Double.toString(tp);
-		totalPriceText.setText(totalPriceStr);
 
 	}
 
@@ -1860,7 +2016,6 @@ ArrayList<String> list = new ArrayList<String>();
 	 }
 	 
 	 
-	 
 	 public void  refresh1(ActionEvent event)
 	 {
 		 
@@ -1928,6 +2083,16 @@ ArrayList<String> list = new ArrayList<String>();
 				 	@Override
 				 	public void handle(ActionEvent event) 
 					{
+				 		Font font29 = Font.font("Modern No. 20", 29);
+
+						Label foodInfo = new Label(null); //ADD TEXT HERE!!
+						foodInfo.setMinWidth(651);
+						foodInfo.setMinHeight(71);
+						foodInfo.setFont(font29);
+						foodInfo.setStyle("-fx-text-alignment: TOP_LEFT; ");
+						
+						foodInfoBox.getChildren().addAll(foodInfo);
+				 		
 				 		/*
 				 		int of = Integer.parseInt(orderButton.getId());
 				 		orderNumberk.setText(orderdone1.get(of).getOrder_number());
@@ -2191,3 +2356,6 @@ ArrayList<String> list = new ArrayList<String>();
 		   
 	 }	 
 }
+
+ 
+

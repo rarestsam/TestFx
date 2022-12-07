@@ -15,7 +15,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<SplitPane dividerPositions="0.0015616866215512754" prefHeight="1104.0" prefWidth="1923.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SceneController">
+<SplitPane dividerPositions="0.011452368558042686" prefHeight="1104.0" prefWidth="1923.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SceneController">
   <items>
     <AnchorPane minHeight="0.0" minWidth="0.0" onMouseClicked="#loginreroute" prefHeight="1102.0" prefWidth="168.0" style="-fx-background-color: #526a9c;">
          <children>
@@ -79,12 +79,12 @@
             </AnchorPane>
             <ScrollPane layoutX="825.0" layoutY="199.0" prefHeight="791.0" prefWidth="675.0">
                <content>
-                  <VBox fx:id="foodBarBox1" prefHeight="792.0" prefWidth="672.0">
+                  <VBox fx:id="foodInfoBox" prefHeight="792.0" prefWidth="672.0">
                      <children>
-                        <Label fx:id="Label1" prefHeight="17.0" prefWidth="131.0" text="Label" />
-                        <Label fx:id="Label2" text="Label" />
-                        <Label prefHeight="17.0" prefWidth="234.0" text="Label" />
-                        <Label text="Label" />
+                        <Label fx:id="Label1" prefHeight="71.0" prefWidth="651.0" text="Label">
+                           <font>
+                              <Font name="Modern No. 20" size="18.0" />
+                           </font></Label>
                      </children></VBox>
                </content>
             </ScrollPane>
