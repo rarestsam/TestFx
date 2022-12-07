@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -20,6 +22,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Spinner;
@@ -85,6 +88,13 @@ public class SceneController {
 	private Calendar calendar;
 	private Database database = new Database();
 	
+	
+	@FXML
+    private VBox employeeClocking;
+
+    @FXML
+    private DatePicker myDatePicker;
+    
 	@FXML
 	private Label workerUsername10;
 	
@@ -413,14 +423,17 @@ public class SceneController {
 					}
 				}
 			}
-
-		} catch (SQLException e) {
+		} 
+		catch (SQLException e) 
+		{
 			login_Label.setText("Failed to connect to database");
 			database.closeConnection();
 			database.closeresultSet();
 			database.closestatement();
 			database.closeupdateField();
-		} catch (Exception e) {
+		}
+		catch (Exception e) 
+		{
 			System.out.print(e);
 			login_Label.setText("Incorrect Id number or not found in database");
 			database.closeConnection();
@@ -430,7 +443,8 @@ public class SceneController {
 		}
 	}
 
-	public void switchToManager(ActionEvent event) throws IOException {
+	public void switchToManager(ActionEvent event) throws IOException
+	{
 
 		Parent root = FXMLLoader.load(getClass().getResource("Manager_Screen.fxml"));
 		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -454,6 +468,7 @@ public class SceneController {
 		 * System.out.print("just checking");
 		 * 
 		 */
+		
 		try {
 			int lastdatabaseid = 0;
 
@@ -568,15 +583,20 @@ public class SceneController {
 		try {
 			int s = Integer.parseInt(txt);
 			return true;
-		} catch (Exception e) {
+		   } 
+		catch (Exception e)
+		{
 			return false;
 		}
 	}
 
-	public boolean checkdatabaseid(ArrayList<Employee> employees, String id_Number) {
+	public boolean checkdatabaseid(ArrayList<Employee> employees, String id_Number) 
+	{
 		boolean checkid = false;
-		for (int i = 0; i < employees.size(); i++) {
-			if (employees.get(i).getId_number().equals(id_Number)) {
+		for (int i = 0; i < employees.size(); i++) 
+		{		
+			if (employees.get(i).getId_number().equals(id_Number)) 
+			{
 				checkid = true;
 				break;
 			}
@@ -584,7 +604,8 @@ public class SceneController {
 		return checkid;
 	}
 
-	public void switchToCreate_New_User(ActionEvent event) throws IOException {
+	public void switchToCreate_New_User(ActionEvent event) throws IOException 
+	{
 		Parent root = FXMLLoader.load(getClass().getResource("New_User.fxml"));
 		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
@@ -594,7 +615,8 @@ public class SceneController {
 
 	}
 
-	public void switchToCreate_Edit_User(ActionEvent event) throws IOException {
+	public void switchToCreate_Edit_User(ActionEvent event) throws IOException
+	{
 		Parent root = FXMLLoader.load(getClass().getResource("edituser.fxml"));
 		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
@@ -605,7 +627,19 @@ public class SceneController {
 	}
 	
 	
-	public void switchToSceneWaitstaff(ActionEvent event) throws IOException {
+	public void switchToemployeesclockin(ActionEvent event) throws IOException
+	{
+		Parent root = FXMLLoader.load(getClass().getResource("Clock_data.fxml"));
+		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
+		stage.setFullScreen(true);
+
+	}
+	
+	public void switchToSceneWaitstaff(ActionEvent event) throws IOException 
+	{		
 		Parent root = FXMLLoader.load(getClass().getResource("Waitstaff_Screen.fxml"));
 		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
@@ -615,7 +649,8 @@ public class SceneController {
 
 	}
 
-	public void switchToLogin(ActionEvent event) throws IOException {
+	public void switchToLogin(ActionEvent event) throws IOException 
+	{
 		root = FXMLLoader.load(getClass().getResource("Login_Screen.fxml"));
 		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
@@ -624,7 +659,8 @@ public class SceneController {
 		stage.setFullScreen(true);
 	}
 
-	public void switchToKitchenstaff(ActionEvent event) throws IOException {
+	public void switchToKitchenstaff(ActionEvent event) throws IOException
+	{
 		Parent root = FXMLLoader.load(getClass().getResource("Kitchen.fxml"));
 		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
@@ -806,7 +842,8 @@ public class SceneController {
 		
 		
 		
-		try {
+		try
+		{
 			SimpleDateFormat timeFormat;
 			SimpleDateFormat dateFormat;
 			String time;
@@ -822,7 +859,8 @@ public class SceneController {
 			String incomplete = "incomplete";
 			String orderpaid = "unpaid";
 			String tableNumber = table_number.getText();
-			if (tableNumber.equals("")) {
+			if (tableNumber.equals(""))
+			{
 				checktable.setText("Enter Table Number");
 
 			} 
@@ -904,7 +942,8 @@ public class SceneController {
 		}
 	}
 
-	public void notesWindow(ActionEvent event) throws IOException {
+	public void notesWindow(ActionEvent event) throws IOException
+	{
 
 		Stage note = new Stage();
 
@@ -1038,7 +1077,8 @@ public class SceneController {
 
 		Button closeButton = new Button("Enter");
 		closeButton.setFont(font29);
-		closeButton.setOnAction(new EventHandler<ActionEvent>() {
+		closeButton.setOnAction(new EventHandler<ActionEvent>()
+		{
 			@Override
 			public void handle(ActionEvent event) {
 				if (closeButton.isArmed() == true) {
@@ -1216,7 +1256,8 @@ public class SceneController {
 
 	}
 
-	public void cardErrorWindow(ActionEvent event, String errorString) throws IOException {
+	public void cardErrorWindow(ActionEvent event, String errorString) throws IOException 
+	{
 
 		Stage cashError = new Stage();
 
@@ -1269,10 +1310,12 @@ public class SceneController {
 		}
 	}
 	
-	public void clockin(ActionEvent event) {
-		try {
+	public void clockin(ActionEvent event) 
+	{
+		try
+		{
 			BufferedWriter writer = new BufferedWriter(new FileWriter("employee_name.txt"));
-
+			BufferedWriter writerID = new BufferedWriter(new FileWriter("IdNumber.txt"));
 			int value_of_txt;
 			String text = txtField.getText();
 			value_of_txt = Integer.parseInt(text);
@@ -1293,15 +1336,19 @@ public class SceneController {
 				employees.add(employee);
 			}
 
-			for (int i = 0; i < employees.size(); i++) {
+			for (int i = 0; i < employees.size(); i++)
+			{
 				if (employees.get(i).getpassword().equals(text)) 
-						{
-					if (employees.get(i).getjobType().equals("Manager")) {
-
+					{
+					if (employees.get(i).getjobType().equals("Manager"))
+					    {
 						employee_name = employees.get(i).getEmployee_name();
 						writer.write(employee_name);
 						writer.close();
-
+					
+						 writerID.write(employees.get(i).getId_number());
+						 writerID.close();
+						
 						SimpleDateFormat timeFormat;
 						SimpleDateFormat dateFormat;
 						String time;
@@ -1335,12 +1382,15 @@ public class SceneController {
 						stage.show();
 						stage.setFullScreen(true);
 					}
-					if (employees.get(i).getjobType().equals("WaitStaff")) {
+					if (employees.get(i).getjobType().equals("WaitStaff")) 
+					{
 
 						employee_name = employees.get(i).getEmployee_name();
 						writer.write(employee_name);
 						writer.close();
 
+						writerID.write(employees.get(i).getId_number());
+						writerID.close();
 						SimpleDateFormat timeFormat;
 						SimpleDateFormat dateFormat;
 						String time;
@@ -1375,14 +1425,16 @@ public class SceneController {
 						stage.show();
 						stage.setFullScreen(true);
 						employee_name = employees.get(i).getEmployee_name();
-
 					}
 
-					if (employees.get(i).getjobType().equals("KitchenStaff")) {
+					if (employees.get(i).getjobType().equals("KitchenStaff")) 
+					{						
 						employee_name = employees.get(i).getEmployee_name();
 						writer.write(employee_name);
 						writer.close();
 
+						 writerID.write(employees.get(i).getId_number());
+						 writerID.close();
 						SimpleDateFormat timeFormat;
 						SimpleDateFormat dateFormat;
 						String time;
@@ -1425,6 +1477,8 @@ public class SceneController {
 						writer.write(employee_name);
 						writer.close();
 
+						 writerID.write(employees.get(i).getId_number());
+						 writerID.close();
 						SimpleDateFormat timeFormat;
 						SimpleDateFormat dateFormat;
 						String time;
@@ -1461,14 +1515,17 @@ public class SceneController {
 				}
 			}
 
-		} catch (SQLException e) {
+		} catch (SQLException e) 
+		{
 			System.out.print(e);
 			login_Label.setText("Failed to connect to database");
 			database.closeConnection();
 			database.closeresultSet();
 			database.closestatement();
 			database.closeupdateField();
-		} catch (Exception e) {
+		} 
+		catch (Exception e) 
+		{
 			System.out.print(e);
 			login_Label.setText("Incorrect Id number or not found in database");
 			database.closeConnection();
@@ -1483,6 +1540,8 @@ public class SceneController {
 		try {
 			BufferedReader readeremp = new BufferedReader(new FileReader("employee_name.txt"));
 			employee_name = readeremp.readLine();
+			BufferedReader readerID = new BufferedReader(new FileReader("IdNumber.txt"));
+			String ID = readerID.readLine();
 			SimpleDateFormat timeFormat;
 			SimpleDateFormat dateFormat;
 			String time;
@@ -1492,20 +1551,20 @@ public class SceneController {
 			time = timeFormat.format(Calendar.getInstance().getTime());
 			date = dateFormat.format(Calendar.getInstance().getTime());
 			database.connect_to_database();
-			database.setResultsetclockedout();
+			database.setResultsetclockedin();
 			int id = 0;
 			while (database.resultSet.next())
 			{
 			  id = database. resultSet.getInt("ID");
 			}
 			int newid = id + 1;
-	
-			String SQL = "UPDATE ClockIn_Out " + "SET ListPrice = ?, " + "Description = ? " + "WHERE BookId = " + "7";
+	//WHERE favorite_website = 'techonthenet.com'
+			//AND customer_id > 6000;
+			String SQL = "UPDATE ClockIn_Out " + "SET ClockOutDate = ?, " + "ClockOut = ? " + "WHERE IdNumber = " + ID + " AND ClockInDate = ?" ;
 			database.updateField = database.connection.prepareStatement(SQL);
-			database.updateField.setInt(1, newid);
-			database.updateField.setString(2, time);
-			database.updateField.setString(3, employee_name);
-			database.updateField.setString(4, date);
+			database.updateField.setString(1,date);
+			database.updateField.setString(2,time);
+			database.updateField.setString(3, date);
 			database.updateField.executeUpdate();
 			root = FXMLLoader.load(getClass().getResource("Login_Screen.fxml"));
 			stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -2086,10 +2145,49 @@ ArrayList<String> list = new ArrayList<String>();
 			 database.closestatement();
 			 database.closeupdateField();
 			 errorlabeledit.setText("please enter the information in the right format and all the fields");
-			       
-			 
 		 }
 		
 	  }
-		
+	 public void submit_clockin(ActionEvent event) throws InterruptedException
+	 {
+		 try {
+			 LocalDate myDate = myDatePicker.getValue();
+			 String myFormattedDate = myDate.format(DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+		     System.out.println(myFormattedDate);
+			 database.connect_to_database();
+			 database.setResultsetclockedin();
+			 
+				while (database.resultSet.next())
+				{
+				  Employee employee = new Employee();
+				  employee.setEmployee_name(database.resultSet.getString("EmployeeName"));
+				  employee.setClockedin(database.resultSet.getString("ClockInDate"));
+				  employee.setClockout(database.resultSet.getString("IdNumber"));
+				  employee.setId_number(database.resultSet.getString("IdNumber"));
+				  employees.add(employee);
+				}
+			 for(int i=0;i<employees.size();i++)
+			 {
+				 if(employees.get(i).getClockedin().equals(myFormattedDate)) 
+				{
+					 
+				}
+			 }
+				
+			 database.closeConnection();
+			 database.closeresultSet();
+			 database.closestatement();
+			 database.closeupdateField();
+		 }
+		 catch(Exception e)
+		 {
+			 System.out.print("error");
+			 database.closeConnection();
+			 database.closeresultSet();
+			 database.closestatement();
+			 database.closeupdateField();
+		 }
+		 
+		   
+	 }	 
 }

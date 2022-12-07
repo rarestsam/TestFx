@@ -122,19 +122,8 @@ public class Database
 	 public void setResultsetclockedin() throws IOException 
 	 {
 		 try {
-			 rs2=statement1.executeQuery("SELECT * FROM ClockIn_Out");
+			 resultSet=statement.executeQuery("SELECT * FROM ClockIn_Out");
 		} catch (SQLException e)
-		 {
-			e.printStackTrace();
-		}
-	 }
-	 
-	 public void setResultsetclockedout() throws IOException 
-	 {
-		 try {
-			 resultSet = statement.executeQuery("SELECT * FROM ClockIn_Out");
-		 	} 
-		 catch (SQLException e)
 		 {
 			e.printStackTrace();
 		}

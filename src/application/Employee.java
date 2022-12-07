@@ -14,9 +14,22 @@ public class Employee
 	private double totalPay;
 	private int databaseid;
 	private String day;
-	private String clockedin;
-	private String clockeout;
+	private String ClockinDate;
+	private String ClockinTime;
+	private String clockout;
 	private String password;
+	
+	
+	
+	public String getClockinTime() 
+	{
+		return ClockinTime;
+	}
+
+	public void setClockinTime(String ClockinTime) 
+	{
+		this.ClockinTime = ClockinTime;
+	}
 	
 	
 	public String getpassword() 
@@ -41,21 +54,21 @@ public class Employee
 
 	public String getClockedin() 
 	{
-		return clockedin;
+		return ClockinDate;
 	}
 
 	public void setClockedin(String clockedin) 
 	{
-		this.clockedin = clockedin;
+		this.ClockinDate = clockedin;
 	}
 
-	public String getClockeout() {
-		return clockeout;
+	public String getClockout() {
+		return clockout;
 	}
 
-	public void setClockeout(String clockeout) 
+	public void setClockout(String clockout) 
 	{
-		this.clockeout = clockeout;
+		this.clockout = clockout;
 	}
 	
 	public void setdatabaseid(int databaseid)
