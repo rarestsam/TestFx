@@ -1913,54 +1913,221 @@ public class SceneController {
 	{
 		try {
 			
-			BufferedReader readeremp = new BufferedReader(new FileReader("employee_name.txt"));
-			employee_name = readeremp.readLine();
-			BufferedReader readerID = new BufferedReader(new FileReader("IdNumber.txt"));
-			String ID = readerID.readLine();
-			SimpleDateFormat timeFormat;
-			SimpleDateFormat dateFormat;
-			String time;
-			String date;
-			timeFormat = new SimpleDateFormat("hh:mm:ss a");
-			dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-			time = timeFormat.format(Calendar.getInstance().getTime());
-			date = dateFormat.format(Calendar.getInstance().getTime());
+			 
+			
+			BufferedWriter writer = new BufferedWriter(new FileWriter("employee_name.txt"));
+			BufferedWriter writerID = new BufferedWriter(new FileWriter("IdNumber.txt"));
+			BufferedWriter writerjobtitle = new BufferedWriter(new FileWriter("jobtitle"));
+			String jobtitle ="";
+			int value_of_txt;
+			String text = txtField.getText();
+			value_of_txt = Integer.parseInt(text);
+			login_Label.setStyle("-fx-text-alignment: center; ");
 			database.connect_to_database();
-			database.setResultsetclockedin();
+			database.setResultset();
 			int id = 0;
-			while (database.resultSet.next())
-			{
-			  id = database. resultSet.getInt("ID");
+			while (database.resultSet.next()) {
+				Employee employee = new Employee();
+				employee.setEmployee_name(database.resultSet.getString("Name"));
+				employee.setId_number(database.resultSet.getString("IdNumber"));
+				employee.setHours(database.resultSet.getInt("Hours"));
+				employee.setWage(database.resultSet.getDouble("Wage"));
+				employee.set_Job_Type(database.resultSet.getString("JobType"));
+				employee.setpassword(database.resultSet.getString("Password"));
+				employee.Set_total_Pay();
+				id = database.resultSet.getInt("ID");
+				employees.add(employee);
 			}
-			int newid = id + 1;
-	//WHERE favorite_website = 'techonthenet.com'
-			//AND customer_id > 6000;
-			String SQL = "UPDATE ClockIn_Out " + "SET ClockOutDate = ?, " + "ClockOut = ? " + "WHERE IdNumber = " + ID + " AND ClockInDate = ?" ;
-			database.updateField = database.connection.prepareStatement(SQL);
-			database.updateField.setString(1,date);
-			database.updateField.setString(2,time);
-			database.updateField.setString(3, date);
-			database.updateField.executeUpdate();
-			/*
-			root = FXMLLoader.load(getClass().getResource("Login_Screen.fxml"));
-			stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-			scene = new Scene(root);
-			stage.setScene(scene);
-			stage.show();
-			stage.setFullScreen(true);
-			*/
-			database.closeConnection();
-			database.closeresultSet();
-			database.closestatement();
-			database.closeupdateField();
+
+			for (int i = 0; i < employees.size(); i++)
+			{
+				if (employees.get(i).getpassword().equals(text)) 
+					{
+					if (employees.get(i).getjobType().equals("Manager"))
+					    {
+						String ID = employees.get(i).getId_number();
+						employee_name = employees.get(i).getEmployee_name();
+						writer.write(employee_name);
+						writer.close();
+					
+						 writerID.write(employees.get(i).getId_number());
+						 writerID.close();
+						
+						SimpleDateFormat timeFormat;
+						SimpleDateFormat dateFormat;
+						String time;
+						String date;
+
+						timeFormat = new SimpleDateFormat("hh:mm:ss a");
+						dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+						time = timeFormat.format(Calendar.getInstance().getTime());
+						date = dateFormat.format(Calendar.getInstance().getTime());
 			
-			
-			
-			
-			
-			readeremp.close();
-			readerID.close();
-		} catch (Exception e) {
+						int newid = id + 1;
+
+						String insertSQL = "INSERT INTO ClockIn_Out (ID,EmployeeName,IdNumber,ClockInDate,ClockIn) VALUES (?,?,?,?,?)";
+						database.updateField = database.connection.prepareStatement(insertSQL);
+						database.updateField.setInt(1, newid);
+						database.updateField.setString(2, employee_name);
+						database.updateField.setString(3, employees.get(i).getId_number());
+						database.updateField.setString(4, date);
+						database.updateField.setString(5, time);
+						database.updateField.executeUpdate();
+
+						database.closeConnection();
+						database.closeresultSet();
+						database.closestatement();
+						database.closeupdateField();
+
+						Parent root = FXMLLoader.load(getClass().getResource("Manager_Screen.fxml"));
+						stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+						scene = new Scene(root);
+						stage.setScene(scene);
+						stage.show();
+						stage.setFullScreen(true);
+					}
+					
+					if (employees.get(i).getjobType().equals("WaitStaff")) 
+					{
+						String ID = employees.get(i).getId_number();
+						employee_name = employees.get(i).getEmployee_name();
+						writer.write(employee_name);
+						writer.close();
+
+						writerID.write(employees.get(i).getId_number());
+						writerID.close();
+						
+						SimpleDateFormat timeFormat;
+						SimpleDateFormat dateFormat;
+						String time;
+						String date;
+
+						timeFormat = new SimpleDateFormat("hh:mm:ss a");
+						dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+						time = timeFormat.format(Calendar.getInstance().getTime());
+						date = dateFormat.format(Calendar.getInstance().getTime());
+					
+
+						int newid = id + 1;
+						
+						String insertSQL = "INSERT INTO ClockIn_Out (ID,EmployeeName,IdNumber,ClockInDate,ClockIn) VALUES (?,?,?,?,?)";
+						database.updateField = database.connection.prepareStatement(insertSQL);
+						database.updateField.setInt(1, newid);
+						database.updateField.setString(2, employee_name);
+						database.updateField.setString(3, employees.get(i).getId_number());
+						database.updateField.setString(4, date);
+						database.updateField.setString(5, time);
+						database.updateField.executeUpdate();
+
+						database.closeConnection();
+						database.closeresultSet();
+						database.closestatement();
+						database.closeupdateField();
+
+						Parent root = FXMLLoader.load(getClass().getResource("Waitstaff_Screen.fxml"));
+						stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+						scene = new Scene(root);
+						stage.setScene(scene);
+						stage.show();
+						stage.setFullScreen(true);
+						employee_name = employees.get(i).getEmployee_name();
+					}
+
+					if (employees.get(i).getjobType().equals("KitchenStaff")) 
+					{			
+						String ID = employees.get(i).getId_number();
+						employee_name = employees.get(i).getEmployee_name();
+						writer.write(employee_name);
+						writer.close();
+
+						writerID.write(employees.get(i).getId_number());
+						writerID.close();
+						 
+						SimpleDateFormat timeFormat;
+						SimpleDateFormat dateFormat;
+						String time;
+						String date;
+
+						timeFormat = new SimpleDateFormat("hh:mm:ss a");
+						dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+						time = timeFormat.format(Calendar.getInstance().getTime());
+						date = dateFormat.format(Calendar.getInstance().getTime());
+						
+
+						int newid = id + 1;
+
+						String insertSQL = "INSERT INTO ClockIn_Out (ID,EmployeeName,IdNumber,ClockInDate,ClockIn) VALUES (?,?,?,?,?)";
+						database.updateField = database.connection.prepareStatement(insertSQL);
+						database.updateField.setInt(1, newid);
+						database.updateField.setString(2, employee_name);
+						database.updateField.setString(3, employees.get(i).getId_number());
+						database.updateField.setString(4, date);
+						database.updateField.setString(5, time);
+						database.updateField.executeUpdate();
+
+						database.closeConnection();
+						database.closeresultSet();
+						database.closestatement();
+						database.closeupdateField();
+
+						Parent root = FXMLLoader.load(getClass().getResource("Kitchen.fxml"));
+						stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+						scene = new Scene(root);
+						stage.setScene(scene);
+						stage.show();
+						stage.setFullScreen(true);
+
+					}
+
+					if (employees.get(i).getjobType().equals("Cashier")) {
+						String ID = employees.get(i).getId_number();
+						employee_name = employees.get(i).getEmployee_name();
+						writer.write(employee_name);
+						writer.close();
+
+						 writerID.write(employees.get(i).getId_number());
+						 writerID.close();
+						SimpleDateFormat timeFormat;
+						SimpleDateFormat dateFormat;
+						String time;
+						String date;
+
+						timeFormat = new SimpleDateFormat("hh:mm:ss a");
+						dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+						time = timeFormat.format(Calendar.getInstance().getTime());
+						date = dateFormat.format(Calendar.getInstance().getTime());
+					
+						int newid = id + 1;
+
+
+						String insertSQL = "INSERT INTO ClockIn_Out (ID,EmployeeName,IdNumber,ClockInDate,ClockIn) VALUES (?,?,?,?,?)";
+						database.updateField = database.connection.prepareStatement(insertSQL);
+						database.updateField.setInt(1, newid);
+						database.updateField.setString(2, employee_name);
+						database.updateField.setString(3, employees.get(i).getId_number());
+						database.updateField.setString(4, date);
+						database.updateField.setString(5, time);
+						database.updateField.executeUpdate();
+
+						database.closeConnection();
+						database.closeresultSet();
+						database.closestatement();
+						database.closeupdateField();
+						Parent root = FXMLLoader.load(getClass().getResource("Waitstaff_Screen.fxml"));
+						stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+						scene = new Scene(root);
+						stage.setScene(scene);
+						stage.show();
+						stage.setFullScreen(true);
+					}
+				}
+			}
+			 writer.close();
+			 writerID.close(); 
+			 writerjobtitle.close();
+		} 
+			catch (Exception e)
+			{
 			System.out.println(e);
 			database.closeConnection();
 			database.closeresultSet();
