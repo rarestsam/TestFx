@@ -70,12 +70,14 @@ public class SceneController {
 	private int fb = 1;
 	private int on = 1;
 	private int o=0;
+	private int  os = 0;
 	private int currentbutton = 110000;
 	private int iterator = 0;
 	private int lastordernumber;
 	private int newordernumber;
 	private double ph = 200.0;
 	private double tp = 0.0;
+	private String pricetotalbutton ="";
 	Double priceText2 = null;
 	Double totalPriceDub;
 	private String priceTotal ="";
@@ -309,6 +311,20 @@ public class SceneController {
 	 @FXML
 	 private VBox foodBarBox18;
 
+	 @FXML
+	 private Label customers_name2;
+	 
+	 @FXML
+	 private Label customers_number2;
+	 
+	 @FXML
+	 private Label orderNumber1;
+	 
+	 @FXML 
+	 private Label tableNumber;
+	 
+	
+	 
 	// BufferedWriter writer2 = new BufferedWriter(new
 	// FileWriter("order_number.txt"));
 
@@ -368,10 +384,12 @@ public class SceneController {
 	 
 	 
 	 
-	public void loginreroute(ActionEvent event) {
+	public void loginreroute(ActionEvent event) 
+	{
 		try {
 			BufferedWriter writer = new BufferedWriter(new FileWriter("employee_name.txt"));
-
+			BufferedWriter writerjobtitle = new BufferedWriter(new FileWriter("jobtitle"));
+			String jobtitle ="";
 			int value_of_txt;
 			String text = txtField.getText();
 			value_of_txt = Integer.parseInt(text);
@@ -408,6 +426,12 @@ public class SceneController {
 						database.closeresultSet();
 						database.closestatement();
 						database.closeupdateField();
+						employee_name = employees.get(i).getEmployee_name();
+						jobtitle = employees.get(i).getjobType();
+						writerjobtitle.write(jobtitle);
+						writerjobtitle.close();
+						writer.write(employee_name);
+						writer.close();
 
 					}
 					if (employees.get(i).getjobType().equals("WaitStaff"))
@@ -422,7 +446,10 @@ public class SceneController {
 						database.closeresultSet();
 						database.closestatement();
 						database.closeupdateField();
+						jobtitle = employees.get(i).getjobType();
 						employee_name = employees.get(i).getEmployee_name();
+						writerjobtitle.write(jobtitle);
+						writerjobtitle.close();
 						writer.write(employee_name);
 						writer.close();
 					}
@@ -439,6 +466,12 @@ public class SceneController {
 						database.closeresultSet();
 						database.closestatement();
 						database.closeupdateField();
+						jobtitle = employees.get(i).getjobType();
+						employee_name = employees.get(i).getEmployee_name();
+						writerjobtitle.write(jobtitle);
+						writerjobtitle.close();
+						writer.write(employee_name);
+						writer.close();
 					}
 
 					if (employees.get(i).getjobType().equals("Cashier")) {
@@ -452,6 +485,12 @@ public class SceneController {
 						database.closeresultSet();
 						database.closestatement();
 						database.closeupdateField();
+						jobtitle = employees.get(i).getjobType();
+						employee_name = employees.get(i).getEmployee_name();
+						writerjobtitle.write(jobtitle);
+						writerjobtitle.close();
+						writer.write(employee_name);
+						writer.close();
 					}
 				}
 			}
@@ -1015,40 +1054,48 @@ public class SceneController {
 
 
 	
-	public void complete(ActionEvent event) {
+	public void complete(ActionEvent event) 
+	{
 		/*
 		 * for(int i=0; i<new_order.getfoodsize();i++) {
 		 * System.out.println(new_order.getFood_name(i)); }
 		 */
 		
 		
-		for(int i=1;i<fb;i++) {
+		for(int i=0;i<fb;i++) {
 		
-			if(nameMap.get("foodbar"+i)!= null){
+			if(nameMap.get("foodbar"+i)!= null)
+			{
 				new_order.setFood_name(nameMap.get("foodbar"+i),i);
 			}
 			else {
-				new_order.setFood_name(null,i);
+				//new_order.setFood_name(null,i);
 			}
-			if(amountMap.get("foodbar"+i)!= null) {
+			if(amountMap.get("foodbar"+i)!= null) 
+			{
 				new_order.setamount(amountMap.get("foodbar"+i),i);
 			}
 			else {
-				new_order.setamount(null,i);
+				//new_order.setamount(null,i);
 			}
-			if(priceMap.get("foodbar"+i)!= null) {
+			if(priceMap.get("foodbar"+i)!= null) 
+			{
 				Double priceinMap= Double.parseDouble(priceMap.get("foodbar"+i));
 				new_order.setFood_price(priceinMap,i);
 			}
 			else {
-				new_order.setFood_price(null,i);
+				//new_order.setFood_price(null,i);
 			}
+			if(priceMap.get("foodbar"+i)!= null) 
+			{
 			
-			System.out.println("Name "+ nameMap.get("foodbar"+i));
-			System.out.println("Amount "+ amountMap.get("foodbar"+i));
-			System.out.println("Price "+ priceMap.get("foodbar"+i));
+				new_order.setNotes(map.get("foodbar" + i),i);
+			}
+		//	System.out.println("Name "+ nameMap.get("foodbar"+i));
+		//	System.out.println("Amount "+ amountMap.get("foodbar"+i));
+		//System.out.println("Price "+ priceMap.get("foodbar"+i));
 		}
-		
+		//System.out.println(new_order.getFood_name(0));
 		
 		try
 		{
@@ -1061,19 +1108,40 @@ public class SceneController {
 			dateFormat = new SimpleDateFormat("MM/dd/yyyy");
 			time = timeFormat.format(Calendar.getInstance().getTime());
 			date = dateFormat.format(Calendar.getInstance().getTime());
-			// System.out.println(time);
-			// System.out.println(date);
+
 
 			String incomplete = "incomplete";
 			String orderpaid = "unpaid";
 			String tableNumber = table_number.getText();
-			if (tableNumber.equals(""))
-			{
-				checktable.setText("Enter Table Number");
+			String phonenumber = customers_number.getText();
+			String customername = customers_name.getText();
+			
 
+			if(phonenumber.equals("") && !customername.equals(""))
+			{
+				
+				checktable.setText("Enter Customer phonenumber");
+
+			}
+
+			else if(!phonenumber.equals("") && customername.equals(""))
+			{
+				
+				checktable.setText("Enter Customer name ");
+
+			}
+			
+			else if (tableNumber.equals(""))
+			{
+				if((phonenumber.equals("") && customername.equals("")))
+						{
+							checktable.setText("Enter Customer name and number or Table Number");
+						}
+				System.out.println("got here");
 			} 
-		
-			else {
+			
+			else 
+			{
 				database.connect_to_database();
 				int tablenumber;
 				int orderid = 0;
@@ -1086,13 +1154,9 @@ public class SceneController {
 				new_order.setTable_number(tableNumber);
 				new_order.setDate(date);
 				new_order.setTime_Of_Order(time);
-				new_order.setNotes("extra", 0);
 				new_order.setComplete(incomplete);
 				new_order.setPaid(orderpaid);
-				// ITEMAMOUNT7   item7amount
-				// System.out.print(new_order.getTotal());
-				String customername = "jack";
-				String phonenumber = "708";
+				
 				String insertSQL = "INSERT INTO Orders (ID,OrderNumber, Customername, PhoneNumber, WaitStaff,Tablenumber,TimeofOrder, month_day_year, Price, Complete, Paid, "
 						+ "item1, item1amount, notes1, item1cost, item2, item2amount, notes2, item2cost, item3, item3amount, notes3, item3cost, item4, item4amount, notes4, item4cost, "
 						+ "item5, item5amount, notes5, item5cost, item6, item6amount, notes6, item6cost, item7, item7amount, notes7, item7cost, item8, item8amount, notes8, item8cost, "
@@ -1110,8 +1174,8 @@ public class SceneController {
 				database.updateField.setString(6, new_order.getTable_number());
 				database.updateField.setString(7, new_order.getTime_Of_Order());
 				database.updateField.setString(8, new_order.getDate());
-				database.updateField.setString(9, new_order.getTotal1());
-				database.updateField.setString(10, new_order.getPaid());
+				database.updateField.setDouble(9, new_order.getTotal());
+				database.updateField.setString(10, new_order.getComplete());
 				database.updateField.setString(11, new_order.getPaid());
 				
 				int foodnameiterator = 12;
@@ -1121,8 +1185,10 @@ public class SceneController {
 				
 				for(int i = 0; i<new_order.getfoodsize();i++)
 				{
+		
+					
 				database.updateField.setString(foodnameiterator, new_order.getFood_name(i));
-				database.updateField.setInt(foodamountiterator, 1);
+				database.updateField.setInt(foodamountiterator, new_order.getamount(i));
 				database.updateField.setString(foodnotesiterator, new_order.getnote(i));
 				database.updateField.setDouble(foodpriceiterator, new_order.getFood_price(i));
 				foodnameiterator = foodnameiterator + 4;
@@ -1584,226 +1650,54 @@ public class SceneController {
 	
 	public void clockin(ActionEvent event) 
 	{
-		try
-		{
-			BufferedWriter writer = new BufferedWriter(new FileWriter("employee_name.txt"));
-			BufferedWriter writerID = new BufferedWriter(new FileWriter("IdNumber.txt"));
-			int value_of_txt;
-			String text = txtField.getText();
-			value_of_txt = Integer.parseInt(text);
-			login_Label.setStyle("-fx-text-alignment: center; ");
+		try {
+			BufferedReader readeremp = new BufferedReader(new FileReader("employee_name.txt"));
+			employee_name = readeremp.readLine();
+			BufferedReader readerID = new BufferedReader(new FileReader("IdNumber.txt"));
+			String ID = readerID.readLine();
+			SimpleDateFormat timeFormat;
+			SimpleDateFormat dateFormat;
+			String time;
+			String date;
+			timeFormat = new SimpleDateFormat("hh:mm:ss a");
+			dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+			time = timeFormat.format(Calendar.getInstance().getTime());
+			date = dateFormat.format(Calendar.getInstance().getTime());
 			database.connect_to_database();
-			database.setResultset();
+			database.setResultsetclockedin();
 			int id = 0;
-			while (database.resultSet.next()) {
-				Employee employee = new Employee();
-				employee.setEmployee_name(database.resultSet.getString("Name"));
-				employee.setId_number(database.resultSet.getString("IdNumber"));
-				employee.setHours(database.resultSet.getInt("Hours"));
-				employee.setWage(database.resultSet.getDouble("Wage"));
-				employee.set_Job_Type(database.resultSet.getString("JobType"));
-				employee.setpassword(database.resultSet.getString("Password"));
-				employee.Set_total_Pay();
-				id = database.resultSet.getInt("ID");
-				employees.add(employee);
-			}
-
-			for (int i = 0; i < employees.size(); i++)
+			while (database.resultSet.next())
 			{
-				if (employees.get(i).getpassword().equals(text)) 
-					{
-					if (employees.get(i).getjobType().equals("Manager"))
-					    {
-						employee_name = employees.get(i).getEmployee_name();
-						writer.write(employee_name);
-						writer.close();
-					
-						 writerID.write(employees.get(i).getId_number());
-						 writerID.close();
-						
-						SimpleDateFormat timeFormat;
-						SimpleDateFormat dateFormat;
-						String time;
-						String date;
-
-						timeFormat = new SimpleDateFormat("hh:mm:ss a");
-						dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-						time = timeFormat.format(Calendar.getInstance().getTime());
-						date = dateFormat.format(Calendar.getInstance().getTime());
-			
-						int newid = id + 1;
-
-						String insertSQL = "INSERT INTO ClockIn_Out (ID,EmployeeName,IdNumber,ClockInDate,ClockIn) VALUES (?,?,?,?,?)";
-						database.updateField = database.connection.prepareStatement(insertSQL);
-						database.updateField.setInt(1, newid);
-						database.updateField.setString(2, employee_name);
-						database.updateField.setString(3, employees.get(i).getId_number());
-						database.updateField.setString(4, date);
-						database.updateField.setString(5, time);
-						database.updateField.executeUpdate();
-
-						database.closeConnection();
-						database.closeresultSet();
-						database.closestatement();
-						database.closeupdateField();
-
-						Parent root = FXMLLoader.load(getClass().getResource("Manager_Screen.fxml"));
-						stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-						scene = new Scene(root);
-						stage.setScene(scene);
-						stage.show();
-						stage.setFullScreen(true);
-					}
-					if (employees.get(i).getjobType().equals("WaitStaff")) 
-					{
-
-						employee_name = employees.get(i).getEmployee_name();
-						writer.write(employee_name);
-						writer.close();
-
-						writerID.write(employees.get(i).getId_number());
-						writerID.close();
-						SimpleDateFormat timeFormat;
-						SimpleDateFormat dateFormat;
-						String time;
-						String date;
-
-						timeFormat = new SimpleDateFormat("hh:mm:ss a");
-						dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-						time = timeFormat.format(Calendar.getInstance().getTime());
-						date = dateFormat.format(Calendar.getInstance().getTime());
-					
-
-						int newid = id + 1;
-
-						String insertSQL = "INSERT INTO ClockIn_Out (ID,EmployeeName,IdNumber,ClockInDate,ClockIn) VALUES (?,?,?,?,?)";
-						database.updateField = database.connection.prepareStatement(insertSQL);
-						database.updateField.setInt(1, newid);
-						database.updateField.setString(2, employee_name);
-						database.updateField.setString(3, employees.get(i).getId_number());
-						database.updateField.setString(4, date);
-						database.updateField.setString(5, time);
-						database.updateField.executeUpdate();
-
-						database.closeConnection();
-						database.closeresultSet();
-						database.closestatement();
-						database.closeupdateField();
-
-						Parent root = FXMLLoader.load(getClass().getResource("Waitstaff_Screen.fxml"));
-						stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-						scene = new Scene(root);
-						stage.setScene(scene);
-						stage.show();
-						stage.setFullScreen(true);
-						employee_name = employees.get(i).getEmployee_name();
-					}
-
-					if (employees.get(i).getjobType().equals("KitchenStaff")) 
-					{						
-						employee_name = employees.get(i).getEmployee_name();
-						writer.write(employee_name);
-						writer.close();
-
-						 writerID.write(employees.get(i).getId_number());
-						 writerID.close();
-						SimpleDateFormat timeFormat;
-						SimpleDateFormat dateFormat;
-						String time;
-						String date;
-
-						timeFormat = new SimpleDateFormat("hh:mm:ss a");
-						dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-						time = timeFormat.format(Calendar.getInstance().getTime());
-						date = dateFormat.format(Calendar.getInstance().getTime());
-						
-
-						int newid = id + 1;
-
-						String insertSQL = "INSERT INTO ClockIn_Out (ID,EmployeeName,IdNumber,ClockInDate,ClockIn) VALUES (?,?,?,?,?)";
-						database.updateField = database.connection.prepareStatement(insertSQL);
-						database.updateField.setInt(1, newid);
-						database.updateField.setString(2, employee_name);
-						database.updateField.setString(3, employees.get(i).getId_number());
-						database.updateField.setString(4, date);
-						database.updateField.setString(5, time);
-						database.updateField.executeUpdate();
-
-						database.closeConnection();
-						database.closeresultSet();
-						database.closestatement();
-						database.closeupdateField();
-
-						Parent root = FXMLLoader.load(getClass().getResource("Kitchen.fxml"));
-						stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-						scene = new Scene(root);
-						stage.setScene(scene);
-						stage.show();
-						stage.setFullScreen(true);
-
-					}
-
-					if (employees.get(i).getjobType().equals("Cashier")) {
-
-						employee_name = employees.get(i).getEmployee_name();
-						writer.write(employee_name);
-						writer.close();
-
-						 writerID.write(employees.get(i).getId_number());
-						 writerID.close();
-						SimpleDateFormat timeFormat;
-						SimpleDateFormat dateFormat;
-						String time;
-						String date;
-
-						timeFormat = new SimpleDateFormat("hh:mm:ss a");
-						dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-						time = timeFormat.format(Calendar.getInstance().getTime());
-						date = dateFormat.format(Calendar.getInstance().getTime());
-					
-						int newid = id + 1;
-
-
-						String insertSQL = "INSERT INTO ClockIn_Out (ID,EmployeeName,IdNumber,ClockInDate,ClockIn) VALUES (?,?,?,?,?)";
-						database.updateField = database.connection.prepareStatement(insertSQL);
-						database.updateField.setInt(1, newid);
-						database.updateField.setString(2, employee_name);
-						database.updateField.setString(3, employees.get(i).getId_number());
-						database.updateField.setString(4, date);
-						database.updateField.setString(5, time);
-						database.updateField.executeUpdate();
-
-						database.closeConnection();
-						database.closeresultSet();
-						database.closestatement();
-						database.closeupdateField();
-						Parent root = FXMLLoader.load(getClass().getResource("Waitstaff_Screen.fxml"));
-						stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-						scene = new Scene(root);
-						stage.setScene(scene);
-						stage.show();
-						stage.setFullScreen(true);
-					}
-				}
+			  id = database. resultSet.getInt("ID");
 			}
-
-		} catch (SQLException e) 
-		{
-			System.out.print(e);
-			login_Label.setText("Failed to connect to database");
+			int newid = id + 1;
+	//WHERE favorite_website = 'techonthenet.com'
+			//AND customer_id > 6000;
+			String SQL = "UPDATE ClockIn_Out " + "SET ClockOutDate = ?, " + "ClockOut = ? " + "WHERE IdNumber = " + ID + " AND ClockInDate = ?" ;
+			database.updateField = database.connection.prepareStatement(SQL);
+			database.updateField.setString(1,date);
+			database.updateField.setString(2,time);
+			database.updateField.setString(3, date);
+			database.updateField.executeUpdate();
+			root = FXMLLoader.load(getClass().getResource("Login_Screen.fxml"));
+			stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			scene = new Scene(root);
+			stage.setScene(scene);
+			stage.show();
+			stage.setFullScreen(true);
 			database.closeConnection();
 			database.closeresultSet();
 			database.closestatement();
 			database.closeupdateField();
-		} 
-		catch (Exception e) 
-		{
-			System.out.print(e);
-			login_Label.setText("Incorrect Id number or not found in database");
+			readeremp.close();
+			readerID.close();
+		} catch (Exception e) {
+			System.out.println(e);
 			database.closeConnection();
 			database.closeresultSet();
 			database.closestatement();
 			database.closeupdateField();
+			e.printStackTrace();
 		}
 
 	}
@@ -2130,128 +2024,145 @@ ArrayList<String> list = new ArrayList<String>();
 	 public void  refresh1(ActionEvent event)
 	 {
 		 
-		 Font font33 = Font.font("Modern No. 20", 33);
-		 try {
-			 int lastdatabaseid;
-			database.connect_to_database();
-			database.setResultsetorderdone();
-			
-			 while(database.resultSet.next())
-			 {
-				Order previousorder = new Order();
-				previousorder.setOrder_number(database.resultSet.getString("OrderNumber"));
-				previousorder.setWaitress(database.resultSet.getString("WaitStaff"));
-				previousorder.setTime_Of_Order(database.resultSet.getString("TimeOfOrder"));
-				previousorder.setDate(database.resultSet.getString("month_day_year"));
-				previousorder.setTotal1(database.resultSet.getDouble("Price"));
-				previousorder.setTable_number(database.resultSet.getString("Tablenumber"));
-				
-				previousorder.setFood_name(database.resultSet.getString("item1"), 0);
-				//previousorder.setFood_price(database.resultSet.getDouble("itemcost1"), 0);
-				previousorder.setamount(database.resultSet.getInt("itemamount1"), 0);
-				previousorder.setNotes(database.resultSet.getString("notes1"), 0);
-				
-				previousorder.setFood_name(database.resultSet.getString("item2"), 1);
-				//previousorder.setFood_price(database.resultSet.getDouble("itemcost2"), 1);
-				previousorder.setamount(database.resultSet.getInt("itemamount2"), 1);
-				previousorder.setNotes(database.resultSet.getString("notes2"), 1);
-				
-				orderdone1.add(previousorder);
-				lastdatabaseid = database.resultSet.getInt(1);
-			 }		 
+		 {
 			 
-			    database.closeConnection();
-				database.closeresultSet();
-				database.closestatement();
-				database.closeupdateField();
-		
-		// ArrayList.clear() vs ArrayList.removeAll().		 
-		//ArrayList<Order> orders = new ArrayList<Order>();
-		 //orders.
-		 //Order order = new
-		 //priceText11 first amount tag
-		 // orderNumberk ordernumber kitchen
-		//tablek table number k
-		// foodText1 		
-		//totalPriceText1	
-		//workerUsername10	
-		//priceText12 amount	
-		//foodText2	
-				
-				
-		for (int i = 0; i < orderdone1.size() ; i++) 
-		{
-			 Button orderButton = new Button("Order #" + orderdone1.get(o).getOrder_number());
-			 orderButton.setFont(font33);
-			 String ji = Integer.toString(o);
-			 orderButton.setId(ji);
-			 orderButton.setMinWidth(704);
-			 orderButton.setMinHeight(87);
-			 orderButton.setMaxWidth(704);
-			 orderButton.setMaxHeight(87);
-			 orderButton.setOnAction(new EventHandler<ActionEvent>() 
-		 		{
-				 	@Override
-				 	public void handle(ActionEvent event) 
-					{
-				 		Font font29 = Font.font("Modern No. 20", 29);
-
-						Label foodInfo = new Label(null); //ADD TEXT HERE!!
-						foodInfo.setMinWidth(651);
-						foodInfo.setMinHeight(71);
-						foodInfo.setFont(font29);
-						foodInfo.setStyle("-fx-text-alignment: TOP_LEFT; ");
-						
-						foodInfoBox.getChildren().addAll(foodInfo);
-				 		
-				 		/*
-				 		int of = Integer.parseInt(orderButton.getId());
-				 		orderNumberk.setText(orderdone1.get(of).getOrder_number());
-				 		tablek.setText(orderdone1.get(of).getTable_number());
-				 		totalPriceText1.setText(orderdone1.get(of).getTotal1());
-				 		workerUsername10.setTextorderdone1.get(of).getWaitress());
-				 		//for(int i =0; i<2;i++)
-				 		//{
-				 		notesText1.setText(orderdone1.get(of).getnote(0));
-				 		foodText1.setText(orderdone1.get(of).getFood_name(0));
-				 		priceText11.setText(orderdone1.get(of).getamountString(0));
-				 		//}
-				 		priceText12.setText(orderdone1.get(of).getamountString(1));
-				 		foodText2.setText(orderdone1.get(of).getFood_name(1));
-				 		notesText2.setText(orderdone1.get(of).getnote(1));
-				 	    currentbutton = of;
-				 	    */
-				 		System.out.println("it worked");
-					}
-		 
-				});
+			 Font font33 = Font.font("Modern No. 20", 33);
+			 try {
 			
-			 order.add(o,orderButton.getId());
-			 orderlistK.getChildren().addAll(orderButton);
-			 o++;
-		}
-		System.out.println(o);
-		System.out.println(orders.size());
+				database.connect_to_database();
+				database.setResultsetorder();
 
+				 while(database.resultSet.next())
+				 {
+					  
+					 String paidStatus = database.resultSet.getString("Paid");
+					 if(paidStatus.equals("unpaid"))
+					 {
+				
+					Order previousorder = new Order();
+					previousorder.setnullall();
+					previousorder.setOrder_number(database.resultSet.getString("OrderNumber"));
+					previousorder.setWaitress(database.resultSet.getString("WaitStaff"));
+					previousorder.setTime_Of_Order(database.resultSet.getString("TimeOfOrder"));
+					previousorder.setDate(database.resultSet.getString("month_day_year"));
+					previousorder.setTotal1(database.resultSet.getDouble("Price"));
+					previousorder.setTable_number(database.resultSet.getString("Tablenumber"));
+					previousorder.setCustomername(database.resultSet.getString("Customername"));
+					previousorder.setphonenumber(database.resultSet.getString("PhoneNumber"));
+					for(int i=0;i<previousorder.getfoodsize(); i++)
+					{
+						//System.out.println(i);
+						int k = i+1;
+					
+						String name = database.resultSet.getString("item" + k);
+				
+						if(name.equals("null"))
+						{						
+							int j = 7;						
+							System.out.println();
+						}
+						else
+						{
+							previousorder.setFood_name(database.resultSet.getString("item" + k), i);
+							previousorder.setamount(database.resultSet.getInt("item" + k + "amount"), i);
+							previousorder.setNotes(database.resultSet.getString("notes" + k), i);
+							previousorder.setFood_price(database.resultSet.getDouble("item" + k + "cost"), i);
+						}						
+					}				
+					orderdone1.add(previousorder);
+					 }
+				 }		 
+				    database.closeConnection();
+					database.closeresultSet();
+					database.closestatement();
+					database.closeupdateField();
+					//ystem.out.println("made it here2");
+			
+			for (int i = 0; i <orderdone1.size() ; i++) 
+			{
+				 Button orderButton = new Button("Order #" + orderdone1.get(os).getOrder_number());
+				 orderButton.setFont(font33);
+				 String ji = Integer.toString(os);
+				 orderButton.setId(ji);
+				 orderButton.setMinWidth(704);
+				 orderButton.setMinHeight(87);
+				 orderButton.setMaxWidth(704);
+				 orderButton.setMaxHeight(87);
+				 orderButton.setOnAction(new EventHandler<ActionEvent>() 
+			 		{
+					 	@Override
+					 	public void handle(ActionEvent event) 
+						{
+					 		//customers_name2
+					 		//customers_number2
+					 		//tableNumber
+					 		//totalPriceText1
+					 		//orderNumber1
+					 		//workerUsername10
+					 		
+					 		foodBarBox18.getChildren().clear();
+					 		int of = Integer.parseInt(orderButton.getId());
+					 		System.out.println(of);
+					 		System.out.println(orderdone1.get(of).getfoodsize());
+					 		orderNumber1.setText(orderdone1.get(of).getOrder_number());
+					 		tableNumber.setText(orderdone1.get(of).getTable_number());
+					 	//	totalPriceText12.setText(orderdone1.get(of).getTotal1());
+					 		workerUsername10.setText(orderdone1.get(of).getWaitress());
+					 		customers_name2.setText(orderdone1.get(of).getCustomername());
+					 		customers_number2.setText(orderdone1.get(of).getphonenumber());
+					 
+					 		for(int i =0; i<orderdone1.get(of).getfoodsize() ;i++)
+					 		{
+					 			String namei = orderdone1.get(of).getFood_name(i);
+					 			if(namei.equals("null"))
+								{
+									
+					 				int j = 7;
+									
+									//System.out.println(i);
+								
+								}
+								else
+								{
+					 			Font font29 = Font.font("Modern No. 20", 29);
+					 			String amountStr = orderdone1.get(of).getamountString(i);
+					 			String priceStr = Double.toString(orderdone1.get(of).getFood_price(i));		
+					 			String lableStr = amountStr + "  " + orderdone1.get(of).getFood_name(i) + "  " + priceStr ;
+					 			String lableStr2 = orderdone1.get(of).getnote(i);
+								Label foodInfo = new Label(lableStr); //ADD TEXT HERE!!
+								foodInfo.setMinWidth(651);
+								foodInfo.setMinHeight(71);
+								foodInfo.setFont(font29);
+								foodInfo.setStyle("-fx-text-alignment: top-left; ");
+								
+								Label foodInfo2 = new Label(lableStr2); //ADD TEXT HERE!!
+								foodInfo2.setMinWidth(651);
+								foodInfo2.setMinHeight(71);
+								foodInfo2.setFont(font29);
+								foodInfo2.setStyle("-fx-text-alignment: top-left; ");
+								
+								
+								foodBarBox18.getChildren().addAll(foodInfo, foodInfo2);
+								}
+					 		}
+					 		//
+					 		pricetotalbutton = orderdone1.get(of).getTotal1();
+						}				 	
+			 		});
+				 
+				 order.add(o,orderButton.getId());
+				 orderlistK.getChildren().addAll(orderButton);
+				 os++;
+			}
+			//System.out.println(o);
+			//System.out.println(orders.size());
+			 }
+			 catch (IOException | SQLException e) 
+			 {
+				e.printStackTrace();
+				System.out.println(e);
+			}
 		 }
-		 catch (IOException e) 
-		 {
-			    database.closeConnection();
-				database.closeresultSet();
-				database.closestatement();
-				database.closeupdateField();
-		
-			   e.printStackTrace();
-		} 
-		 catch (SQLException e) 
-		 {
-			    database.closeConnection();
-				database.closeresultSet();
-				database.closestatement();
-				database.closeupdateField();		
-			  e.printStackTrace();			
-		}
-		 
 	 }
 	 
 	 
@@ -2429,7 +2340,7 @@ ArrayList<String> list = new ArrayList<String>();
 		 try {
 			 LocalDate myDate = myDatePicker.getValue();
 			 String myFormattedDate = myDate.format(DateTimeFormatter.ofPattern("MM/dd/yyyy"));
-		     System.out.println(myFormattedDate);
+		//     System.out.println(myFormattedDate);
 			 database.connect_to_database();
 			 database.setResultsetclockedin();
 			 
@@ -2446,6 +2357,9 @@ ArrayList<String> list = new ArrayList<String>();
 			 {
 				 if(employees.get(i).getClockedin().equals(myFormattedDate)) 
 				{
+					 
+					 
+					 
 					 
 				}
 			 }
