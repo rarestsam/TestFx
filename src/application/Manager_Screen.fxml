@@ -11,7 +11,7 @@
             <Font name="Modern No. 20" size="22.0" />
          </font>
       </Button>
-      <Button fx:id="clearButton11" layoutX="147.0" layoutY="24.0" mnemonicParsing="false" onAction="#switchToLogin" prefHeight="32.0" prefWidth="112.0" style="-fx-background-color: red;" text="Clock Out" textAlignment="CENTER">
+      <Button fx:id="clearButton11" layoutX="147.0" layoutY="24.0" mnemonicParsing="false" onAction="#clockout" prefHeight="32.0" prefWidth="112.0" style="-fx-background-color: red;" text="Clock Out" textAlignment="CENTER">
          <font>
             <Font name="Modern No. 20" size="21.0" />
          </font>
@@ -21,7 +21,7 @@
             <Font name="Modern No. 20" size="61.0" />
          </font>
       </Button>
-      <Button layoutX="459.0" layoutY="299.0" mnemonicParsing=" false" onAction="#switchToKitchenstaff" prefHeight="113.0" prefWidth="981.0" text="Wait Staff" textFill="#1d1e1e">
+      <Button layoutX="459.0" layoutY="299.0" mnemonicParsing=" false" onAction="#switchToSceneWaitstaff" prefHeight="113.0" prefWidth="981.0" text="Wait Staff" textFill="#1d1e1e">
          <font>
             <Font name="Modern No. 20" size="61.0" />
          </font>

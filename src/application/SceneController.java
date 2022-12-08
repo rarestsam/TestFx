@@ -68,7 +68,7 @@ public class SceneController {
 	
 	private int neworderid;
 	
-	private int fb = 1;
+	private int fb = 0;
 	private int on = 1;
 	private int o=0;
 	private int  os = 0;
@@ -1160,14 +1160,83 @@ public class SceneController {
 
 			}
 			
+			else if (!phonenumber.equals("") && !customername.equals("") && tableNumber.equals(""))
+			{
+				database.connect_to_database();
+				int tablenumber;
+				int orderid = 0;
+				tablenumber = Integer.parseInt(tableNumber);
+				BufferedReader readeremp = new BufferedReader(new FileReader("employee_name.txt"));
+				employee_name = readeremp.readLine();
+				neworderid = orderid + 1;				
+				new_order.setEmployee_Name(employee_name);
+				new_order.setOrder_number(newordernumber1);
+				new_order.setTable_number(tableNumber);
+				new_order.setDate(date);
+				new_order.setTime_Of_Order(time);
+				new_order.setComplete(incomplete);
+				new_order.setPaid(orderpaid);
+				
+				String insertSQL = "INSERT INTO Orders (ID,OrderNumber, Customername, PhoneNumber, WaitStaff,Tablenumber,TimeofOrder, month_day_year, Price, Complete, Paid, "
+						+ "item1, item1amount, notes1, item1cost, item2, item2amount, notes2, item2cost, item3, item3amount, notes3, item3cost, item4, item4amount, notes4, item4cost, "
+						+ "item5, item5amount, notes5, item5cost, item6, item6amount, notes6, item6cost, item7, item7amount, notes7, item7cost, item8, item8amount, notes8, item8cost, "
+						+ "item9, item9amount, notes9, item9cost, item10, item10amount, notes10, item10cost, item11, item11amount, notes11, item11cost, item12, item12amount, notes12, item12cost,"
+						+ " item13, item13amount, notes13, item13cost, item14, item14amount, notes14, item14cost, item15, item15amount, notes15, item15cost, item16, item16amount, notes16, item16cost, "
+						+ "item17, item17amount, notes17, item17cost, item18, item18amount, notes18, item18cost, item19, item19amount, notes19, item19cost, item20, item20amount, notes20, item20cost) "
+	+ "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+				
+				database.updateField = database.connection.prepareStatement(insertSQL);
+				database.updateField.setInt(1, 7);
+				database.updateField.setString(2, new_order.getOrder_number());
+				database.updateField.setString(3, customername);
+				database.updateField.setString(4, phonenumber);
+				database.updateField.setString(5, new_order.getEmployee_Name());
+				database.updateField.setString(6, new_order.getTable_number());
+				database.updateField.setString(7, new_order.getTime_Of_Order());
+				database.updateField.setString(8, new_order.getDate());
+				database.updateField.setDouble(9, new_order.getTotal());
+				database.updateField.setString(10, new_order.getComplete());
+				database.updateField.setString(11, new_order.getPaid());
+				
+				int foodnameiterator = 12;
+				int foodamountiterator = 13;
+				int foodnotesiterator = 14;
+				int foodpriceiterator = 15;
+				
+				for(int i = 0; i<new_order.getfoodsize();i++)
+				{
+		
+					
+				database.updateField.setString(foodnameiterator, new_order.getFood_name(i));
+				database.updateField.setInt(foodamountiterator, new_order.getamount(i));
+				database.updateField.setString(foodnotesiterator, new_order.getnote(i));
+				database.updateField.setDouble(foodpriceiterator, new_order.getFood_price(i));
+				foodnameiterator = foodnameiterator + 4;
+				foodamountiterator = foodamountiterator + 4;
+				foodnotesiterator =  foodnotesiterator +4;
+				foodpriceiterator =foodpriceiterator +4;
+				}
+								
+				database.updateField.executeUpdate();
+				database.closeConnection();
+				database.closeresultSet();
+				database.closestatement();
+				database.closeupdateField();
+							
+				checktable.setText("Success");
+				
+				clear(event);
+				readeremp.close();
+			} 
+			
 			else if (tableNumber.equals(""))
 			{
 				if((phonenumber.equals("") && customername.equals("")))
 						{
 							checktable.setText("Enter Customer name and number or Table Number");
-						}
-				System.out.println("got here");
+						}	
 			} 
+			
 			
 			else 
 			{
@@ -1484,10 +1553,10 @@ public class SceneController {
 							database.updateField = database.connection.prepareStatement(SQL);
 							database.updateField.setString(1, "Paid");
 							database.updateField.executeUpdate();	
-							 database.closeConnection();
-								database.closeresultSet();
-								database.closestatement();
-								database.closeupdateField();
+							database.closeConnection();
+							database.closeresultSet();
+							database.closestatement();
+							database.closeupdateField();
 							// closeButton.setOnAction(e -> paymentInfo.close());
 						} catch (IOException | SQLException e) {
 							// TODO Auto-generated catch block
@@ -1607,7 +1676,7 @@ public class SceneController {
 							complete(event);
 							database.connect_to_database();
 							String ordernumber = orderdone1.get(index).getOrder_number();
-							String SQL = "UPDATE Orders " + "SET Paid = ? " + "WHERE OrderNumber = " + totalPriceText.getText();
+							String SQL = "UPDATE Orders " + "SET Paid = ? " + "WHERE OrderNumber = " + ordernumber;
 							database.updateField = database.connection.prepareStatement(SQL);
 							database.updateField.setString(1, "Paid");
 							database.updateField.executeUpdate();	
@@ -2199,7 +2268,7 @@ public class SceneController {
 	
 		 Font font33 = Font.font("Modern No. 20", 33);
 		 try {
-
+			clear1(event);
 			database.connect_to_database();
 			database.setResultsetorder();
 
@@ -2383,6 +2452,7 @@ public class SceneController {
 		 	o=0;
 		 	orders.clear();
 			orderList.getChildren().clear();
+			foodBarBox18.getChildren().clear();
 			orderNumberk.setText("");
 			tablek.setText("");
 			workerUsernamek.setText("");
@@ -2461,9 +2531,10 @@ ArrayList<String> list = new ArrayList<String>();
 	 {
 		 
 		 {
-			 
+			
 			 Font font33 = Font.font("Modern No. 20", 33);
 			 try {
+				 clear2(event);
 				orderdone1.clear();
 				
 				database.connect_to_database();
@@ -2598,7 +2669,7 @@ ArrayList<String> list = new ArrayList<String>();
 			//System.out.println(o);
 			//System.out.println(orders.size());
 			 }
-			 catch (IOException | SQLException e) 
+			 catch (IOException | SQLException | InterruptedException e) 
 			 {
 				e.printStackTrace();
 				System.out.println(e);
