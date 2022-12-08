@@ -12,15 +12,51 @@ public class Order
 	private String orderdone;
 	private String paid;
 	private String date;
-	
+	private String Waitress;
+	private String customername;
+	private String phonenumbers;
 	private double total;
 	private ArrayList<Double> food_price = new ArrayList<Double>();
 	private ArrayList<String> food_name = new ArrayList<String>();
 	private ArrayList<Integer> amount = new ArrayList<Integer>();
 	private ArrayList<String> notes = new ArrayList<String>();
-
-	private String Waitress;
 	
+	private ArrayList<String> amountStr = new ArrayList<String>();
+	private ArrayList<String> food_pricestr = new ArrayList<String>();
+	
+	public void setCustomername(String Customername)
+	{
+		
+		this.customername=Customername;
+	}
+	
+	public String getCustomername()
+	{
+		
+		return customername;
+	}
+	
+	public void setphonenumber(String phonenumbers)
+	{
+		
+		this.phonenumbers= phonenumbers;
+	}
+	
+	public String getphonenumber()
+	{
+		
+		return phonenumbers;
+	}
+	
+	public void setamountStr(String amountStr,int i)
+	{
+	       this.amountStr.set(i, amountStr);
+	}
+	
+	public String getamountStr(int i)
+	{
+		return amountStr.get(i);
+	}
 	
 	public String getamountString(int i)
 	{
@@ -29,7 +65,7 @@ public class Order
 		 return h;
 	}
 	
-	public double getamount(int i)
+	public Integer getamount(int i)
 	{
 		return amount.get(i);
 	}
@@ -238,9 +274,28 @@ public class Order
 		}
 	}
 	
+	public void setnullamountStr() 
+	{
+		amountStr.clear();	
+		for(int i=0; i<20;i++)
+		{
+			amountStr.add("null");
+		}
+	}
+	
+	public void setnullfood_priceStr() 
+	{
+		food_pricestr.clear();	
+		for(int i=0; i<20;i++)
+		{
+			food_pricestr.add("null");
+		}
+	}
+	
 	public void setnullall()
 	{
-		
+		setnullamountStr(); 
+		setnullfood_priceStr(); 
 		setnullamount(); 
 		setnullfood_name(); 	
 		setnullfood_price(); 
