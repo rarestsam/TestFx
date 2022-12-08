@@ -64,20 +64,22 @@ public class SceneController {
 	private String lastorderstring;
 	private String newordernumber1;
 	private String time;
-
+	private String pricetotalbutton ="";
+	
 	private int neworderid;
 	
 	private int fb = 1;
 	private int on = 1;
 	private int o=0;
 	private int  os = 0;
+	private int index =11111;
 	private int currentbutton = 110000;
 	private int iterator = 0;
 	private int lastordernumber;
 	private int newordernumber;
 	private double ph = 200.0;
 	private double tp = 0.0;
-	private String pricetotalbutton ="";
+	
 	Double priceText2 = null;
 	Double totalPriceDub;
 	private String priceTotal ="";
@@ -830,7 +832,7 @@ public class SceneController {
 					
 					
 					int foodAmountTextInt= Integer.parseInt(foodAmountText.getText());
-					foodAmountTextInt++;//
+					foodAmountTextInt++;
 					foodAmountText.setText(Integer.toString(foodAmountTextInt));
 					
 					Double foodAmountTextDub = Double.parseDouble(foodAmountText.getText());
@@ -1474,10 +1476,26 @@ public class SceneController {
 							&& secCodeStr.equals("123")) {
 						try {
 							cardErrorWindow(event, "Successful");
+							//sad
+							//String ordernumber = orders.get(k).getOrder_number();
+							database.connect_to_database();
+							String ordernumber = orderdone1.get(index).getOrder_number();
+							String SQL = "UPDATE Orders " + "SET Paid = ? " + "WHERE OrderNumber = " + ordernumber;
+							database.updateField = database.connection.prepareStatement(SQL);
+							database.updateField.setString(1, "Paid");
+							database.updateField.executeUpdate();	
+							 database.closeConnection();
+								database.closeresultSet();
+								database.closestatement();
+								database.closeupdateField();
 							// closeButton.setOnAction(e -> paymentInfo.close());
-						} catch (IOException e) {
+						} catch (IOException | SQLException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
+							 database.closeConnection();
+								database.closeresultSet();
+								database.closestatement();
+								database.closeupdateField();
 						}
 					}
 					else {
@@ -2055,7 +2073,8 @@ ArrayList<String> list = new ArrayList<String>();
 			 
 			 Font font33 = Font.font("Modern No. 20", 33);
 			 try {
-			
+				orderdone1.clear();
+				
 				database.connect_to_database();
 				database.setResultsetorder();
 
@@ -2129,6 +2148,7 @@ ArrayList<String> list = new ArrayList<String>();
 					 		
 					 		foodBarBox18.getChildren().clear();
 					 		int of = Integer.parseInt(orderButton.getId());
+					 		index = of;
 					 		System.out.println(of);
 					 		System.out.println(orderdone1.get(of).getfoodsize());
 					 		orderNumber1.setText(orderdone1.get(of).getOrder_number());
@@ -2174,6 +2194,7 @@ ArrayList<String> list = new ArrayList<String>();
 					 		}
 					 		//
 					 		pricetotalbutton = orderdone1.get(of).getTotal1();
+					 		
 						}				 	
 			 		});
 				 
@@ -2196,11 +2217,12 @@ ArrayList<String> list = new ArrayList<String>();
 	 
 	 public void clear2(ActionEvent event) throws InterruptedException
 	 {
-		 	o=0;
+		 	index=11111;
 		 	orderdone1.clear();
 		 	orderlistK.getChildren().clear();
 		 	foodBarBox18.getChildren().clear();
-		 	pricetotalbutton = "sad";
+		 	os=0;
+		 //	pricetotalbutton = "sad";
 		 	//order.clear();
 			//orderNumberk.setText("");
 			//tablek.setText("");
