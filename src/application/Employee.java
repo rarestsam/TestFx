@@ -5,8 +5,7 @@ public class Employee
 {
 	private String employee_name;
 	private String id_number;
-	//private String clocked_in;
-	//private String clocked_out;
+
 	private String total_hours;
 	private String jobType;
 	private double wage;

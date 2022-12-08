@@ -105,6 +105,9 @@ public class SceneController {
 	
 	
 	@FXML
+	private TextField employee_passwordTextfield;
+	
+	@FXML
     private VBox employeeClocking;
 
     @FXML
@@ -547,12 +550,13 @@ public class SceneController {
 			database.setResultset();
 			while (database.resultSet.next()) {
 				Employee employee = new Employee();
-				employee.setdatabaseid(database.resultSet.getInt("employeeid"));
+				employee.setdatabaseid(database.resultSet.getInt("ID"));
 				employee.setEmployee_name(database.resultSet.getString("Name"));
 				employee.setId_number(database.resultSet.getString("IdNumber"));
 				employee.setHours(database.resultSet.getInt("Hours"));
 				employee.setWage(database.resultSet.getDouble("Wage"));
 				employee.set_Job_Type(database.resultSet.getString("JobType"));
+				employee.setpassword(database.resultSet.getString("Password"));
 				employee.Set_total_Pay();
 				employees.add(employee);
 				lastdatabaseid = employee.getdatabaseid();
@@ -562,6 +566,7 @@ public class SceneController {
 			String wageTxt = wage_texField.getText();
 			String id_Number = Id_Number_txtField.getText();
 			String hour = hoursTxt.getText();
+			String PASSWORD = employee_passwordTextfield.getText();
 			String jobType;
 			int hours = 0;
 			double wage = 0;
@@ -570,45 +575,66 @@ public class SceneController {
 			int arraysize = employees.size();
 			Employee tdb = new Employee();
 
-			if (name.equals("")) {
+			if (name.equals("")) 
+			{
 				verify.setText("Please enter a name");
-			} else if (wageTxt.equals("")) {
+			} 
+			else if (wageTxt.equals(""))
+			{
 				verify.setText("Please enter a wage");
-			} else if (id_Number.equals("")) {
+			} 
+			else if (id_Number.equals("")) 
+			{
 				verify.setText("Please enter an ID");
-			} else if (hour.equals("")) {
-				verify.setText("Please enter an ID");
-			} else if (!Cashier_rdb.isSelected() && !Kitchen_Staff_rdb.isSelected() && !Manager_rdb.isSelected()
-					&& !Wait_staff_rdb.isSelected()) {
+			} 
+			else if (hour.equals("")) 
+			{
+				verify.setText("Please enter hours");
+			} 
+			else if (PASSWORD.equals(""))
+			{				
+				verify.setText("Please enter a PASSWORD");
+			}
+			else if (!Cashier_rdb.isSelected() && !Kitchen_Staff_rdb.isSelected() && !Manager_rdb.isSelected()
+					&& !Wait_staff_rdb.isSelected())
+			{
 				verify.setText("Please select a job type.");
-			} else if (verify_Nametext(name)) {
+			} 
+			else if (verify_Nametext(name)) 
+			{
 				verify.setText("Please enter name in the correct format");
-			} else if (checkdatabaseid(employees, id_Number)) {
+			} 
+			else if (checkdatabaseid(employees, id_Number)) 
+			{
 				verify.setText("ID has been taken, please change it.");
 			}
 
 			else {
 
-				if (Manager_rdb.isSelected()) {
+				if (Manager_rdb.isSelected())
+				{
 					jobType = "Manager";
 					tdb.set_Job_Type(jobType);
 				}
 
-				else if (Wait_staff_rdb.isSelected()) {
+				else if (Wait_staff_rdb.isSelected()) 
+				{
 					jobType = "WaitStaff";
 					tdb.set_Job_Type(jobType);
 
-				} else if (Kitchen_Staff_rdb.isSelected()) {
+				} else if (Kitchen_Staff_rdb.isSelected())
+				{
 					jobType = "KitchenStaff";
 					tdb.set_Job_Type(jobType);
 				}
 
-				else if (Cashier_rdb.isSelected()) {
+				else if (Cashier_rdb.isSelected()) 
+				{
 					jobType = "Cashier";
 					tdb.set_Job_Type(jobType);
 				}
 				int newdatabaseid = lastdatabaseid +1;
-				System.out.print(newdatabaseid);
+				//System.out.print(newdatabaseid);
 				wage = DecimalFormat.getNumberInstance().parse(wageTxt).doubleValue();
 				id = Integer.parseInt(id_Number);
 				hours = Integer.parseInt(hour);
@@ -618,16 +644,17 @@ public class SceneController {
 				tdb.setId_number(id_Number);
 				tdb.setdatabaseid(newdatabaseid);
 				tdb.Set_total_Pay();
-
-				String insertSQL = "INSERT INTO Employee (employeeid, Name, IdNumber, Hours, Wage, TotalPay, JobType) VALUES (?, ?, ?, ?, ?, ?, ?)";
+				
+				String insertSQL = "INSERT INTO Employee (ID, Password, IdNumber, Name, Hours, Wage, TotalPay, JobType) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 				database.updateField = database.connection.prepareStatement(insertSQL);
 				database.updateField.setInt(1, tdb.getdatabaseid());
-				database.updateField.setString(2, tdb.getEmployee_name());
+				database.updateField.setString(2, PASSWORD);
 				database.updateField.setString(3, tdb.getId_number());
-				database.updateField.setInt(4, tdb.getHours());
-				database.updateField.setDouble(5, tdb.getWage());
-				database.updateField.setDouble(6, tdb.get_totalpay());
-				database.updateField.setString(7, tdb.getjobType());
+				database.updateField.setString(4, tdb.getEmployee_name());
+				database.updateField.setInt(5, tdb.getHours());
+				database.updateField.setDouble(6, tdb.getWage());
+				database.updateField.setDouble(7, tdb.get_totalpay());
+				database.updateField.setString(8, tdb.getjobType());
 				database.updateField.executeUpdate();
 				database.closeConnection();
 				database.closeresultSet();
@@ -2133,13 +2160,13 @@ ArrayList<String> list = new ArrayList<String>();
 								foodInfo.setMinWidth(651);
 								foodInfo.setMinHeight(71);
 								foodInfo.setFont(font29);
-								foodInfo.setStyle("-fx-text-alignment: top-left; ");
+								//foodInfo.setStyle("-fx-text-alignment: top-left; ");
 								
 								Label foodInfo2 = new Label(lableStr2); //ADD TEXT HERE!!
 								foodInfo2.setMinWidth(651);
 								foodInfo2.setMinHeight(71);
 								foodInfo2.setFont(font29);
-								foodInfo2.setStyle("-fx-text-alignment: top-left; ");
+								//foodInfo2.setStyle("-fx-text-alignment: top-left; ");
 								
 								
 								foodBarBox18.getChildren().addAll(foodInfo, foodInfo2);
@@ -2153,6 +2180,7 @@ ArrayList<String> list = new ArrayList<String>();
 				 order.add(o,orderButton.getId());
 				 orderlistK.getChildren().addAll(orderButton);
 				 os++;
+				 
 			}
 			//System.out.println(o);
 			//System.out.println(orders.size());
@@ -2164,13 +2192,15 @@ ArrayList<String> list = new ArrayList<String>();
 			}
 		 }
 	 }
-	 
+
 	 
 	 public void clear2(ActionEvent event) throws InterruptedException
 	 {
 		 	o=0;
 		 	orderdone1.clear();
 		 	orderlistK.getChildren().clear();
+		 	foodBarBox18.getChildren().clear();
+		 	pricetotalbutton = "sad";
 		 	//order.clear();
 			//orderNumberk.setText("");
 			//tablek.setText("");
@@ -2337,10 +2367,12 @@ ArrayList<String> list = new ArrayList<String>();
 	  }
 	 public void submit_clockin(ActionEvent event) throws InterruptedException
 	 {
+		 
+  employeeClocking.getChildren().clear();	 		
+	 			
 		 try {
 			 LocalDate myDate = myDatePicker.getValue();
 			 String myFormattedDate = myDate.format(DateTimeFormatter.ofPattern("MM/dd/yyyy"));
-		//     System.out.println(myFormattedDate);
 			 database.connect_to_database();
 			 database.setResultsetclockedin();
 			 
@@ -2349,7 +2381,8 @@ ArrayList<String> list = new ArrayList<String>();
 				  Employee employee = new Employee();
 				  employee.setEmployee_name(database.resultSet.getString("EmployeeName"));
 				  employee.setClockedin(database.resultSet.getString("ClockInDate"));
-				  employee.setClockout(database.resultSet.getString("IdNumber"));
+				  employee.setClockinTime(database.resultSet.getString("ClockIn"));
+				  employee.setClockout(database.resultSet.getString("ClockOut"));
 				  employee.setId_number(database.resultSet.getString("IdNumber"));
 				  employees.add(employee);
 				}
@@ -2358,9 +2391,20 @@ ArrayList<String> list = new ArrayList<String>();
 				 if(employees.get(i).getClockedin().equals(myFormattedDate)) 
 				{
 					 
-					 
-					 
-					 
+					 	String clockin = employees.get(i).getClockinTime();
+					 	String clockout = employees.get(i).getClockout();
+					 	String employeeName = employees.get(i).getEmployee_name();
+					 	String IDNUMBER = employees.get(i).getId_number();
+					 	Font font29 = Font.font("Modern No. 20", 29);
+			 		
+			 			String lableStr = employeeName + "   " + clockin + "          " +  clockout + "     " + IDNUMBER;
+			 			
+						Label clockinfo = new Label(lableStr); //ADD TEXT HERE!!
+						clockinfo.setMinWidth(651);
+						clockinfo.setMinHeight(71);
+						clockinfo.setFont(font29);
+						//clockinfo.setStyle("-fx-text-alignment: top-left; ");
+						employeeClocking.getChildren().addAll(clockinfo);
 				}
 			 }
 				
