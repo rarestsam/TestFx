@@ -1561,7 +1561,7 @@ public class SceneController {
 			error.setStyle("-fx-background-color: #ff0000; ");
 			error.setStyle("-fx-alignment: CENTER; ");
 			
-			Label price = new Label("Total:     $"+ priceTotal);
+			Label price = new Label("Total:     $"+ totalPriceText.getText());
 			price.setFont(font35);
 			price.setStyle("-fx-text-alignment: TOP_LEFT; ");
 			
@@ -1589,20 +1589,42 @@ public class SceneController {
 							
 							error.setText("Enter recived amount");
 						}
-						else {
+						else 
+						{
 							
 							Double moneyStr = Double.parseDouble(money.getText());
-							Double priceTotalStr = Double.parseDouble(priceTotal);
+							Double priceTotalStr = Double.parseDouble(totalPriceText1.getText());
 							Double changeStr = 0.0;
 							
+							if(changeStr>=0)
+							{
 							changeStr = moneyStr-priceTotalStr;
+							
 							
 							change ="$" + Double.toString(changeStr);
 							changeText.setText("Change:     "+ change);
 							error.setText("");
+							complete(event);
+							database.connect_to_database();
+							String ordernumber = orderdone1.get(index).getOrder_number();
+							String SQL = "UPDATE Orders " + "SET Paid = ? " + "WHERE OrderNumber = " + totalPriceText.getText();
+							database.updateField = database.connection.prepareStatement(SQL);
+							database.updateField.setString(1, "Paid");
+							database.updateField.executeUpdate();	
+							database.closeConnection();
+							database.closeresultSet();
+							database.closestatement();
+							database.closeupdateField();
+							}
+							else {
+								
+								error.setText("Not enough");
+							}
+							
+							
 						}
 					}
-					catch(NumberFormatException e) {
+					catch(NumberFormatException | IOException | SQLException e) {
 						error.setText("Enter digets only");
 					}
 					
@@ -1645,6 +1667,200 @@ public class SceneController {
 			cashError.showAndWait();
 		}
 	}
+	
+
+	public void payTypeWindow2(ActionEvent event) throws IOException {
+
+		Stage paymentType = new Stage();
+
+		paymentType.initModality(Modality.APPLICATION_MODAL);
+		paymentType.setTitle("Payment Type");
+		paymentType.setMinWidth(400);
+		paymentType.setMinHeight(500);
+		paymentType.setMaxWidth(400);
+		paymentType.setMaxHeight(500);
+
+		Font font50 = Font.font("Modern No. 20", 50);
+
+		Button cashButton = new Button("Cash");
+		cashButton.setFont(font50);
+		cashButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				if (cashButton.isArmed() == true) {
+					try {
+						cashErrorWindow2(event);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+		});
+
+		Button cardButton = new Button("Card");
+		cardButton.setFont(font50);
+		cardButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				if (cardButton.isArmed() == true) {
+					try {
+						payInfoWindow(event);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+		});
+
+		VBox layout = new VBox(10);
+		layout.setPadding(new Insets(110, 0, 0, 115));
+		layout.getChildren().addAll(cashButton, cardButton);
+
+		Scene noteScene = new Scene(layout);
+		paymentType.setScene(noteScene);
+		paymentType.showAndWait();
+
+	}
+	
+	public void cashErrorWindow2(ActionEvent event) throws IOException {
+		/* differentiate between cashier and waitstaff here
+		   most likly connect to a database and retrieve employees
+		   find where the employyee name in file matches job description and then execute
+		 */
+		BufferedReader jobstitle = new BufferedReader(new FileReader("jobtitle"));
+		String jobtitle = jobstitle.readLine();
+		if(jobtitle.equals("Cashier")){
+			
+			Stage cashError = new Stage();
+			cashError.initModality(Modality.APPLICATION_MODAL);
+			cashError.setTitle("Error");
+			cashError.setMinWidth(650);
+			cashError.setMinHeight(500);
+			cashError.setMaxWidth(650);
+			cashError.setMaxHeight(500);
+
+			Font font35 = Font.font("Modern No. 20", 30);
+			Font font29 = Font.font("Modern No. 20", 25);
+			
+			Label error = new Label("");
+			error.setFont(font29);
+			error.setStyle("-fx-background-color: #ff0000; ");
+			error.setStyle("-fx-alignment: CENTER; ");
+			
+			Label price = new Label("Total:     $"+ totalPriceText1.getText());
+			price.setFont(font35);
+			price.setStyle("-fx-text-alignment: TOP_LEFT; ");
+			
+			Label moneyText = new Label("Recived Amount:  ");
+			moneyText.setFont(font35);
+			moneyText.setStyle("-fx-text-alignment: TOP_LEFT; ");
+			
+			TextField money = new TextField("");
+			money.setMaxWidth(100.0);
+			money.setFont(font35);
+			money.setStyle("-fx-text-alignment: TOP_LEFT; ");
+			
+			Label changeText = new Label("Change:     ");
+			changeText.setFont(font35);
+			changeText.setStyle("-fx-text-alignment: TOP_LEFT; ");
+			
+			Button completeButton = new Button("Get Change");
+			completeButton.setFont(font29);
+			completeButton.relocate(350.0, 170.0);
+			completeButton.setOnAction(new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent event) {
+					try {
+						if(String.valueOf(money.getText()).equals("")) {
+							
+							error.setText("Enter recived amount");
+						}
+						else 
+						{
+							
+							Double moneyStr = Double.parseDouble(money.getText());
+							Double priceTotalStr = Double.parseDouble(totalPriceText1.getText());
+							Double changeStr = 0.0;
+							
+							if(changeStr>=0)
+							{
+							changeStr = moneyStr-priceTotalStr;
+							
+							
+							change ="$" + Double.toString(changeStr);
+							changeText.setText("Change:     "+ change);
+							error.setText("");
+							database.connect_to_database();
+							String ordernumber = orderdone1.get(index).getOrder_number();
+							String SQL = "UPDATE Orders " + "SET Paid = ? " + "WHERE OrderNumber = " + ordernumber;
+							database.updateField = database.connection.prepareStatement(SQL);
+							database.updateField.setString(1, "Paid");
+							database.updateField.executeUpdate();	
+							database.closeConnection();
+							database.closeresultSet();
+							database.closestatement();
+							database.closeupdateField();
+							}
+							else {
+								
+								error.setText("Not enough");
+							}
+							
+							
+						}
+					}
+					catch(NumberFormatException e) {
+						error.setText("Enter digets only");
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+				}	
+			});
+			
+			HBox layout = new HBox();
+			layout.getChildren().addAll(moneyText, money, completeButton);
+			
+			VBox layout2 = new VBox(10);
+			layout2.setPadding(new Insets(100, 0, 0, 100));
+			layout2.getChildren().addAll(error, price, layout, changeText);
+
+			Scene noteScene = new Scene(layout2);
+			cashError.setScene(noteScene);
+			cashError.showAndWait();
+			
+		}
+		else {
+			Stage cashError = new Stage();
+			cashError.initModality(Modality.APPLICATION_MODAL);
+			cashError.setTitle("Error");
+			cashError.setMinWidth(650);
+			cashError.setMinHeight(500);
+			cashError.setMaxWidth(650);
+			cashError.setMaxHeight(500);
+	
+			Font font35 = Font.font("Modern No. 20", 35);
+	
+			Text errorText = new Text(" Please Complete Cash Payment At Register!");
+			errorText.setFont(font35);
+			errorText.setStyle("-fx-text-alignment: TOP_LEFT; ");
+	
+			VBox layout = new VBox(10);
+			layout.setPadding(new Insets(180, 0, 0, 0));
+			layout.getChildren().addAll(errorText);
+	
+			Scene noteScene = new Scene(layout);
+			cashError.setScene(noteScene);
+			cashError.showAndWait();
+		}
+	}
+	
 
 	public void cardErrorWindow(ActionEvent event, String errorString) throws IOException 
 	{
@@ -1696,6 +1912,7 @@ public class SceneController {
 	public void clockin(ActionEvent event) 
 	{
 		try {
+			
 			BufferedReader readeremp = new BufferedReader(new FileReader("employee_name.txt"));
 			employee_name = readeremp.readLine();
 			BufferedReader readerID = new BufferedReader(new FileReader("IdNumber.txt"));
@@ -1724,16 +1941,23 @@ public class SceneController {
 			database.updateField.setString(2,time);
 			database.updateField.setString(3, date);
 			database.updateField.executeUpdate();
+			/*
 			root = FXMLLoader.load(getClass().getResource("Login_Screen.fxml"));
 			stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 			scene = new Scene(root);
 			stage.setScene(scene);
 			stage.show();
 			stage.setFullScreen(true);
+			*/
 			database.closeConnection();
 			database.closeresultSet();
 			database.closestatement();
 			database.closeupdateField();
+			
+			
+			
+			
+			
 			readeremp.close();
 			readerID.close();
 		} catch (Exception e) {
@@ -2149,15 +2373,16 @@ ArrayList<String> list = new ArrayList<String>();
 					 		foodBarBox18.getChildren().clear();
 					 		int of = Integer.parseInt(orderButton.getId());
 					 		index = of;
-					 		System.out.println(of);
-					 		System.out.println(orderdone1.get(of).getfoodsize());
+					 		//System.out.println(of);
+					 		//System.out.println(orderdone1.get(of).getfoodsize());
 					 		orderNumber1.setText(orderdone1.get(of).getOrder_number());
 					 		tableNumber.setText(orderdone1.get(of).getTable_number());
-					 	//	totalPriceText12.setText(orderdone1.get(of).getTotal1());
+					 		totalPriceText1.setText(orderdone1.get(of).getTotal1());
 					 		workerUsername10.setText(orderdone1.get(of).getWaitress());
 					 		customers_name2.setText(orderdone1.get(of).getCustomername());
 					 		customers_number2.setText(orderdone1.get(of).getphonenumber());
-					 
+					 		
+					 		
 					 		for(int i =0; i<orderdone1.get(of).getfoodsize() ;i++)
 					 		{
 					 			String namei = orderdone1.get(of).getFood_name(i);
