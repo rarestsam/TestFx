@@ -105,7 +105,7 @@
                               </AnchorPane>
                               <ScrollPane layoutY="209.0" prefHeight="740.0" prefWidth="737.0">
                                  <content>
-                                    <VBox fx:id="foodBarBox3" prefHeight="740.0" prefWidth="722.0">
+                                    <VBox fx:id="foodBarBox18" prefHeight="740.0" prefWidth="722.0">
                                        <children>
                                           <Pane fx:id="foodBar1" prefHeight="68.0" prefWidth="697.0" style="-fx-background-color: white;">
                                              <children>
