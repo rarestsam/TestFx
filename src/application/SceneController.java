@@ -78,6 +78,9 @@ public class SceneController {
 	private double tp = 0.0;
 	Double priceText2 = null;
 	Double totalPriceDub;
+	private String priceTotal ="";
+	private String change= "";
+
 
 	private boolean checkdelete = false;
 
@@ -248,6 +251,12 @@ public class SceneController {
 
 	@FXML
 	private TextField table_number;
+	
+	@FXML
+	private TextField customers_number;
+	
+	@FXML
+	private TextField customers_name;
 
 	@FXML
 	private Label workerUsername;
@@ -339,18 +348,21 @@ public class SceneController {
 
 			}
 		}
-		public void clear(ActionEvent event) throws IOException
+	 public void clear(ActionEvent event) throws IOException
 		{
 			new_order.setnullall();
 			foodBarBox.getChildren().clear();
 			table_number.setText("");
 			totalPriceText.setText("0.00");
+			customers_name.setText("");
+			customers_number.setText("");
 			tp=0.0;
 			nameMap.clear();
 			amountMap.clear();
 			priceMap.clear();
 			
 		}
+
 	 
 	 
 	 
@@ -697,6 +709,22 @@ public class SceneController {
 		stage.show();
 		stage.setFullScreen(true);
 	}
+	
+
+	public void totalPrice(ActionEvent event) {
+		double priceT = 0;
+		for(int i=0; i<fb;i++) {
+			String nulll= String.valueOf(priceMap.get("foodbar"+ i));
+			if(nulll=="null") {
+				priceT= priceT + 0;
+			}
+			else {
+				priceT= priceT + Double.parseDouble(priceMap.get("foodbar"+ i));
+			}
+			
+			priceTotal= Double.toString(priceT);
+		}
+	}
 
 	public void addFoodBar(ActionEvent event) {
 		try {
@@ -717,16 +745,10 @@ public class SceneController {
 			foodbar.setId("foodbar" + fb);
 			foodbarList.add(foodbar.getId());
 			
-			Spinner<Integer> spinner = new Spinner<>(1, 1000, 1);
-			spinner.setMaxWidth(100);
-			spinner.setMinHeight(49);
-			spinner.relocate(40.0, 10.0);
-			spinner.setId("spinner" + fb);
-			
-			TextField foodAmountText = new TextField("1");
+			Label foodAmountText = new Label("1");
 			foodAmountText.setMaxWidth(60);
 			foodAmountText.relocate(40.0, 16.0);
-			foodAmountText.setFont(font21);
+			foodAmountText.setFont(font29);
 			
 			Button plusButton = new Button("+");
 			plusButton.setMaxWidth(20);
@@ -747,22 +769,28 @@ public class SceneController {
 					
 					Double foodAmountTextDub = Double.parseDouble(foodAmountText.getText());
 					
-					if(foodText.getText()=="Pizza") {
+					if(foodText.getText()=="Pizza") 
+					{
 						priceText2= 24.23;
 					}
-					if(foodText.getText()=="Burger") {
+					if(foodText.getText()=="Burger") 
+					{
 						priceText2 = 8.42;
 					}
-					if(foodText.getText()=="Ice Cream Scoop") {
+					if(foodText.getText()=="Ice Cream Scoop") 
+					{
 						priceText2 = 3.50;
 					}
-					if(foodText.getText()=="Fries") {
+					if(foodText.getText()=="Fries") 
+					{
 						priceText2 = 3.02;
 					}
-					if(foodText.getText()=="Soda") {
+					if(foodText.getText()=="Soda") 
+					{
 						priceText2 = 4.30;
 					}
-					if(foodText.getText()=="Water Bottle") {
+					if(foodText.getText()=="Water Bottle") 
+					{
 						priceText2 = 2.54;
 					}
 					
@@ -775,6 +803,9 @@ public class SceneController {
 					priceMap.replace(foodbar.getId(),priceText.getText());
 					System.out.println("Plus " + priceMap);
 					
+					totalPrice(event);
+					totalPriceText.setText(priceTotal);
+					System.out.println("P" + priceTotal);
 					
 				}
 			});
@@ -826,6 +857,9 @@ public class SceneController {
 						priceMap.replace(foodbar.getId(),priceText.getText());
 						System.out.println("Minus " +priceMap);
 						
+						totalPrice(event);
+						totalPriceText.setText(priceTotal);
+						System.out.println("M" + priceTotal);
 						
 					}
 					
@@ -868,6 +902,9 @@ public class SceneController {
 						nameMap.replace(foodbar.getId(),null);
 						amountMap.replace(foodbar.getId(),null);
 						priceMap.replace(foodbar.getId(),null);
+						
+						totalPrice(event);
+						totalPriceText.setText(priceTotal);
 
 						iterator = iterator -1;
 					}
@@ -913,11 +950,11 @@ public class SceneController {
 										map.replace(foodbar.getId(),noteEntered);
 									}
 									else {
-										System.out.println("id NOT found");
+									 	System.out.println("id NOT found");
 										map.put(foodbar.getId(),noteEntered);
 									}
-								}
-									
+									note.close();
+								}	
 							});
 
 							VBox layout = new VBox(10);
@@ -965,20 +1002,17 @@ public class SceneController {
 			
 			ph += 100.0;
 			fb++;
-
-			
-			totalPriceDub = Double.parseDouble(priceText.getText());
-
-			tp = tp + totalPriceDub;
-
-			String totalPriceStr = Double.toString(tp);
-			totalPriceText.setText(totalPriceStr);
 			iterator++;
+			
+			totalPrice(event);
+			totalPriceText.setText(priceTotal);
+			
 			
 		} catch (Exception e) {
 			System.out.print(e);
 		}
 	}
+
 
 	
 	public void complete(ActionEvent event) {
@@ -1396,30 +1430,109 @@ public class SceneController {
 		   most likly connect to a database and retrieve employees
 		   find where the employyee name in file matches job description and then execute
 		 */
+		BufferedReader jobstitle = new BufferedReader(new FileReader("jobtitle"));
+		String jobtitle = jobstitle.readLine();
+		if(jobtitle.equals("Cashier")){
+			
+			Stage cashError = new Stage();
+			cashError.initModality(Modality.APPLICATION_MODAL);
+			cashError.setTitle("Error");
+			cashError.setMinWidth(650);
+			cashError.setMinHeight(500);
+			cashError.setMaxWidth(650);
+			cashError.setMaxHeight(500);
 
-		Stage cashError = new Stage();
+			Font font35 = Font.font("Modern No. 20", 30);
+			Font font29 = Font.font("Modern No. 20", 25);
+			
+			Label error = new Label("");
+			error.setFont(font29);
+			error.setStyle("-fx-background-color: #ff0000; ");
+			error.setStyle("-fx-alignment: CENTER; ");
+			
+			Label price = new Label("Total:     $"+ priceTotal);
+			price.setFont(font35);
+			price.setStyle("-fx-text-alignment: TOP_LEFT; ");
+			
+			Label moneyText = new Label("Recived Amount:  ");
+			moneyText.setFont(font35);
+			moneyText.setStyle("-fx-text-alignment: TOP_LEFT; ");
+			
+			TextField money = new TextField("");
+			money.setMaxWidth(100.0);
+			money.setFont(font35);
+			money.setStyle("-fx-text-alignment: TOP_LEFT; ");
+			
+			Label changeText = new Label("Change:     ");
+			changeText.setFont(font35);
+			changeText.setStyle("-fx-text-alignment: TOP_LEFT; ");
+			
+			Button completeButton = new Button("Get Change");
+			completeButton.setFont(font29);
+			completeButton.relocate(350.0, 170.0);
+			completeButton.setOnAction(new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent event) {
+					try {
+						if(String.valueOf(money.getText()).equals("")) {
+							
+							error.setText("Enter recived amount");
+						}
+						else {
+							
+							Double moneyStr = Double.parseDouble(money.getText());
+							Double priceTotalStr = Double.parseDouble(priceTotal);
+							Double changeStr = 0.0;
+							
+							changeStr = moneyStr-priceTotalStr;
+							
+							change ="$" + Double.toString(changeStr);
+							changeText.setText("Change:     "+ change);
+							error.setText("");
+						}
+					}
+					catch(NumberFormatException e) {
+						error.setText("Enter digets only");
+					}
+					
+				}	
+			});
+			
+			HBox layout = new HBox();
+			layout.getChildren().addAll(moneyText, money, completeButton);
+			
+			VBox layout2 = new VBox(10);
+			layout2.setPadding(new Insets(100, 0, 0, 100));
+			layout2.getChildren().addAll(error, price, layout, changeText);
 
-		cashError.initModality(Modality.APPLICATION_MODAL);
-		cashError.setTitle("Error");
-		cashError.setMinWidth(650);
-		cashError.setMinHeight(500);
-		cashError.setMaxWidth(650);
-		cashError.setMaxHeight(500);
-
-		Font font35 = Font.font("Modern No. 20", 35);
-
-		Text errorText = new Text(" Please Complete Cash Payment At Register!");
-		errorText.setFont(font35);
-		errorText.setStyle("-fx-text-alignment: TOP_LEFT; ");
-
-		VBox layout = new VBox(10);
-		layout.setPadding(new Insets(180, 0, 0, 0));
-		layout.getChildren().addAll(errorText);
-
-		Scene noteScene = new Scene(layout);
-		cashError.setScene(noteScene);
-		cashError.showAndWait();
-
+			Scene noteScene = new Scene(layout2);
+			cashError.setScene(noteScene);
+			cashError.showAndWait();
+			
+		}
+		else {
+			Stage cashError = new Stage();
+			cashError.initModality(Modality.APPLICATION_MODAL);
+			cashError.setTitle("Error");
+			cashError.setMinWidth(650);
+			cashError.setMinHeight(500);
+			cashError.setMaxWidth(650);
+			cashError.setMaxHeight(500);
+	
+			Font font35 = Font.font("Modern No. 20", 35);
+	
+			Text errorText = new Text(" Please Complete Cash Payment At Register!");
+			errorText.setFont(font35);
+			errorText.setStyle("-fx-text-alignment: TOP_LEFT; ");
+	
+			VBox layout = new VBox(10);
+			layout.setPadding(new Insets(180, 0, 0, 0));
+			layout.getChildren().addAll(errorText);
+	
+			Scene noteScene = new Scene(layout);
+			cashError.setScene(noteScene);
+			cashError.showAndWait();
+		}
 	}
 
 	public void cardErrorWindow(ActionEvent event, String errorString) throws IOException 
