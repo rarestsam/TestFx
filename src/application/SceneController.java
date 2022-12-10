@@ -25,51 +25,38 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
-import javafx.scene.control.Spinner;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.application.Application;
-import javafx.application.Platform;
-import javafx.fxml.FXMLLoader;
-import javafx.stage.Stage;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.text.TextAlignment;
 
 public class SceneController {
-	private static final Paint WHITE = null;
 	private Stage stage;
 	private Scene scene;
 	private Parent root;
 	
 	private String employee_name;
-	private String order_number;	
-	private String table_number_text;
+	//private String order_number;	
+	//private String table_number_text;
 	private String lastorderstring;
 	private String newordernumber1;
-	private String time;
+	//private String time;
 	private String pricetotalbutton ="";
 	
 	private int neworderid;
 	
 	private int fb = 0;
-	private int on = 1;
+	//private int on = 1;
 	private int o=0;
 	private int  os = 0;
 	private int index =11111;
@@ -86,7 +73,7 @@ public class SceneController {
 	private String change= "";
 
 
-	private boolean checkdelete = false;
+	//private boolean checkdelete = false;
 
 	ArrayList<String> order = new ArrayList<String>();
 	ArrayList<Order> orders = new ArrayList<Order>();
@@ -101,8 +88,8 @@ public class SceneController {
 	HashMap<String,String> priceMap= new HashMap<>();
 	
 	private Order new_order = new Order();
-	private SimpleDateFormat timeFormat;
-	private Calendar calendar;
+	//private SimpleDateFormat timeFormat;
+	//private Calendar calendar;
 	private Database database = new Database();
 	
 	
@@ -573,8 +560,8 @@ public class SceneController {
 			int hours = 0;
 			double wage = 0;
 			int id = 0;
-			Boolean checkID = true;
-			int arraysize = employees.size();
+			//Boolean checkID = true;
+			//int arraysize = employees.size();
 			Employee tdb = new Employee();
 
 			if (name.equals("")) 
@@ -1417,7 +1404,7 @@ public class SceneController {
 		cardNumText.setFont(font29);
 		cardNumText.setStyle("-fx-text-alignment: TOP_LEFT; ");
 
-		TextField cardNum = new TextField();
+		PasswordField cardNum = new PasswordField();
 		cardNum.setText("");
 		cardNum.setStyle("-fx-text-alignment: TOP_LEFT; ");
 
@@ -1425,7 +1412,7 @@ public class SceneController {
 		expDateText.setFont(font29);
 		expDateText.setStyle("-fx-text-alignment: TOP_LEFT; ");
 
-		TextField expDateM = new TextField();
+		PasswordField expDateM = new PasswordField();
 		expDateM.setText("");
 		expDateM.setMaxWidth(40);
 		expDateM.setStyle("-fx-text-alignment: TOP_LEFT; ");
@@ -1434,7 +1421,7 @@ public class SceneController {
 		slash.setFont(font29);
 		slash.setStyle("-fx-text-alignment: TOP_LEFT; ");
 
-		TextField expDateY = new TextField();
+		PasswordField expDateY = new PasswordField();
 		expDateY.setText("");
 		expDateY.setMaxWidth(40);
 		expDateY.setStyle("-fx-text-alignment: TOP_LEFT; ");
@@ -1443,7 +1430,7 @@ public class SceneController {
 		secCodeText.setFont(font29);
 		secCodeText.setStyle("-fx-text-alignment: TOP_LEFT; ");
 
-		TextField secCode = new TextField();
+		PasswordField secCode = new PasswordField();
 		secCode.setText("");
 		secCode.setStyle("-fx-text-alignment: TOP_LEFT; ");
 
@@ -2021,7 +2008,9 @@ public class SceneController {
 					
 						 writerID.write(employees.get(i).getId_number());
 						 writerID.close();
-						
+						 jobtitle = employees.get(i).getjobType();
+							writerjobtitle.write(jobtitle);
+							writerjobtitle.close();
 						SimpleDateFormat timeFormat;
 						SimpleDateFormat dateFormat;
 						String time;
@@ -2065,6 +2054,10 @@ public class SceneController {
 
 						writerID.write(employees.get(i).getId_number());
 						writerID.close();
+						
+						jobtitle = employees.get(i).getjobType();
+						writerjobtitle.write(jobtitle);
+						writerjobtitle.close();
 						
 						SimpleDateFormat timeFormat;
 						SimpleDateFormat dateFormat;
@@ -2112,6 +2105,9 @@ public class SceneController {
 						writerID.write(employees.get(i).getId_number());
 						writerID.close();
 						 
+						jobtitle = employees.get(i).getjobType();
+						writerjobtitle.write(jobtitle);
+						writerjobtitle.close();
 						SimpleDateFormat timeFormat;
 						SimpleDateFormat dateFormat;
 						String time;
@@ -2156,6 +2152,9 @@ public class SceneController {
 
 						 writerID.write(employees.get(i).getId_number());
 						 writerID.close();
+						 jobtitle = employees.get(i).getjobType();
+							writerjobtitle.write(jobtitle);
+							writerjobtitle.close();
 						SimpleDateFormat timeFormat;
 						SimpleDateFormat dateFormat;
 						String time;
