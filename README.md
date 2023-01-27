@@ -1,7 +1,5 @@
 # TestFx
-There is a read me we provided in the Final deliverables folder. We will also provide them here as well. 
 
- 
 
 For the jar file there are two things needed 
 
